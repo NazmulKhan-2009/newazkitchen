@@ -1,0 +1,38 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Metamorphous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Metamorphous&display=swap');
+
+.custom_header_style{
+ display:flex;
+ justify-content: center;
+ align-items: center;
+}
+.custom_header_style h2{
+font-family: 'Metamorphous', cursive;
+
+}
+.custom_header_style p{
+ font-family: 'Metamorphous', cursive;
+ font-size:1.2rem;
+ text-align: justify;
+ 
+ 
+}
+
+.custom_header_style .greeting{
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ color: #fd5c63;
+}
+
+/* Responsive View */
+@media only screen and (max-width: 900px){ /* from 0 to 800 px max height applies */
+ .device__view{
+  padding-top:0;
+ }
+ 
+ .device__view h2 p{
+   
+    text-align: center;
+   }
+ 
+}
