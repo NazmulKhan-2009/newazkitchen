@@ -49,10 +49,9 @@ const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart}) => {
 //  const [confirmBtn, setConfirmBtn]=useState(false)
  const classes = useStyles();
 
- console.log(cartItem)
+ 
 
  const handleRemove=(foodTitle,index)=>{
-  console.log(foodTitle)
   let cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
   let filterItem=cartInfo.filter(cartInfo=>cartInfo.title !== foodTitle)
   localStorage.setItem("cartInfo", JSON.stringify(filterItem))
@@ -142,6 +141,7 @@ const handleCartConfirm=()=>{
     :
     <ArrowBackIcon
       onClick={()=>handlePlaceOrder(false)}
+      // onClick={()=>window.location.reload()}
     />
     }
     

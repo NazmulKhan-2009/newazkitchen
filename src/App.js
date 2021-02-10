@@ -8,10 +8,13 @@ import './App.css';
 import Cart from './components/Cart/Cart/Cart';
 import CartEmpty from './components/Cart/Cart/CartEmpty';
 import NotFound from './components/Common/NotFound/NotFound';
+import FormForUpload from './components/Dashboard/AdminPanel/UploadFood/FormForUpload/FormForUpload';
+import UploadFoods from './components/Dashboard/AdminPanel/UploadFood/UploadFoods/UploadFoods';
 import Dashboard from './components/Dashboard/Dashboard';
 import Gallery from './components/Gallery/Gallery';
 import AppNav from './components/Home/Header/AppBar/AppNav';
 import Home from './components/Home/Home/Home';
+import PracticeComp from './PracticeCom/PracticeComp';
 
 
 export const UserContext=createContext()
@@ -40,7 +43,14 @@ function App(){
         <Route exact path="/" component={Home} />
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/dashboard" component={Dashboard} />    
-        <Route exact path="/cart" component={cartItem ? Cart : CartEmpty} />    
+        <Route exact path="/cart" component={cartItem ? Cart : CartEmpty} />  
+         
+        <Route exact path="/practicecomp" component={PracticeComp} /> 
+         
+        <Route exact path="/uploadfoods" component={UploadFoods} />  
+
+
+        <Route exact path="*" component={NotFound} /> 
       </Switch>
       
     </Router>

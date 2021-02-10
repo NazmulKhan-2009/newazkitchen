@@ -8,14 +8,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Fab, Grid } from '@material-ui/core';
+import { useContext } from 'react';
+import { UserContext } from '../../../App';
 
 // const TAX_RATE = 0.07;
 
 const useStyles = makeStyles({
   table: {
-    minWidth:"25rem",
-    
-    
+    minWidth:"25rem"  
   },
 });
 
@@ -48,11 +48,19 @@ const useStyles = makeStyles({
 
 const PriceDetails=()=>{
   const classes = useStyles();
+  const [cartItem, setCartItem]=useContext(UserContext)
 
   
 
+  const priceData=cartItem.map(data=>data.total)
+  const inTotalPrice=priceData.reduce((pv,cv)=>pv+cv)
+  const vat=inTotalPrice*.05
+  const deliveryCost=inTotalPrice>1000?50:80
+  const havetoPay=inTotalPrice+vat+deliveryCost
+
+
   return (
-    <Grid item md={11}>
+    <Grid item md={11} >
     <h3
       style={{
         textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
@@ -70,25 +78,25 @@ const PriceDetails=()=>{
           <TableRow>
             <TableCell rowSpan={0} />
             <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">400</TableCell>
+            <TableCell align="right">{inTotalPrice}</TableCell>
           </TableRow>
 
           <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="right">40</TableCell>
-            <TableCell align="right">440</TableCell>
+            <TableCell>Vat</TableCell>
+            <TableCell align="right">5%</TableCell>
+            <TableCell align="right">{vat}</TableCell>
           </TableRow>
 
           <TableRow>
             <TableCell>Delivery Cost</TableCell>
-            <TableCell align="right">50</TableCell>
-            <TableCell align="right">520</TableCell>
+            
+            <TableCell align="right" colSpan={2}>{deliveryCost}</TableCell>
           </TableRow>
 
           <TableRow>
            
             <TableCell align="center" colSpan={2}>Total</TableCell>
-            <TableCell align="right">600</TableCell>
+            <TableCell align="right">{havetoPay}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

@@ -67,7 +67,7 @@ const FoodCard=({item,ind})=>{
   const [cartCount, setCartCount] = useState(0)
   // const [cart,setCart]=useState([])
  const [cartItem, setCartItem]=useContext(UserContext)
-console.log(ind)
+
   // const handleExpandClick = () => {
   //   setExpanded(!expanded);
   // };

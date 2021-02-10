@@ -14,7 +14,7 @@ const CartOrder=()=>{
   const [cartItem, setCartItem]=useContext(UserContext)
   const [placeOrder, setPlaceOrder]=useState(false)
   const [confirmCart, setConfirmCart]=useState(false)
-  console.log(cartItem)
+  
 
   const handlePlaceOrder=(bool)=>{
     setConfirmCart(bool)

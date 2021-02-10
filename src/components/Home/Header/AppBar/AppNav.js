@@ -261,6 +261,14 @@ const AppNav=()=>{
             
 
             <Typography className={classes.root} >
+
+            
+              <Link to="/uploadfoods" style={{textDecoration:"none",fontWeight:'bold',color:'red'}}>
+                ADD FOOD
+              </Link>
+              <Link to="/practicecomp" style={{textDecoration:"none",fontWeight:'bold'}}>
+                Practice
+              </Link>
               <Link to="/" style={{textDecoration:"none"}}>
                 Home
               </Link>
