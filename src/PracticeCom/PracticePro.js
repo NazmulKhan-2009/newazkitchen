@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 
 
+
 let Context = null
 const {Provider,Consumer}=Context=createContext()
 const PracticeProvider = (props) => {
@@ -19,7 +20,8 @@ const PracticeProvider = (props) => {
    
   }}
   >
-{props.children}
+  <h1 style={{color:props.color.color}}>Okay</h1>
+  {props.children}
   </Provider>
  );
 };

@@ -18,7 +18,7 @@
  position: relative;
 }
 .upload_Button::before{
- content:"Upload Photo";
+ /* content:"Upload Photo"; */
  position:absolute;
  left:35%;
  top:25%;
@@ -26,5 +26,22 @@
  text-shadow: "5px 4px 11px rgba(0, 0, 0, 0.26)";
             
  
+ 
+}
+.file_base{
+ 
+ position: relative;
+ 
+}
+.file_base::before{
+ content:"Upload Photo";
+}
+.file_base input{
+ width: 300px!important;
+ height:40px!important;
+ opacity: 0!important;
+ position: absolute!important;
+ left: 0px;
+ cursor:pointer;
  
 }

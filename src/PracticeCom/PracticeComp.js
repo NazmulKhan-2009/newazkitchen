@@ -5,18 +5,17 @@ import ParentCom from './ParentCom/ParentCom';
 import { PracticeProvider } from './PracticePro';
 
 
-
-
-
-
 const PracticeComp = () => {
  
  return (
   
   
-  <PracticeProvider>
-   <ParentCom/>
-   <CousinComp/>
+  <PracticeProvider
+  color={{color:"red"}}
+  >
+    <ParentCom/>
+    <CousinComp/>
+    <h1>just just just just</h1> 
   </PracticeProvider>
 
  );
