@@ -54,7 +54,7 @@ const PriceDetails=()=>{
 
   const priceData=cartItem.map(data=>data.total)
   const inTotalPrice=priceData.reduce((pv,cv)=>pv+cv)
-  const vat=inTotalPrice*.05
+  const vat=Math.round(inTotalPrice*.05) 
   const deliveryCost=inTotalPrice>1000?50:80
   const havetoPay=inTotalPrice+vat+deliveryCost
 

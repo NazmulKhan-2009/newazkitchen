@@ -61,45 +61,94 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FoodCard=({item,ind})=>{
+const FoodCard=({item,ind,foodDet,count})=>{
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [cartCount, setCartCount] = useState(0)
   // const [cart,setCart]=useState([])
  const [cartItem, setCartItem]=useContext(UserContext)
 
+ const [foodIdCount,setFoodIdCount]=useState({id:"",count:0})
+// console.log(`for ${item._id} count is ${cartCount}`)
+// console.log(`special id ${foodId}`)
+
+//  console.log(item._id)
   // const handleExpandClick = () => {
   //   setExpanded(!expanded);
   // };
   
-  const handleCartAdd=(foodTitle)=>{
+  // const handleCartAdd=(id)=>{
+  //   // const addCart=[]
+     
+  // if(cartCount>0){
+
+  // let cartInfo=[]
+  // const selectedFood={...item,quantity:cartCount,total:cartCount*item.price}
+  
+
+  //   if(JSON.parse(localStorage.getItem('cartInfo'))){
+  //     cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
+  //     // cartInfo=cartInfo.filter(cartInfo=>cartInfo.title!==foodTitle)
+  //     // cartInfo=cartInfo.filter(cartInfo=>cartInfo.foodTitle!==foodTitle)
+  //     cartInfo=cartInfo.filter(cartInfo=>cartInfo._id!==id)
+  //   }
+  //   cartInfo.push(selectedFood)  
+  //   localStorage.setItem("cartInfo", JSON.stringify(cartInfo))
+
+  //   setCartItem(JSON.parse(localStorage.getItem('cartInfo')))
+  // // setCartCount(0)
+  // }
+  // }
+
+  // senond way
+
+  const handleCartAdd=(id)=>{
     // const addCart=[]
      
-  if(cartCount>0){
+  if(foodIdCount.count>0 && id === foodIdCount.id){
 
   let cartInfo=[]
-  const selectedFood={...item,quantity:cartCount,total:cartCount*item.price}
+  const selectedFood={...item,quantity:foodIdCount.count,total:foodIdCount.count*item.price}
   
 
     if(JSON.parse(localStorage.getItem('cartInfo'))){
       cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
-      cartInfo=cartInfo.filter(cartInfo=>cartInfo.title!==foodTitle)
+      // cartInfo=cartInfo.filter(cartInfo=>cartInfo.title!==foodTitle)
+      // cartInfo=cartInfo.filter(cartInfo=>cartInfo.foodTitle!==foodTitle)
+      cartInfo=cartInfo.filter(cartInfo=>cartInfo._id!==id)
     }
     cartInfo.push(selectedFood)  
     localStorage.setItem("cartInfo", JSON.stringify(cartInfo))
 
     setCartItem(JSON.parse(localStorage.getItem('cartInfo')))
-  setCartCount(0)
+  // setCartCount(0)
+  setFoodIdCount({count:0})
   }
   }
+
+  
+  const handleCartCount=(id)=>{
+    if(id === foodIdCount.id){
+    setFoodIdCount({id:id,count:foodIdCount.count+1})
+  }else{
+    setFoodIdCount({id:id,count:0+1})
+  }
+  }
+
+  const handleReduce=(id)=>{
+    if(id === foodIdCount.id && foodIdCount.count>0){
+      setFoodIdCount({id:id,count:foodIdCount.count-1})
+    }
+      }
+
   return (
    
     <Grid container item={true} md={4} xs={10} className={classes.cardStyle}>
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar sizes="string" aria-label="recipe" className={classes.avatar} variant='square'>
-            {item.price}
+          <Avatar sizes="string" aria-label="recipe" className={classes.avatar} variant='circular' style={{width:'80px'}}>
+            <span style={{fontSize:".8rem"}}>{item.price}/-</span> 
           </Avatar>
         }
         action={
@@ -111,20 +160,25 @@ const FoodCard=({item,ind})=>{
         }
      
         // title={`${item.title} ${item.price}`}
-        title={item.title}
+        // title={item.title}
+        title={item.foodTitle}
         
       />
-      {item.image &&
+      {item.imageUrl &&
       <CardMedia
         className={classes.media}
-        image={item.image}
+        // image={item.image}
+        image={item.imageUrl}
         
-        title={item.title}
+        
+        // title={item.title}
+        title={item.foodTitle}
       />
       }
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {item.detail}
+          {/* {item.detail} */}
+          {item.description}
         </Typography>
       </CardContent>
       {/* <CardActions 
@@ -162,7 +216,9 @@ const FoodCard=({item,ind})=>{
           <Button
             aria-label="increase"
             size="small"
-            onClick={()=>setCartCount(cartCount+1)}
+            // onClick={()=>setCartCount(cartCount+1)}
+            onClick={()=>handleCartCount(item._id)}
+            
             // onClick={() => {
             //   setCount(count + 1);
             // }}
@@ -173,7 +229,8 @@ const FoodCard=({item,ind})=>{
           <Button
             aria-label="reduce"
             size="small"
-            onClick={()=>setCartCount(cartCount>0? cartCount-1:0)}
+            // onClick={()=>setCartCount(cartCount>0? cartCount-1:0)}
+            onClick={()=>handleReduce(item._id)}
             
             // onClick={() => {
             //   setCount(Math.max(count - 1, 0));
@@ -183,7 +240,11 @@ const FoodCard=({item,ind})=>{
           </Button>
         </ButtonGroup>
 
-         <span style={{color:"#1769aa",fontWeight:"bold"}}>{cartCount>0 && `${cartCount*item.price} BDT`}</span>
+         {/* <span style={{color:"#1769aa",fontWeight:"bold"}}>{cartCount>0 && `${cartCount*item.price} BDT`}</span> */}
+         {item._id===foodIdCount.id && foodIdCount.count>0 &&
+          <span style={{color:"#1769aa",fontWeight:"bold"}}>{`${foodIdCount.count*item.price} BDT`}</span>
+         }
+         
 
         <Badge 
           title={cartCount>0 ? "Add To Cart" : "Nothing in Cart Yet"}
@@ -192,9 +253,11 @@ const FoodCard=({item,ind})=>{
             vertical: 'top',
             horizontal: 'left',
           }}
-           badgeContent={cartCount}>
+           badgeContent={foodIdCount.id===item._id ? foodIdCount.count : 0}>
           <ShoppingCartIcon 
-          onClick={()=>handleCartAdd(item.title)}
+          // onClick={()=>handleCartAdd(item.title)}
+          // onClick={()=>handleCartAdd(item.foodTitle)}
+          onClick={()=>handleCartAdd(item._id)}
 
           />
         </Badge>

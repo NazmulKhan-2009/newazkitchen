@@ -56,22 +56,23 @@ const DeliveryDetails=()=> {
           type="email"           
           onChange={handleInput}           
           value={deliveryInfo.email ||""}
+          
         />
         <TextField 
+          required={true}
           id="cellInput" 
-          label="Your Cell" 
+          label="Your Contact" 
           inputProps={{ minLength: 11,maxLength: 11 }}
           variant="outlined" 
-          name="cell" 
+          name="contact" 
           type="text" 
-          onChange={handleInput} 
-          required={true}
-          value={deliveryInfo.cell ||""} 
+          onChange={handleInput}           
+          value={deliveryInfo.contact ||""} 
           
         />
         <TextField
           id="addressInput"
-          label="Your Address" 
+          label="Your Address in details" 
           variant="outlined" 
           name="address" 
           type="text" 

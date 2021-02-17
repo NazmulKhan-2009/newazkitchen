@@ -51,9 +51,10 @@ const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart}) => {
 
  
 
- const handleRemove=(foodTitle,index)=>{
+ const handleRemove=(foodTitle,index,id)=>{
   let cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
-  let filterItem=cartInfo.filter(cartInfo=>cartInfo.title !== foodTitle)
+  // let filterItem=cartInfo.filter(cartInfo=>cartInfo.title !== foodTitle)
+  let filterItem=cartInfo.filter(cartInfo=>cartInfo._id !== id)
   localStorage.setItem("cartInfo", JSON.stringify(filterItem))
   const remainItem=JSON.parse(localStorage.getItem('cartInfo'))
   if(remainItem.length<1){
@@ -85,14 +86,14 @@ const handleCartConfirm=()=>{
         <Grid container item={true} xs={12} >
           <Grid item={true} container style={{margin:"auto"}} xs={4} md={3}>
             
-              <img className={classes.img} alt="complex" src={CartData.image} />
+              <img className={classes.img} alt="complex" src={CartData.imageUrl} />
             
           </Grid>
           <Grid container item  xs={6} md={6}>
             
              <Grid>
                 <Typography gutterBottom  style={{ cursor: 'pointer',color:'blue' }} >
-                  {CartData.title}
+                  {CartData.foodTitle}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   Quantity: {CartData.quantity}
@@ -102,7 +103,7 @@ const handleCartConfirm=()=>{
                   Price:BDT {CartData.total}
                 </Typography>
                 {!confirmCart ?
-                  <Typography variant="body2" style={{ cursor: 'pointer',color:'red' }} onClick={()=>handleRemove(CartData.title,i)}>
+                  <Typography variant="body2" style={{ cursor: 'pointer',color:'red' }} onClick={()=>handleRemove(CartData.foodTitle,i,CartData._id)}>
                   Remove
                 </Typography>
                 :

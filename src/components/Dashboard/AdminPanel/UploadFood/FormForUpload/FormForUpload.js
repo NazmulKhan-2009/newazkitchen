@@ -9,7 +9,7 @@ import "./FormForUpload.css"
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import FileBase64 from 'react-file-base64';
-
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,13 +33,15 @@ const FormForUpload=()=> {
   const [foodInfo,setFoodInfo]=useState({})
   const[file,setFile]= useState(null) //for file base64
   const[foodsInfo,setFoodsInfo]= useState({}) 
+
   
-  
+  // #### CONSOLE ZONE START POINT ####
+
   // console.log(foodInfo)
   // console.log(file)
-  console.log(foodsInfo.imageUrl)
+  // console.log(foodsInfo.imageUrl)
   
- 
+ // #### CONSOLE ZONE END POINT ####
 
  
   const handleSubmit=(e)=>{
@@ -60,15 +62,36 @@ const FormForUpload=()=> {
     formData.append('price',price)
     formData.append('imageUrl', file); //file base64
    
-    fetch("http://localhost:5000/fooddetail",{
-          method: 'POST',
-          body:formData      
-        })
-        .then(res=>res.json())
-        .then(data=>setFoodsInfo(data.data))
-        .catch(err=>console.error(err))
-    
+    //*****FETCH WAY XXXX ASTAGFIRULLAH XXXXX
+    // fetch("http://localhost:5000/fooddetail",{
+    //       method: 'POST',
+    //       body:formData      
+    //     })
+    //     .then(res=>res.json())
+    //     .then(data=>setFoodsInfo(data.data))
+    //     .catch(err=>console.error(err))
 
+    // *****AXIOS WAY
+
+    //AXIOS THEN CATCH WAY XXXX ASTAGFIRULLAH XXXX
+    // axios.post("http://localhost:5000/fooddetail",formData)    
+    //     .then(data=>setFoodsInfo(data.data.data))
+    //     .catch(err=>console.error(err))
+
+
+     //****AXIOS ASYNC AWAIT WAY XXXX ASTAGFIRULLAH XXXXXX
+    const addFood= async()=>{
+      try{
+          const response=await axios.post("http://localhost:5000/api/food/fooddetail",formData) 
+          setFoodsInfo(response.data.data)
+       }catch(e){
+         console.log(`add Food error ${e}`)
+        } ;
+    }    
+    addFood()
+
+    
+// NO NEED BELLOW CODE XXXX ASTAGFIRULLAH XXXXX
     // formData.append('file',file);
     // // formData.append('image_link', file); //file base64
        
@@ -107,10 +130,14 @@ const FormForUpload=()=> {
             
             }}
         > </h3>
-        <p>{foodsInfo.foodTitle}</p>
+        
         {/* <img src={`http://localhost:5000/${foodsInfo.imageUrl}`}  alt="" /> */}
 
-        <img src={foodsInfo.imageUrl} alt=""/>
+        {foodsInfo.imageUrl &&
+          <img src={foodsInfo.imageUrl} alt="" width="30%"/>
+        }
+       
+       
 
         <form  className={classes.root} autoComplete="on" onSubmit={handleSubmit}>
            
@@ -187,10 +214,21 @@ const FormForUpload=()=> {
             <PhotoCamera  style={{position:"absolute",width:"35px",height:"30px",cursor:'pointer',paddingTop:"5px"}} color="secondary"/>
             </label>
 
-            {/* <FileBase64 multiple={false} onDone={image => console.log(typeof image.base64)}/>                        */}
-            <FileBase64 required={true} multiple={false} onDone={image =>image.type.slice(0,5)==="image" && image.size<"5000 kB" ? setFile(image.base64) : alert("Please Upload an Image within 5MB")}/>                       
+            {/* <FileBase64 multiple={false} onDone={image => console.log(typeof image.base64)}/> 
+                                   */}
+            {/* && image.size<"5000 kB"  */}
+            <FileBase64 required={true} multiple={false} onDone={image =>image.type.slice(0,5)==="image" ? setFile(image.base64) : alert("Please Upload an Image within 5MB")}/>                       
           </Grid>  
-
+            
+            {
+              file!==null &&
+              <div
+              style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:'column'}}
+              >
+                <img src={file} alt="" width="25%"/>
+                <small style={{textTransform:'capitalize'}}>{foodInfo.foodTitle}</small>
+              </div>
+            }
             
           <Button variant="outlined" color="secondary" type="submit" style={{marginLeft:"20px"}}>
             Add Food
