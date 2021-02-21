@@ -72,9 +72,9 @@ const DeliveryDetails=()=> {
       > Delivery Address</h3>
       <form  className={classes.root} autoComplete="on" onSubmit={handleSubmit}>
       <div>
-        <FormControlLabel value="Mr" control={<Radio size="small" name="gender" value="Mr" onChange={handleInput} checked={selectedValue === 'Mr'} color="primary" />} label="Mr" />
+        <FormControlLabel value="Mr" control={<Radio required={true} size="small" name="gender" value="Mr" onChange={handleInput} checked={selectedValue === 'Mr'} color="primary" />} label="Mr" />
 
-        <FormControlLabel value="Mrs" control={<Radio size="small" name="gender" value="Mrs" onChange={handleInput} checked={selectedValue === 'Mrs'} color="primary"/>} label="Mrs" />
+        <FormControlLabel value="Mrs" control={<Radio required={true} size="small" name="gender" value="Mrs" onChange={handleInput} checked={selectedValue === 'Mrs'} color="primary"/>} label="Mrs" />
       </div>
       
         <TextField 

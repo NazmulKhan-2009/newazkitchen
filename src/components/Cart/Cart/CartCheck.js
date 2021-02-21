@@ -50,7 +50,8 @@ const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart,handleDialog}) =
 //  const [confirmBtn, setConfirmBtn]=useState(false)
  const classes = useStyles();
 
- 
+//  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
+//  console.log(deliveryInfo)
 
  const handleRemove=(foodTitle,index,id)=>{
   let cartInfo=JSON.parse(localStorage.getItem('cartInfo'))

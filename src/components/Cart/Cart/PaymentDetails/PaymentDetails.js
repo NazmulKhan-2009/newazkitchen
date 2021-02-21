@@ -15,7 +15,10 @@ const PaymentDetails = ({confirmCart}) => {
    />
    
    {confirmCart ? 
-   <DeliveryDetails/>:<WaitingOrder/>
+   <DeliveryDetails/>
+   :
+   <WaitingOrder 
+   info={{text:'Waiting for Confirm cart',img:'https://media1.giphy.com/media/LVd5BbSMsgKLEjKpqL/source.gif'}}/>
    }
    
   
