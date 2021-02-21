@@ -4,21 +4,32 @@ import TextField from '@material-ui/core/TextField';
 import { Button, Grid } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Alert from '@material-ui/lab/Alert';
+import { useHistory } from "react-router-dom";
+
+import { withStyles } from '@material-ui/core/styles';
+import { green, red } from '@material-ui/core/colors';
+import Radio from '@material-ui/core/Radio';
+import { Fab, FormControlLabel} from '@material-ui/core';
+import './DeliveryDetails.css'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
-      minWidth: '30ch',
+      margin: theme.spacing(0),
+      minWidth: '15rem',  
+       
     },
+    
   },
 }));
 
 const DeliveryDetails=()=> {
   const classes = useStyles();
   const [deliveryInfo,SetDeliveryInfo]=useState({})
-  
+  let history = useHistory();
  
+  
   
   
   // console.log(deliveryInfo)
@@ -26,14 +37,26 @@ const DeliveryDetails=()=> {
   const handleSubmit=(e)=>{
      e.preventDefault()
     console.log(deliveryInfo)
-    sessionStorage.setItem("deliveryInfo", JSON.stringify(deliveryInfo))
+  // console.log(totalPrice)
+  sessionStorage.setItem("deliveryInfo", JSON.stringify({...deliveryInfo,totalPrice}))
     // localStorage.removeItem('cartInfo')
     SetDeliveryInfo({})
+    history.push("/dashboard/payment")
   }
 
-  const handleInput=e=>{   
+  const handleInput=e=>{ 
+    setSelectedValue(e.target.value);  
     SetDeliveryInfo({...deliveryInfo,[e.target.name]:e.target.value})
   }
+
+  const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
+  console.log(totalPrice)
+
+  const [selectedValue, setSelectedValue] = React.useState('');
+
+  // const handleChange = (event) => {
+  //   setSelectedValue(event.target.value);
+  // };
 
   return (
     <Grid>
@@ -41,21 +64,28 @@ const DeliveryDetails=()=> {
         style={{
           textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
           color:"#fd5c63",
+          margin: '1rem'
+          
           // marginBottom:"3rem",
           
           }}
       > Delivery Address</h3>
       <form  className={classes.root} autoComplete="on" onSubmit={handleSubmit}>
-        
+      <div>
+        <FormControlLabel value="Mr" control={<Radio size="small" name="gender" value="Mr" onChange={handleInput} checked={selectedValue === 'Mr'} color="primary" />} label="Mr" />
+
+        <FormControlLabel value="Mrs" control={<Radio size="small" name="gender" value="Mrs" onChange={handleInput} checked={selectedValue === 'Mrs'} color="primary"/>} label="Mrs" />
+      </div>
+      
         <TextField 
           required={true}
           id="emailInput" 
-          label="Your Email" 
+          label="Your Name" 
           variant="outlined" 
-          name="email" 
-          type="email"           
+          name="name" 
+          type="text"           
           onChange={handleInput}           
-          value={deliveryInfo.email ||""}
+          value={deliveryInfo.name ||""}
           
         />
         <TextField 
@@ -80,7 +110,7 @@ const DeliveryDetails=()=> {
           required={true}
           value={deliveryInfo.address ||""}  
         />
-        <TextField
+        <TextField       
           id="insInput"
           label="Additional Instruction" 
           variant="outlined" 
@@ -89,7 +119,7 @@ const DeliveryDetails=()=> {
           onChange={handleInput} 
           value={deliveryInfo.instruction ||""} 
         />
-        <Button variant="outlined" color="secondary" type="submit">
+        <Button variant="outlined" color="secondary" type="submit"  >
           Go to Payment
         </Button>
         

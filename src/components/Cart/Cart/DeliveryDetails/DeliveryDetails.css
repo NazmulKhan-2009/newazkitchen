@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Courgette&display=swap');
+/* font-family: 'Courgette', cursive !important; */
+
+.MuiFormControl-root{
+ margin: 5px !important;
+}
+.makeStyles-root-51{
+ margin:5px !important;
+}
+
+.MuiFormLabel-root {
+ 
+ padding: 0;
+ font-size: 1.2rem !important;
+ font-family: 'Caveat', cursive !important;
+ font-weight: 800 !important;
+ line-height: 1;
+ letter-spacing: .04038em;
+}
+.MuiInputBase-input {
+ font-family: 'Courgette', cursive !important;
+ letter-spacing: .04038em !important;
+ font-size: 1.2rem !important;
+ /* color:red !important; */
+ text-shadow: 5px 4px 5px rgba(0, 0, 0, 0.36) !important;
+ color:#863D41 !important;
+  
+}
+
+
+

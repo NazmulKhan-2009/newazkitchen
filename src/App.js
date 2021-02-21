@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Gallery from './components/Gallery/Gallery';
 import AppNav from './components/Home/Header/AppBar/AppNav';
 import Home from './components/Home/Home/Home';
+import PaymentProcess from './components/PaymentProcess/PaymentProcess';
 import PracticeComp from './PracticeCom/PracticeComp';
 
 
@@ -28,6 +29,10 @@ function App(){
     setCartItem(cartGet)
     // console.log(cartGet)
   },[])
+
+  // ??????
+  // const cusInfo=JSON.parse(localStorage.getItem('deliveryInfo'))
+  const cusInfo=true  
 
   return (
     <UserContext.Provider
@@ -48,6 +53,10 @@ function App(){
         <Route exact path="/practicecomp" component={PracticeComp} /> 
          
         <Route exact path="/uploadfoods" component={UploadFoods} />  
+        
+          <Route exact path="/dashboard/payment" component={cusInfo ? PaymentProcess : NotFound} />
+        
+        
 
 
         <Route exact path="*" component={NotFound} /> 

@@ -247,7 +247,7 @@ const FoodCard=({item,ind,foodDet,count})=>{
          
 
         <Badge 
-          title={cartCount>0 ? "Add To Cart" : "Nothing in Cart Yet"}
+          title={foodIdCount.count>0 ? "Add To Cart" : "Nothing in Cart Yet"}
           color="secondary"
           anchorOrigin={{
             vertical: 'top',

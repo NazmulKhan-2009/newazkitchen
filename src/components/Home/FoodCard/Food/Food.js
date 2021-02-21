@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import LoadingCart from '../../../Common/NotFound/LoadingCard';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -100,7 +103,7 @@ const handleFood=(item,color)=>{
      
     <Grid container item={true} md={10} xs={12} style={{margin:'auto'}}>  
     
-    {
+    {/* {
       itemWise.slice(0,sliceFood).map((item,ind)=>
       <FoodCard
        key={ind}
@@ -110,6 +113,26 @@ const handleFood=(item,color)=>{
        
       />
      )
+    } */}
+
+    {
+      itemWise.length<1 ? 
+      <Grid container justify="center">
+       <LoadingCart/>  
+      </Grid>
+       
+      
+      : 
+
+      itemWise.slice(0,sliceFood).map((item,ind)=>
+      <FoodCard
+       key={ind}
+       item={item}
+       ind={ind}
+       foodDet={foodDetails}
+       />
+     )
+
     }
     
     </Grid>

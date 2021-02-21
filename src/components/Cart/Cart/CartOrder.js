@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import CartCheck from './CartCheck';
 import WaitingOrder from './WaitingOrder';
@@ -10,15 +10,21 @@ import DeliveryDetails from './DeliveryDetails/DeliveryDetails';
 import PriceDetails from './PriceDetails';
 import PaymentDetails from './PaymentDetails/PaymentDetails';
 
-const CartOrder=()=>{
+const CartOrder=({handleDialog})=>{
   const [cartItem, setCartItem]=useContext(UserContext)
   const [placeOrder, setPlaceOrder]=useState(false)
   const [confirmCart, setConfirmCart]=useState(false)
+  
   
 
   const handlePlaceOrder=(bool)=>{
     setConfirmCart(bool)
   }
+
+
+  
+
+  
   
 // const cartItems=[{car:"toyota",price:200},{car:"toyota",price:200}]
   return (
@@ -53,15 +59,17 @@ const CartOrder=()=>{
 
     {cartItem.length>0 ?
 
-    <Grid item container md={10} xs={10} style={{margin:"auto",marginTop:"2rem"}}>   
+    <Grid item container md={10} xs={10} style={{margin:"auto",marginTop:"-1rem"}}>   
       
       <CartCheck
         handlePlaceOrder={handlePlaceOrder}
         confirmCart={confirmCart}
+        handleDialog={handleDialog}
       />     
        <PaymentDetails 
          confirmCart={confirmCart}
          setConfirmCart={setConfirmCart}
+         
        />
       {/* {confirmCart && 
         <WaitingOrder

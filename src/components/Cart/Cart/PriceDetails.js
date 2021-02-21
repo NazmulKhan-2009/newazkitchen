@@ -7,17 +7,36 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Fab, Grid } from '@material-ui/core';
+
 import { useContext } from 'react';
 import { UserContext } from '../../../App';
+import { Grid } from '@material-ui/core';
+
+
+const useStyles = makeStyles((theme) => ({
+
+  table: {
+    minWidth:"25rem",
+    
+      
+  },
+  
+}));
 
 // const TAX_RATE = 0.07;
 
-const useStyles = makeStyles({
-  table: {
-    minWidth:"25rem"  
-  },
-});
+// const GreenRadio = withStyles({
+//   root: {
+//     color: red[400],
+//     '&$checked': {
+//       color: red[600],
+//     },
+//   },
+//   checked: {},
+// })((props) => <Radio color="default" {...props} />);
+
+
+
 
 // function ccyFormat(num) {
 //   return `${num.toFixed(2)}`;
@@ -50,6 +69,9 @@ const PriceDetails=()=>{
   const classes = useStyles();
   const [cartItem, setCartItem]=useContext(UserContext)
 
+  //RADIOS BOX
+ 
+
   
 
   const priceData=cartItem.map(data=>data.total)
@@ -58,18 +80,28 @@ const PriceDetails=()=>{
   const deliveryCost=inTotalPrice>1000?50:80
   const havetoPay=inTotalPrice+vat+deliveryCost
 
+  sessionStorage.setItem("totalPrice", JSON.stringify(havetoPay))
+  
 
   return (
     <Grid item md={11} >
+     
     <h3
       style={{
         textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
         color:"#fd5c63",
+        paddingRight:"3rem"
         // marginBottom:"3rem",
         
         }}
      > Payment Details</h3>
-    <TableContainer component={Paper}>
+
+            
+        
+         
+ 
+
+    <TableContainer component={Paper} elevation={10}>
       <Table className={classes.table} aria-label="spanning table">
         
         <TableBody>

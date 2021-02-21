@@ -1,3 +1,4 @@
+import { Fab } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
@@ -20,6 +21,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../../App';
 import './AppNav.css';
+import logo2 from '../../../../images/logo/logo-2.png'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -94,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     
   },
   imgStyle:{
-    borderRadius:'50%'
+    // borderRadius:'50%'
   }
   
 }));
@@ -234,9 +236,9 @@ const AppNav=()=>{
                 Newaz Kitchen
               </Typography> */}
              
-                <img src="https://images.news18.com/ibnlive/uploads/2020/04/Tips-on-Cooking-If-Youre-at-Home-F5.jpg" alt="" width="7%" className={classes.imgStyle}  />
+                {/* <img src="https://images.news18.com/ibnlive/uploads/2020/04/Tips-on-Cooking-If-Youre-at-Home-F5.jpg" alt="" width="7%" className={classes.imgStyle}  /> */}
               
-              
+                <img src={logo2} alt="" width="5%" className={classes.imgStyle}  />
           
 
           
@@ -295,21 +297,25 @@ const AppNav=()=>{
               </Badge>
             </IconButton>
             
+            {/* Shopping cart */}
+          {cartItem && cartItem.length>0 &&
             
-            <IconButton
+           <IconButton
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={null}
-              color="inherit"             
+              color="inherit"   
+              size="medium"              
+              style={{position:'fixed',bottom:"10px",right:'20px',background:'gray',width:'60px',border:"2px solid black"}}         
             >
             <Badge badgeContent={cartItem && cartItem.length} color="secondary" >
-            <Link to="/cart"><ShoppingBasketIcon color="primary"/></Link>
+            <Link to="/cart"> <ShoppingBasketIcon   style={{color:"blue"}}/></Link>
             </Badge>
               
             </IconButton>
-               
+          }
             <IconButton
               edge="end"
               aria-label="account of current user"

@@ -10,6 +10,7 @@ import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import { useState } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Dialogs from '../Dialog/Dialogs';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   }
  
 }));
-const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart}) => {
+const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart,handleDialog}) => {
  const [cartItem, setCartItem]=useContext(UserContext)
 //  const [confirmBtn, setConfirmBtn]=useState(false)
  const classes = useStyles();
@@ -64,13 +65,17 @@ const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart}) => {
 }
 
 const handleCartConfirm=()=>{
+
+  handleDialog(true)
   handlePlaceOrder(true)
   // setConfirmBtn(true)
 
 }
 
+
+
  return (
-  <Grid  item={true}  md={6} >
+  <Grid  item={true}  md={5} >
   <h3  className={classes.header}>Your Cart Details</h3>
   <Grid 
   className={classes.cartSide}
@@ -81,7 +86,7 @@ const handleCartConfirm=()=>{
    
     <div className={classes.root} key={i} >
     
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} elevation={5}>
       
         <Grid container item={true} xs={12} >
           <Grid item={true} container style={{margin:"auto"}} xs={4} md={3}>
@@ -115,6 +120,8 @@ const handleCartConfirm=()=>{
 
                 
             </Grid>
+
+            
                  
           </Grid>
         </Grid>
@@ -146,7 +153,7 @@ const handleCartConfirm=()=>{
     />
     }
     
-
+    
     </Grid>
  );
 };
