@@ -16,7 +16,11 @@ const handleAgree=(bool)=>{
  return (
   <div>
    <CartOrder handleDialog={handleDialog}/>
-   <Dialogs dial={open} handleAgree={handleAgree}/>
+   <Dialogs 
+    dial={open} 
+    handleAgree={handleAgree}
+    
+   />
   </div>
  );
 };

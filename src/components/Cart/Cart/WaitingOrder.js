@@ -3,7 +3,7 @@ import React from 'react';
 
 const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
 // console.log(paymentMethod)
-  
+  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
 
  return (
    <Grid  item={true} xs={10} md={confirmCart? 4:8} >
@@ -33,7 +33,8 @@ const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
       style={{
         textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
         color:"#fd5c63",
-        marginBottom:"1rem"     
+        marginBottom:"1rem",
+        textAlign:'center'     
         }}
      > {info.text}</h3>
      <img 

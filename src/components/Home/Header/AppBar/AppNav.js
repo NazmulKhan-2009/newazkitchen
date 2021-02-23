@@ -247,6 +247,8 @@ const AppNav=()=>{
               <SearchIcon />
             </div>
             <InputBase
+            autoFocus={true}
+              tabIndex="1"
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,

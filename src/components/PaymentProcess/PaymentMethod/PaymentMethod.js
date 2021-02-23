@@ -6,7 +6,7 @@ import CashOnDelivery from './CashOnDelivery/CashOnDelivery';
 import MobileTransfer from './MobileTransfer/MobileTransfer';
 import SelectMethod from './SelectMethod/SelectMethod';
 
-const PaymentMethod = () => {
+const PaymentMethod = ({setPaymentData,handleDialog}) => {
 const [paymentMethod, setPaymentpaymentMethod]=useState({isType:false,methodName:''})
 const [paymentType,setPaymentType]=useState(false)
 
@@ -15,8 +15,8 @@ const handlePayment=(paymentType,bool)=>{
  // if(paymentType==='Card Payment'){
  //  setPaymentpaymentMethod()
  // }
- console.log(paymentType)
- console.log(bool)
+//  console.log(paymentType)
+//  console.log(bool)
  setPaymentpaymentMethod({isType:bool,methodName:paymentType})
  
 // console.log(paymentType)
@@ -30,11 +30,11 @@ const handlePayment=(paymentType,bool)=>{
    sm={5} 
    xs={10} >
    <h3 className='head'>Payment Method</h3>
-   <SelectMethod  handlePayment={handlePayment}/>
+   <SelectMethod  handlePayment={handlePayment} handleDialog={handleDialog}/>
    {
     paymentMethod.isType?
     <>
-     {paymentMethod.methodName==='Card Payment' && <CardPayment/>}
+     {paymentMethod.methodName==='Card Payment' && <CardPayment setPaymentData={setPaymentData}/>}
      {paymentMethod.methodName==='Mobile Transfer' && <MobileTransfer/>}
      {paymentMethod.methodName=== 'Cash On Delivery' && <CashOnDelivery/> }
    </>:
