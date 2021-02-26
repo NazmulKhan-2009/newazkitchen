@@ -6,7 +6,7 @@ import CashOnDelivery from './CashOnDelivery/CashOnDelivery';
 import MobileTransfer from './MobileTransfer/MobileTransfer';
 import SelectMethod from './SelectMethod/SelectMethod';
 
-const PaymentMethod = ({setPaymentData,handleDialog}) => {
+const PaymentMethod = ({setPaymentData,handleDialog,purchaseDone,purchaseNotify}) => {
 const [paymentMethod, setPaymentpaymentMethod]=useState({isType:false,methodName:''})
 const [paymentType,setPaymentType]=useState(false)
 
@@ -29,22 +29,30 @@ const handlePayment=(paymentType,bool)=>{
    md={5}
    sm={5} 
    xs={10} >
+   {!purchaseNotify && <>
    <h3 className='head'>Payment Method</h3>
    <SelectMethod  handlePayment={handlePayment} handleDialog={handleDialog}/>
+   </>
+   }
    {
     paymentMethod.isType?
     <>
-     {paymentMethod.methodName==='Card Payment' && <CardPayment setPaymentData={setPaymentData}/>}
-     {paymentMethod.methodName==='Mobile Transfer' && <MobileTransfer/>}
+     {paymentMethod.methodName==='Card Payment' && <CardPayment setPaymentData={setPaymentData} purchaseDone={purchaseDone}/>}
+     {paymentMethod.methodName==='Mobile Transfer' && <MobileTransfer handleDialog={handleDialog} purchaseDone={purchaseDone}/>}
      {paymentMethod.methodName=== 'Cash On Delivery' && <CashOnDelivery/> }
    </>:
    <WaitingOrder 
-   info={{text:"Waiting For Payment Option",
-          img:'https://pizzahouse.pk/wp-content/uploads/2020/06/QualifiedRecklessIrukandjijellyfish-max-1mb.gif'}}/>
+//    info={{text:"Waiting For Payment Option",
+//           img:'https://pizzahouse.pk/wp-content/uploads/2020/06/QualifiedRecklessIrukandjijellyfish-max-1mb.gif'}}
 
-   }
+       info={{text:"Waiting For Payment Option",
+              img:' https://media.tenor.com/images/f877ce050749a1ab7db5cad6997658f3/tenor.gif'}}
+
+          />
+       
+       }
   
-
+  
        
    
   </Grid>

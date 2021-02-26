@@ -15,6 +15,7 @@ import Gallery from './components/Gallery/Gallery';
 import AppNav from './components/Home/Header/AppBar/AppNav';
 import Home from './components/Home/Home/Home';
 import PaymentProcess from './components/PaymentProcess/PaymentProcess';
+import PurchaseHistory from './components/PurchaseHistory/PurchaseHistory/PurchaseHistory';
 import PracticeComp from './PracticeCom/PracticeComp';
 
 
@@ -56,7 +57,7 @@ function App(){
         
           <Route exact path="/dashboard/payment" component={cusInfo ? PaymentProcess : NotFound} />
         
-        
+          <Route exact path="/dashboard/purchaseHistory" component={PurchaseHistory} /> 
 
 
         <Route exact path="*" component={NotFound} /> 

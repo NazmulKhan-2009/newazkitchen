@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { myContext } from '../PracticePro';
 
+export const info=()=>{
+ return "dhk-ctg"
+}
 
 const CousinComp = () => {
  // const {info, setInfo}=useContext(myContext)

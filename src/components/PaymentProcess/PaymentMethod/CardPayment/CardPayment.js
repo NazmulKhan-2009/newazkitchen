@@ -7,7 +7,9 @@ import CardForm from '../CardForm/CardForm';
 // const stripePromise = loadStripe(PAYMENT_API);
 // const stripePromise = loadStripe('pk_test_51HZmpeBrQZkVZj93ptIXAlr0QfKpz53Jmi58FsGsE2DpgVLXGWkTAyU69KDD0oIvhiBFk0qyHkPIHtwy8jRiRzOr00RFgzPi1v');
 
-const CardPayment = ({setPaymentData}) => {
+const CardPayment = ({setPaymentData,purchaseDone}) => {
+    
+
  return (
   <div>
    <h3 
@@ -19,9 +21,11 @@ const CardPayment = ({setPaymentData}) => {
                         <CardForm setPaymentData={setPaymentData}/>
                     </Elements> */}
 
-                    <CardForm setPaymentData={setPaymentData}/>
+                    <CardForm setPaymentData={setPaymentData} purchaseDone={purchaseDone}/>
   </div>
  );
 };
 
 export default CardPayment;
+
+// purchase data issue start from here

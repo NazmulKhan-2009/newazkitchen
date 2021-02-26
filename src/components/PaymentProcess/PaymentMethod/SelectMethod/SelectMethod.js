@@ -13,13 +13,21 @@ const SelectMethod = ({handlePayment,handleDialog}) => {
   handlePayment(e.target.value,true)
   // console.log(e.target.value)
   if(e.target.value==='Cash On Delivery'){
-    handleDialog(true)
+    handleDialog(true,{
+      title:'Cash on Delivery....',
+      content:'Please Pay ',
+      // payment:totalPrice,
+      contentEnd:'once you received the product. ',
+      btnYes:"Confirm",
+      btnNo:"Change Mind",
+      inputOption:"dont"
+      })
   }
  }
 
  return (
-  <div>
-  <div>
+  
+  <div style={{width:"100%"}}>
         <FormControlLabel value="Card Payment" control={<Radio required={true} size="small" name="paymentBy" value="Card Payment" onChange={handleInput} checked={selectedValue === 'Card Payment'} color="primary" />} label="Card Payment" />
 
         <FormControlLabel value="Mobile Transfer" control={<Radio required={true} size="small" name="paymentBy" value="Mobile Transfer" onChange={handleInput} checked={selectedValue === 'Mobile Transfer'} color="primary"/>} label="Mobile Transfer" />
@@ -33,7 +41,7 @@ const SelectMethod = ({handlePayment,handleDialog}) => {
         
       </div>
    
-  </div>
+  
  );
 };
 

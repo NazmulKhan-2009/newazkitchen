@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,21 +7,54 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { useHistory } from 'react-router-dom';
+import { Badge, Grid, TextField } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const Dialogs=({dial,handleAgree})=>{
+const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree})=>{
 
-  let history = useHistory();
-  const handleDisagree = () => {
-   
-    history.push("/");
-  };
+  const [purchasedInfo,setPrchasedInfo]= useState({}) 
+  // let history = useHistory();
 
-  const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
+  // const handleDisagree = (bool) => {
+    
+    
+  //     // history.push("/")
+    
+  // };
+
+  // const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
+
+  const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
+  const StyledBadge = withStyles((theme) => ({
+    badge: {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }))(Badge);
+
   
+
+  const handleSubmit=(e)=>{
+     e.preventDefault()
+     if(dialogInfo.title!=='Payment Process....'){
+      const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
+      sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
+     }   
+     
+     handleAgree(false,true)
+  }
+
+  const handleInput=e=>{   
+    setPrchasedInfo({...purchasedInfo,[e.target.name]:e.target.value})
+  }
+
 
   return (
     <div>
@@ -35,23 +68,97 @@ const Dialogs=({dial,handleAgree})=>{
         // onClose={handleAgree}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
+        
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Payment process...."}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{dialogInfo && dialogInfo.title}</DialogTitle>
+        <Grid container justify="center">
+        {cartInfo.map((purchasedFoodInfo)=> 
+        <Grid key={purchasedFoodInfo._id} item xs={3}> 
+          <StyledBadge badgeContent={purchasedFoodInfo.quantity} color="secondary">
+          
+           
+          <ShoppingCartIcon />
+          </StyledBadge>     
+          <img  src={purchasedFoodInfo.imageUrl} alt="" width="70%" style={{borderRadius:'50px'}}/> 
+        </Grid>              
+        )
+        }
+        </Grid>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Before Next level of payment please be informed you have to Pay by Bkash as 50% of your total price about <span style={{textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
-        color:"#fd5c63"}}>{totalPrice*.5}/=</span> and rest of price will be collected on delivery. 
+            {dialogInfo && dialogInfo.content}<span style={{textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
+        color:"#fd5c63"}}>{dialogInfo && `${dialogInfo.payment}/- `}</span> {dialogInfo && dialogInfo.contentEnd}
           </DialogContentText>
         </DialogContent>
+        
+        
+        
         <DialogActions>
         
-          <Button onClick={handleDisagree} color="primary">
-            Don't Proceed
+        
+        
+        {/* {dialogInfo.inputField} */}
+        
+
+          {/* <Button onClick={()=>handleDisagree(false)} color="primary">
+            {dialogInfo && dialogInfo.btnNo}
           </Button>
-          <Button onClick={()=>handleAgree(false)} color="primary">
-            Proceed 
-          </Button>
+          <Button onClick={()=>handleAgree(false,true)} color="primary">
+            {dialogInfo && dialogInfo.btnYes} 
+          </Button> */}
+          
+          <form   autoComplete="on" onSubmit={handleSubmit}>
+          
+           
+          
+         {dialogInfo.inputOption==='do' &&
+         <>
+          <TextField
+            id="transaction no"
+            label="Transaction Ref No" 
+            variant="outlined" 
+            name="transaction-No" 
+            type="text" 
+            // inputProps={{ minLength: 3,maxLength: 50 }}
+            onChange={handleInput} 
+            required={true}
+            // value={foodInfo.foodTitle ||""}  
+          />
+          
+          <TextField
+            id="ac no"
+            label="Money send from" 
+            variant="outlined" 
+            name="sentMobileAc" 
+            type="text" 
+            inputProps={{ minLength: 3,maxLength: 50 }}
+            onChange={handleInput} 
+            required={true}
+            // value={foodInfo.foodTitle ||""}  
+          />
+          </>
+         }
+          
+          
+          
+          
+         
+          <Grid container justify="flex-end">
+          
+            <Button onClick={()=>handleDisagree(false)} color="primary">
+              {dialogInfo && dialogInfo.btnNo}
+            </Button>
+          
+            <Button type='submit'  color="primary">
+              {dialogInfo && dialogInfo.btnYes} 
+            </Button>
+          </Grid>
+
+          </form>
+          
         </DialogActions>
+
+        
       </Dialog>
     </div>
   );

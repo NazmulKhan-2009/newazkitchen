@@ -20,11 +20,34 @@ const useStyles = makeStyles((theme) => ({
  }
 }));
 
-const MoneyTrfCom=({info})=>{
+const MoneyTrfCom=({info,handleDialog,purchaseDone})=>{
   const classes = useStyles();
 
+  // const inputField=(
+  // <form>
+  //   <input type="text"/>
+  //   <input type="text"/>
+  //   <button>send</button>
+  // </form>
+  // )
+
+  const handleMobileTrf=(mobileTrfTitle)=>{
+    handleDialog(true,{
+      title:`You are going to payment by ${mobileTrfTitle}` ,
+      content:'Please Provide ',
+      // payment:totalPrice,
+      contentEnd:'and send us Transaction ID & Amount. ',
+      
+      btnYes:"Confirm",
+      btnNo:"Change Mind",
+      inputOption:'do'
+      // inputField
+    })
+
+  }
+
   return (
-    <div className={classes.root} >
+    <div className={classes.root} onClick={()=>handleMobileTrf(info.coName)} >
       <Avatar variant="square" src={info.img} className={classes.imgStyle}/>
     </div>
   );

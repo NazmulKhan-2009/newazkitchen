@@ -200,6 +200,7 @@ const SubmitButton = ({processing, error, children, disabled}) => (
     className={`SubmitButton ${error ? 'SubmitButton--error' : ''}`}
     type="submit"
     disabled={processing || disabled}
+    
   >
     {processing ? 'Processing...' : children}
   </button>
@@ -232,7 +233,7 @@ const ResetButton = ({onClick}) => (
   </button>
 );
 
-const CheckoutForm = ({setPaymentData}) => {
+const CheckoutForm = ({setPaymentData,purchaseDone}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -244,6 +245,19 @@ const CheckoutForm = ({setPaymentData}) => {
     phone: '',
     name: '',
   });
+
+  const cardDataBase=(payload)=>{
+    const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
+    const orderDoneDb={
+      ...deliveryInfo,
+      paymentType:'Card',
+      email:payload.paymentMethod.billing_details.email,
+      card_holder_name:payload.paymentMethod.billing_details.name,
+      card_Brand:payload.paymentMethod.card.brand,
+    }
+    sessionStorage.setItem('orderDoneDb', JSON.stringify(orderDoneDb))
+  }
+   
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -276,6 +290,8 @@ const CheckoutForm = ({setPaymentData}) => {
     } else {
       setPaymentMethod(payload.paymentMethod);
       setPaymentData(payload.paymentMethod)
+      cardDataBase(payload) //????
+      purchaseDone(true) //?????
     }
   };
 
@@ -349,7 +365,7 @@ const CheckoutForm = ({setPaymentData}) => {
         />
       </fieldset>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
-      <SubmitButton processing={processing} error={error} disabled={!stripe}>
+      <SubmitButton  processing={processing} error={error} disabled={!stripe}>
         PAY BDT {JSON.parse(sessionStorage.getItem('totalPrice'))}
       </SubmitButton>
     </form>
@@ -368,11 +384,11 @@ const ELEMENTS_OPTIONS = {
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51HZmpeBrQZkVZj93ptIXAlr0QfKpz53Jmi58FsGsE2DpgVLXGWkTAyU69KDD0oIvhiBFk0qyHkPIHtwy8jRiRzOr00RFgzPi1v');
 
-const CardForm = ({setPaymentData}) => {
+const CardForm = ({setPaymentData,purchaseDone}) => {
   return (
     <div className="AppWrapper">
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm setPaymentData={setPaymentData}/>
+        <CheckoutForm setPaymentData={setPaymentData} purchaseDone={purchaseDone}/>
       </Elements>
     </div>
   );

@@ -28,7 +28,7 @@ const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
      src="https://media1.giphy.com/media/LVd5BbSMsgKLEjKpqL/source.gif" alt=""/> */}
 
      
-     <>
+     <Grid container justify='center'>
       <h3
       style={{
         textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
@@ -48,7 +48,7 @@ const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
     
      
      src={info.img} alt=""/>
-     </>
+     </Grid>
      
 
    </Grid>

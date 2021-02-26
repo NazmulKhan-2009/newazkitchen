@@ -1,4 +1,5 @@
 import React from 'react';
+import WaitingOrder from '../../../Cart/Cart/WaitingOrder';
 
 
 const CashOnDelivery = () => {
@@ -6,7 +7,11 @@ const CashOnDelivery = () => {
  
  return (
   <div className="Form">
-   <h3>That is Cash On Delivery Page</h3>
+   <WaitingOrder
+      info={{
+       text:"Waiting For Payment Option",
+       img:' https://media.tenor.com/images/f877ce050749a1ab7db5cad6997658f3/tenor.gif'}}
+          />
    
   </div>
  );

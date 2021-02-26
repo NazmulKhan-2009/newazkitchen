@@ -225,4 +225,5 @@ body {
  cursor: pointer;
  /* background: transparent; */
  background: #fd5c63;
+ display: none;
 }
