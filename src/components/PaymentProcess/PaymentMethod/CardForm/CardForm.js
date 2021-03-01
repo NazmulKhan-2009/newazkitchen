@@ -133,6 +133,8 @@ import React, {useState} from 'react';
 import {loadStripe} from '@stripe/stripe-js';
 import {CardElement, Elements, useElements, useStripe} from "@stripe/react-stripe-js";
 import './CardForm.css';
+import PurchaseDone from '../../PurchaseDone/PurchaseDone';
+import { orderedData } from '../../../DataManagement';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -233,7 +235,7 @@ const ResetButton = ({onClick}) => (
   </button>
 );
 
-const CheckoutForm = ({setPaymentData,purchaseDone}) => {
+const CheckoutForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -292,30 +294,45 @@ const CheckoutForm = ({setPaymentData,purchaseDone}) => {
       setPaymentData(payload.paymentMethod)
       cardDataBase(payload) //????
       purchaseDone(true) //?????
+
+      const email="ustciiucbracbank@gmail.com";
+    const orderedDetails=await orderedData(email,payload.paymentMethod)
+    dbOrderedInfo(orderedDetails)
+
     }
   };
-
-  const reset = () => {
-    setError(null);
-    setProcessing(false);
-    setPaymentMethod(null);
-    setBillingDetails({
-      email: '',
-      phone: '',
-      name: '',
-    });
-  };
+//todo ## RESET CARD - NO NEED NOW- MAY REQUIRE IN FUTURE
+  // const reset = () => {
+  //   setError(null);
+  //   setProcessing(false);
+  //   setPaymentMethod(null);
+  //   setBillingDetails({
+  //     email: '',
+  //     phone: '',
+  //     name: '',
+  //   });
+  // };
 
   return paymentMethod ? (
-    <div className="Result">
-      <div className="ResultTitle" role="alert">
-        Congratulation , Your Payment is successful
-      </div>
-      <div className="ResultMessage">
-        Thanks for purchase from Newaz Kitchen, your puchase ID is  {paymentMethod.id}
-      </div>
-      <ResetButton onClick={reset} />
-    </div>
+
+    <PurchaseDone 
+    successInfo={{
+      paymentIdInfo:`Thanks for purchase from Newaz Kitchen, your puchase ID is  ${paymentMethod.id}`,
+      successMsg:'Congratulation , Your Payment is successful',
+
+      
+      }}/>
+      
+      //! SUCCESS NOTIFICATION NO-NEED
+    //// <div className="Result">
+    ////   <div className="ResultTitle" role="alert">
+    ////     Congratulation , Your Payment is successful
+    ////   </div>
+    ////   <div className="ResultMessage">
+    ////     Thanks for purchase from Newaz Kitchen, your puchase ID is  {paymentMethod.id}
+    ////   </div>
+    ////   <ResetButton onClick={reset} />
+    //// </div>
   ) : (
     <form className="Form" onSubmit={handleSubmit}>
       <fieldset className="FormGroup">
@@ -384,11 +401,11 @@ const ELEMENTS_OPTIONS = {
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51HZmpeBrQZkVZj93ptIXAlr0QfKpz53Jmi58FsGsE2DpgVLXGWkTAyU69KDD0oIvhiBFk0qyHkPIHtwy8jRiRzOr00RFgzPi1v');
 
-const CardForm = ({setPaymentData,purchaseDone}) => {
+const CardForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
   return (
     <div className="AppWrapper">
       <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm setPaymentData={setPaymentData} purchaseDone={purchaseDone}/>
+        <CheckoutForm setPaymentData={setPaymentData} purchaseDone={purchaseDone} dbOrderedInfo={dbOrderedInfo}/>
       </Elements>
     </div>
   );

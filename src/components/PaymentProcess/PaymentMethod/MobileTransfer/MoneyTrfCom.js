@@ -40,7 +40,8 @@ const MoneyTrfCom=({info,handleDialog,purchaseDone})=>{
       
       btnYes:"Confirm",
       btnNo:"Change Mind",
-      inputOption:'do'
+      inputOption:'do',
+      purchaseDone:purchaseDone
       // inputField
     })
 

@@ -10,14 +10,18 @@ import { useHistory } from 'react-router-dom';
 import { Badge, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { orderedData } from '../../DataManagement';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree})=>{
+const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
 
   const [purchasedInfo,setPrchasedInfo]= useState({}) 
+  //? const [orderInfo,setOrderInfo]= useState({}) 
+
+  // console.log(orderInfo)
   // let history = useHistory();
 
   // const handleDisagree = (bool) => {
@@ -41,18 +45,40 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree})=>{
 
   
 
-  const handleSubmit=(e)=>{
-     e.preventDefault()
-     if(dialogInfo.title!=='Payment Process....'){
-      const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
-      sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
-     }   
+  // ! const handleSubmit=(e)=>{
+  //    e.preventDefault()
+  //    if(dialogInfo.title!=='Payment Process....'){
+  //     const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
+  //     sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
+
+  //     dialogInfo.purchaseDone(true)
+  //    }   
      
-     handleAgree(false,true)
-  }
+  //    handleAgree(false,true)
+   
+  // }
+
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    if(dialogInfo.title!=='Payment Process....'){
+    //  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
+    //!  sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
+
+    const email="ustciiucbracbank@gmail.com";
+    const orderedDetails=await orderedData(email,dialogInfo.title,purchasedInfo)
+    dbOrderedInfo(orderedDetails)
+
+     dialogInfo.purchaseDone(true)
+    }   
+    
+    handleAgree(false,true)
+  
+ }
 
   const handleInput=e=>{   
     setPrchasedInfo({...purchasedInfo,[e.target.name]:e.target.value})
+
   }
 
 
@@ -117,7 +143,7 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree})=>{
             id="transaction no"
             label="Transaction Ref No" 
             variant="outlined" 
-            name="transaction-No" 
+            name="transaction_No" 
             type="text" 
             // inputProps={{ minLength: 3,maxLength: 50 }}
             onChange={handleInput} 

@@ -5,6 +5,7 @@ import WaitingOrder from '../Cart/Cart/WaitingOrder';
 import Dialogs from '../Cart/Dialog/Dialogs';
 
 import DeliveryConfirmation from './DeliveryConfirmation/DeliveryConfirmation';
+import OrderDetailsDB from './OrderDetailsDB/OrderDetailsDB';
 import PaymentMethod from './PaymentMethod/PaymentMethod';
 import PurchaseDone from './PurchaseDone/PurchaseDone';
 
@@ -16,20 +17,21 @@ const PaymentProcess = () => {
    // console.log(paymentData)
    const [open, setOpen] = React.useState(false);
    const [purchaseNotify, setPurchaseNotify] = React.useState(false);
+   const [orderInfo,setOrderInfo]= useState({})
 
-   
+   console.log(orderInfo)
 
    const handleDialog=(bool,dialogInfo)=>{
       setOpen(bool)
       setPaymentType(dialogInfo)
      }
      
-     let history = useHistory();
+   //   let history = useHistory();
 
      const handleAgree=(forDialog,forSatus)=>{
       setOpen(forDialog)
       if(forSatus){
-         history.push("/dashboard/purchaseHistory")
+         // history.push("/dashboard/purchaseHistory")
          
       }
      }
@@ -40,6 +42,10 @@ const PaymentProcess = () => {
 
      const purchaseDone=(bool)=>{
       setPurchaseNotify(bool)
+     }
+
+     const dbOrderedInfo=(db_order)=>{
+      setOrderInfo(db_order)
      }
      
 // console.log(purchaseNotify) //?????
@@ -55,18 +61,28 @@ const PaymentProcess = () => {
    />:
    <>
    <Grid container item md={12} justify="center"> 
-      {
+      {/* {
          
       purchaseNotify ? <PurchaseDone /> : <DeliveryConfirmation />  
    
-      }
+      } */}
+      {!purchaseNotify && <DeliveryConfirmation />}
+      {purchaseNotify &&  <OrderDetailsDB
+           orderInfo={orderInfo}
+        /> }
         
         <PaymentMethod 
             setPaymentData={setPaymentData} 
             handleDialog={handleDialog}
             purchaseDone={purchaseDone} 
             purchaseNotify={purchaseNotify}
+            dbOrderedInfo={dbOrderedInfo}
+            
             />  
+      
+      
+          
+      
      </Grid>
      
      </>
@@ -76,6 +92,7 @@ const PaymentProcess = () => {
    dial={open} 
    handleAgree={handleAgree}
    handleDisagree={handleDisagree}
+   dbOrderedInfo={dbOrderedInfo}
    // dialogInfo={{
    //    // title:'Cash on Delivery....',
    //    title:`Delivery by ${paymentType} payment `,
@@ -93,6 +110,7 @@ const PaymentProcess = () => {
       btnYes:`${paymentType.btnYes}`,
       btnNo:`${paymentType.btnNo}`,
       inputOption:`${paymentType.inputOption}`,
+      purchaseDone:paymentType.purchaseDone
       // inputField:paymentType.inputField,
       }}
   />

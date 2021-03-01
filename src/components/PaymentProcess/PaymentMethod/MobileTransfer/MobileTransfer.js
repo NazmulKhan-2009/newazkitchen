@@ -1,8 +1,9 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
+import PurchaseDone from '../../PurchaseDone/PurchaseDone';
 import MoneyTrfCom from './MoneyTrfCom';
 
-const MobileTransfer = ({handleDialog,purchaseDone}) => {
+const MobileTransfer = ({handleDialog,purchaseDone,purchaseNotify}) => {
 
  const moneyTrfCo=[
   {
@@ -27,20 +28,40 @@ const MobileTransfer = ({handleDialog,purchaseDone}) => {
   },
  ]
  return (
-  <Grid >
-   <h3 
-    style={{
-        textAlign: 'center',
-        textShadow: '5px 4px 11px rgba(0, 0, 0, 0.26)',
-        color:'#AB47BC'}}>Pay Bill by Mobile Money Transfer</h3>
-   <Grid container className="Form">
-   {
-    moneyTrfCo.map(info=><MoneyTrfCom info={info} key={info.coName}
-        handleDialog={handleDialog} purchaseDone={purchaseDone}
-    /> )
-   }
-   </Grid>
-  </Grid>
+     <>
+     {
+        !purchaseNotify ?
+
+        <Grid >
+            <h3 
+                style={{
+                    textAlign: 'center',
+                    textShadow: '5px 4px 11px rgba(0, 0, 0, 0.26)',
+                    color:'#AB47BC'}}>Pay Bill by Mobile Money Transfer</h3>
+            <Grid container className="Form">
+            {
+                moneyTrfCo.map(info=><MoneyTrfCom info={info} key={info.coName}
+                    handleDialog={handleDialog} purchaseDone={purchaseDone}
+                    
+                /> )
+            }
+            </Grid>
+            </Grid>
+            
+            : <PurchaseDone
+                successInfo={{
+                    paymentIdInfo:'You will Pay 3333 Taka once you received the Food',
+                    successMsg:`Thanks for purchase from Newaz Kitchen, your puchase ID is  ${'NK-'+Date.now()+Math.floor(Math.random())}`,
+
+         
+      }}
+
+            />
+
+        
+     }
+
+</>
  );
 };
 

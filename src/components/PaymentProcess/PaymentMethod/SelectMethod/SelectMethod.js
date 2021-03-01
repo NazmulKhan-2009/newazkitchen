@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Radio from '@material-ui/core/Radio';
 import {FormControlLabel, Tooltip} from '@material-ui/core';
 
-const SelectMethod = ({handlePayment,handleDialog}) => {
+const SelectMethod = ({handlePayment,handleDialog,purchaseDone,purchaseNotify}) => {
 
  const [selectedValue, setSelectedValue] = React.useState('');
 //  const [select, setSelect]=useState(false)
@@ -20,7 +20,9 @@ const SelectMethod = ({handlePayment,handleDialog}) => {
       contentEnd:'once you received the product. ',
       btnYes:"Confirm",
       btnNo:"Change Mind",
-      inputOption:"dont"
+      inputOption:"dont",
+      purchaseDone:purchaseDone
+      // purchaseNotify:purchaseNotify  //????????
       })
   }
  }

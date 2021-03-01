@@ -7,7 +7,7 @@ import CardForm from '../CardForm/CardForm';
 // const stripePromise = loadStripe(PAYMENT_API);
 // const stripePromise = loadStripe('pk_test_51HZmpeBrQZkVZj93ptIXAlr0QfKpz53Jmi58FsGsE2DpgVLXGWkTAyU69KDD0oIvhiBFk0qyHkPIHtwy8jRiRzOr00RFgzPi1v');
 
-const CardPayment = ({setPaymentData,purchaseDone}) => {
+const CardPayment = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
     
 
  return (
@@ -21,7 +21,7 @@ const CardPayment = ({setPaymentData,purchaseDone}) => {
                         <CardForm setPaymentData={setPaymentData}/>
                     </Elements> */}
 
-                    <CardForm setPaymentData={setPaymentData} purchaseDone={purchaseDone}/>
+                    <CardForm setPaymentData={setPaymentData} purchaseDone={purchaseDone} dbOrderedInfo={dbOrderedInfo}/>
   </div>
  );
 };
