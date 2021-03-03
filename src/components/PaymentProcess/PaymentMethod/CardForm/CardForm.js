@@ -292,16 +292,19 @@ const CheckoutForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
     if (payload.error) {
       setError(payload.error);
     } else {
-      setPaymentMethod(payload.paymentMethod);
-      setPaymentData(payload.paymentMethod)
-      cardDataBase(payload) //????
-      purchaseDone(true) //?????
 
       const email="ustciiucbracbank@gmail.com";
     const orderedDetails=await orderedData(email,payload.paymentMethod)
     
     // dbOrderedInfo(orderedDetails)
     setOrderInfo(orderedDetails)
+
+      setPaymentMethod(payload.paymentMethod);
+      setPaymentData(payload.paymentMethod)
+      cardDataBase(payload) //????
+      purchaseDone(true) //?????
+
+      
     }
   };
 //todo ## RESET CARD - NO NEED NOW- MAY REQUIRE IN FUTURE

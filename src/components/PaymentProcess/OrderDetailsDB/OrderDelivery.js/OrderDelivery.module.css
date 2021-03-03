@@ -1,0 +1,17 @@
+.delivery_header{
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ color:#fd5c63;
+ line-height:2px;
+}
+.detail p{
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ color:#185ABD;
+ line-height:2px;
+ 
+}
+
+.transaction_header{
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ color:#fd5c63;
+}
+

@@ -33,7 +33,7 @@ const MoneyTrfCom=({info,handleDialog,purchaseDone})=>{
 
   const handleMobileTrf=(mobileTrfTitle)=>{
     handleDialog(true,{
-      title:`You are going to payment by ${mobileTrfTitle}` ,
+      title:`Payment by ${mobileTrfTitle}` ,
       content:'Please Provide ',
       // payment:totalPrice,
       contentEnd:'and send us Transaction ID & Amount. ',

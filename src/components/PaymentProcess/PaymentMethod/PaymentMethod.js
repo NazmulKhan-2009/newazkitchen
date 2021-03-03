@@ -31,7 +31,7 @@ const handlePayment=(paymentType,bool)=>{
  return (
   <Grid
    item
-   md={!purchaseNotify ? 5 : 10}
+   md={!purchaseNotify ? 5 : 11}
    sm={5} 
    xs={10} >
    {!purchaseNotify && <>

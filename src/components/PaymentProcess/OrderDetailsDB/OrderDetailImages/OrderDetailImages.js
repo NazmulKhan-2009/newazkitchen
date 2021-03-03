@@ -53,14 +53,14 @@ export default function OrderDetailImages({orderInfo}) {
   return (
     <>
     {orderInfo ? <div className={classes.root}>
-      <GridList cellHeight={100} className={classes.gridList}>
+      <GridList cellHeight={80} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
           {/* <ListSubheader component="div">December</ListSubheader> */}
         </GridListTile>
         {orderInfo.ordered_Data && orderInfo.ordered_Data.map(item => (
           <GridListTile key={item._id}>
             <img src={item.imageUrl} alt={item.foodTitle} />
-            <GridListTileBar
+            {/* <GridListTileBar
               title={item.foodTitle}
               subtitle={<span>Quantity: {item.quantity}</span>}
               actionIcon={
@@ -68,7 +68,15 @@ export default function OrderDetailImages({orderInfo}) {
                   <InfoIcon />
                 </IconButton>
               }
+            /> */}
+            <GridListTileBar                          
+              actionIcon={
+                <IconButton aria-label={`info about ${item.foodTitle}`} className={classes.icon}>
+                  <InfoIcon />
+                </IconButton>
+              }
             />
+
           </GridListTile>
         ))}
       </GridList>

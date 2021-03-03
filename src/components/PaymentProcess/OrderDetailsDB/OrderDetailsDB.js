@@ -13,25 +13,25 @@ const OrderDetailsDB = ({orderInfo}) => {
  return (
   
 <Grid container item md={12} justify="center" spacing={5}>
-  <Grid item md={4}>
+  <Grid item md={3}>
    <OrderDetailImages
       orderInfo={orderInfo}
    />
   </Grid>
 
-  <Grid item md={3}>
+  <Grid item md={6}>
   <OrderDelivery
       orderInfo={orderInfo}
    />
   </Grid>
   
-  <Grid item md={3}>
+  {/* <Grid item md={3}>
   <OrderTransaction
       orderInfo={orderInfo}
    />
-  </Grid>
+  </Grid> */}
 
-  <Grid item md={2}>
+  <Grid item md={2} container justify="center">
   <OrderStatus
       orderInfo={orderInfo}
    />
