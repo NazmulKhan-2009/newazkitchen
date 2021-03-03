@@ -129,12 +129,13 @@
 // // export default CardForm;
 
 
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {loadStripe} from '@stripe/stripe-js';
 import {CardElement, Elements, useElements, useStripe} from "@stripe/react-stripe-js";
 import './CardForm.css';
 import PurchaseDone from '../../PurchaseDone/PurchaseDone';
 import { orderedData } from '../../../DataManagement';
+import { UserContext } from '../../../../App';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -247,6 +248,7 @@ const CheckoutForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
     phone: '',
     name: '',
   });
+  const [orderInfo, setOrderInfo]=useContext(UserContext)
 
   const cardDataBase=(payload)=>{
     const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
@@ -297,8 +299,9 @@ const CheckoutForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
 
       const email="ustciiucbracbank@gmail.com";
     const orderedDetails=await orderedData(email,payload.paymentMethod)
-    dbOrderedInfo(orderedDetails)
-
+    
+    // dbOrderedInfo(orderedDetails)
+    setOrderInfo(orderedDetails)
     }
   };
 //todo ## RESET CARD - NO NEED NOW- MAY REQUIRE IN FUTURE
@@ -315,13 +318,13 @@ const CheckoutForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
 
   return paymentMethod ? (
 
-    <PurchaseDone 
-    successInfo={{
-      paymentIdInfo:`Thanks for purchase from Newaz Kitchen, your puchase ID is  ${paymentMethod.id}`,
-      successMsg:'Congratulation , Your Payment is successful',
+  <PurchaseDone 
+  successInfo={{
+    paymentIdInfo:`Thanks for purchase from Newaz Kitchen, your puchase ID is  ${paymentMethod.id}`,
+    successMsg:'Congratulation , Your Payment is successful',
 
-      
-      }}/>
+    
+    }}/> 
       
       //! SUCCESS NOTIFICATION NO-NEED
     //// <div className="Result">

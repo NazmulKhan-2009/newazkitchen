@@ -1,14 +1,17 @@
 import { Grid } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import WaitingOrder from '../../Cart/Cart/WaitingOrder';
 import CardPayment from './CardPayment/CardPayment';
 import CashOnDelivery from './CashOnDelivery/CashOnDelivery';
 import MobileTransfer from './MobileTransfer/MobileTransfer';
 import SelectMethod from './SelectMethod/SelectMethod';
+import { UserContext } from '../../../App';
 
 const PaymentMethod = ({setPaymentData,handleDialog,purchaseDone,purchaseNotify,dbOrderedInfo}) => {
 const [paymentMethod, setPaymentpaymentMethod]=useState({isType:false,methodName:''})
 const [paymentType,setPaymentType]=useState(false)
+// const [grid, setGrid]=useState(5)
+
 
 
 const handlePayment=(paymentType,bool)=>{
@@ -23,10 +26,12 @@ const handlePayment=(paymentType,bool)=>{
 }
 
 
+
+
  return (
   <Grid
    item
-   md={5}
+   md={!purchaseNotify ? 5 : 10}
    sm={5} 
    xs={10} >
    {!purchaseNotify && <>
@@ -39,7 +44,7 @@ const handlePayment=(paymentType,bool)=>{
     <>
      {paymentMethod.methodName==='Card Payment' && <CardPayment setPaymentData={setPaymentData} purchaseDone={purchaseDone} dbOrderedInfo={dbOrderedInfo}/>}
      {paymentMethod.methodName==='Mobile Transfer' && <MobileTransfer handleDialog={handleDialog} purchaseDone={purchaseDone} purchaseNotify={purchaseNotify}/>}
-     {paymentMethod.methodName=== 'Cash On Delivery' && <CashOnDelivery purchaseDone={purchaseDone} purchaseNotify={purchaseNotify}/> }
+     {paymentMethod.methodName=== 'Cash On Delivery' && <CashOnDelivery purchaseDone={purchaseDone} purchaseNotify={purchaseNotify} /> }
    </>:
    <WaitingOrder 
 //    info={{text:"Waiting For Payment Option",

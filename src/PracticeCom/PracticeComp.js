@@ -1,8 +1,9 @@
 import { Button } from '@material-ui/core';
 import axios from 'axios';
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { orderedData } from '../components/DataManagement';
 import ChildrenComp from './ChildrenComp/ChildrenComp';
+import ClassComPrac from './ClassComPrac/ClassCompPrac';
 import CousinComp,{info} from './CousinComp/CousinComp';
 import ParentCom from './ParentCom/ParentCom';
 import { PracticeProvider } from './PracticePro';
@@ -49,6 +50,9 @@ const PracticeComp = () => {
     
     
     setCount(count+1)
+    // setCount((count, propss)=>{
+    //   return count+2
+    // })
   }
 
 
@@ -103,6 +107,10 @@ const email="ustciiucbracbank@gmail.com";
   <PracticeProvider
   color={{color:"red"}}
   >
+    <ClassComPrac
+      greet={'Welcome Bangladesh'}
+      localeTime={"bn-BD"}
+    />
     <ParentCom/>
     <h1 style={{color:'red'}}>{time}</h1>
     <Button variant="outlined" color="secondary" onClick={handleOrder}>Order Details</Button>

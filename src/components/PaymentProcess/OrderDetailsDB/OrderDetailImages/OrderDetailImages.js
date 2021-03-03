@@ -51,8 +51,9 @@ export default function OrderDetailImages({orderInfo}) {
   // }
 
   return (
-    <div className={classes.root}>
-      <GridList cellHeight={80} className={classes.gridList}>
+    <>
+    {orderInfo ? <div className={classes.root}>
+      <GridList cellHeight={100} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
           {/* <ListSubheader component="div">December</ListSubheader> */}
         </GridListTile>
@@ -61,7 +62,7 @@ export default function OrderDetailImages({orderInfo}) {
             <img src={item.imageUrl} alt={item.foodTitle} />
             <GridListTileBar
               title={item.foodTitle}
-              subtitle={<span>by: {item.foodTitle}</span>}
+              subtitle={<span>Quantity: {item.quantity}</span>}
               actionIcon={
                 <IconButton aria-label={`info about ${item.foodTitle}`} className={classes.icon}>
                   <InfoIcon />
@@ -71,6 +72,7 @@ export default function OrderDetailImages({orderInfo}) {
           </GridListTile>
         ))}
       </GridList>
-    </div>
+    </div> :"Nothing upload In Database"}
+    </>
   );
 }

@@ -25,6 +25,9 @@ export const UserContext=createContext()
 function App(){
   
   const [cartItem, setCartItem]=useState([])
+  const [orderInfo, setOrderInfo]=useState([])
+  
+
   useEffect(()=>{
     const cartGet=JSON.parse(localStorage.getItem('cartInfo'))
     setCartItem(cartGet)
@@ -39,7 +42,10 @@ function App(){
     <UserContext.Provider
     value={[
       cartItem,
-      setCartItem
+      setCartItem, 
+      orderInfo,
+      setOrderInfo,
+      
     ]}
     
     >
@@ -51,7 +57,7 @@ function App(){
         <Route exact path="/dashboard" component={Dashboard} />    
         <Route exact path="/cart" component={cartItem ? Cart : CartEmpty} />  
          
-        <Route exact path="/practicecomp" component={PracticeComp} /> 
+        {/* <Route exact path="/practicecomp" component={PracticeComp} />  */}
          
         <Route exact path="/uploadfoods" component={UploadFoods} />  
         

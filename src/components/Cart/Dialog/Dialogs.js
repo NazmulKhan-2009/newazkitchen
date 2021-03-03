@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,6 +11,7 @@ import { Badge, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { orderedData } from '../../DataManagement';
+import { UserContext } from '../../../App';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
@@ -20,6 +21,7 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
 
   const [purchasedInfo,setPrchasedInfo]= useState({}) 
   //? const [orderInfo,setOrderInfo]= useState({}) 
+  const [orderInfo,setOrderInfo]=useContext(UserContext)
 
   // console.log(orderInfo)
   // let history = useHistory();
@@ -67,8 +69,8 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
 
     const email="ustciiucbracbank@gmail.com";
     const orderedDetails=await orderedData(email,dialogInfo.title,purchasedInfo)
-    dbOrderedInfo(orderedDetails)
-
+    // dbOrderedInfo(orderedDetails)
+    setOrderInfo(orderedDetails)
      dialogInfo.purchaseDone(true)
     }   
     

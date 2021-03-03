@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../App';
 import WaitingOrder from '../Cart/Cart/WaitingOrder';
 import Dialogs from '../Cart/Dialog/Dialogs';
 
@@ -11,15 +12,17 @@ import PurchaseDone from './PurchaseDone/PurchaseDone';
 
 const PaymentProcess = () => {
    const [paymentData, setPaymentData] = useState({});
+   //!console.log(paymentData)
    const [paymentType, setPaymentType] = useState({});
    const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
    const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
    // console.log(paymentData)
    const [open, setOpen] = React.useState(false);
    const [purchaseNotify, setPurchaseNotify] = React.useState(false);
-   const [orderInfo,setOrderInfo]= useState({})
+   //! const [orderInfo,setOrderInfo]= useState({})
+   const [orderInfo, setOrderInfo]=useContext(UserContext)
 
-   console.log(orderInfo)
+  //!console.log(orderInfo)
 
    const handleDialog=(bool,dialogInfo)=>{
       setOpen(bool)
@@ -44,9 +47,9 @@ const PaymentProcess = () => {
       setPurchaseNotify(bool)
      }
 
-     const dbOrderedInfo=(db_order)=>{
-      setOrderInfo(db_order)
-     }
+   //   const dbOrderedInfo=(db_order)=>{
+   //    setOrderInfo(db_order)
+   //   }
      
 // console.log(purchaseNotify) //?????
 
@@ -67,16 +70,18 @@ const PaymentProcess = () => {
    
       } */}
       {!purchaseNotify && <DeliveryConfirmation />}
-      {purchaseNotify &&  <OrderDetailsDB
+      
+       {/* {purchaseNotify &&  <OrderDetailsDB
            orderInfo={orderInfo}
-        /> }
+        /> }  */}
         
         <PaymentMethod 
             setPaymentData={setPaymentData} 
             handleDialog={handleDialog}
             purchaseDone={purchaseDone} 
             purchaseNotify={purchaseNotify}
-            dbOrderedInfo={dbOrderedInfo}
+            
+            // dbOrderedInfo={dbOrderedInfo}
             
             />  
       
@@ -92,7 +97,8 @@ const PaymentProcess = () => {
    dial={open} 
    handleAgree={handleAgree}
    handleDisagree={handleDisagree}
-   dbOrderedInfo={dbOrderedInfo}
+   
+   // dbOrderedInfo={dbOrderedInfo}
    // dialogInfo={{
    //    // title:'Cash on Delivery....',
    //    title:`Delivery by ${paymentType} payment `,

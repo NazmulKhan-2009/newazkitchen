@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import WaitingOrder from '../../../Cart/Cart/WaitingOrder';
 import PurchaseDone from '../../PurchaseDone/PurchaseDone';
+import { UserContext } from '../../../../App';
 
 
 const CashOnDelivery = ({purchaseNotify}) => {
 
- 
+  const [orderInfo]=useContext(UserContext)
+  // console.log(orderInfo.delivery_Info.totalPrice)
  return (
     <>
     {
@@ -21,8 +23,8 @@ const CashOnDelivery = ({purchaseNotify}) => {
      :
      <PurchaseDone
        successInfo={{
-         paymentIdInfo:'You will Pay 2222 Taka once you received the Food',
-         successMsg:`Thanks for purchase from Newaz Kitchen, your puchase ID is  ${'NK-'+Date.now()+Math.floor(Math.random())}`,
+         paymentIdInfo:`You will Pay ${orderInfo && orderInfo.delivery_Info.totalPrice} Taka once you received the Food`,
+         successMsg:`Thanks for purchase from Newaz Kitchen, your puchase ID is`,
 
          
       }}
