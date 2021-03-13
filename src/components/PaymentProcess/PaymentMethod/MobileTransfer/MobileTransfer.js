@@ -1,9 +1,12 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../../../App';
 import PurchaseDone from '../../PurchaseDone/PurchaseDone';
 import MoneyTrfCom from './MoneyTrfCom';
 
 const MobileTransfer = ({handleDialog,purchaseDone,purchaseNotify}) => {
+
+    const [orderInfo]=useContext(UserContext)
 
  const moneyTrfCo=[
   {
@@ -50,8 +53,8 @@ const MobileTransfer = ({handleDialog,purchaseDone,purchaseNotify}) => {
             
             : <PurchaseDone
                 successInfo={{
-                    paymentIdInfo:'You will Pay 3333 Taka once you received the Food',
-                    successMsg:`Thanks for purchase from Newaz Kitchen, your puchase ID is  ${'NK-'+Date.now()+Math.floor(Math.random())}`,
+                    paymentIdInfo:`You have Paid ${orderInfo.delivery_Info.totalPrice} Taka on ${orderInfo.payment_by}`,
+                    successMsg:`Thanks for purchase from Newaz Kitchen, your puchase ID is `,
 
          
       }}

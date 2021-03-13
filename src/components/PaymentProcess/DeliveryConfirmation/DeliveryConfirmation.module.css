@@ -1,0 +1,11 @@
+.head{
+ color:#fd5c63;
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ 
+}
+.delivery_confirmation p{
+ margin:.5rem 0;
+ width:25rem;
+ color:#333333;
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+}

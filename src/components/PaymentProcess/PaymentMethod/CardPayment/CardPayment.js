@@ -7,7 +7,7 @@ import CardForm from '../CardForm/CardForm';
 // const stripePromise = loadStripe(PAYMENT_API);
 // const stripePromise = loadStripe('pk_test_51HZmpeBrQZkVZj93ptIXAlr0QfKpz53Jmi58FsGsE2DpgVLXGWkTAyU69KDD0oIvhiBFk0qyHkPIHtwy8jRiRzOr00RFgzPi1v');
 
-const CardPayment = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
+const CardPayment = ({setPaymentData,purchaseDone,dbOrderedInfo,purchaseNotify}) => {
     
 
  return (
@@ -16,7 +16,7 @@ const CardPayment = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
     style={{
         textAlign: 'center',
         textShadow: '5px 4px 11px rgba(0, 0, 0, 0.26)',
-        color:'#AB47BC'}}>Pay Bill by Debit/Credit Card</h3>
+        color:'#AB47BC'}}>{!purchaseNotify && "Pay Bill by Debit/Credit Card"}</h3>
    {/* <Elements stripe={stripePromise}>
                         <CardForm setPaymentData={setPaymentData}/>
                     </Elements> */}

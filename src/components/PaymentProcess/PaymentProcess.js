@@ -55,7 +55,7 @@ const PaymentProcess = () => {
 
  return (
     
-  <Grid item md={10} style={{margin:"8vh auto"}}>
+  <Grid item md={10} style={{margin:"4vh auto"}}>
   {deliveryInfo==null ?
    <WaitingOrder
       info={{text:'You dont purchased Yet',

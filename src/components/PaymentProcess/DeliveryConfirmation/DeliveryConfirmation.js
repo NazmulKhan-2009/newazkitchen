@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import WaitingOrder from '../../Cart/Cart/WaitingOrder';
-import classes from './DeliveryConfirmation.css'
+import classes from './DeliveryConfirmation.module.css'
 
 const DeliveryConfirmation = ({handleDialog}) => {
  // const [open, setOpen] = React.useState(false);
@@ -21,15 +21,15 @@ const DeliveryConfirmation = ({handleDialog}) => {
 
 
  return (
-  <Grid item md={5} sm={5} xs={10} >
+  <Grid item md={5} sm={5} xs={10} className={classes.delivery_confirmation}>
   
 
-    <h3  className={classes.head} onClick={()=>handleDialog(true)}>Dispatch Details</h3>
+    <h3  className={classes.head} onClick={()=>handleDialog(false)}>Dispatch Details</h3>
    
     <p>{`Name : ${gender +'. '+ name.toUpperCase()}`}</p>
     <p>{`Contact : ${contact}`}</p>
     <p>{`Delivery Address : ${address}`}</p>
-    <p>{`Total Price ${totalPrice}/=`}</p>
+    <p>{`Total Price : BDT ${totalPrice}`}</p>
     <p>{instruction && `Instruction : ${instruction}`}</p>
   
   

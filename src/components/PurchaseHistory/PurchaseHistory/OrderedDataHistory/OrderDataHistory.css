@@ -1,0 +1,23 @@
+.history_data .MuiTableCell-alignLeft{
+ width:1% 
+}
+
+.cell_head .MuiTableCell-root ,
+.history_data .MuiTableCell-alignLeft {
+ text-align:center !important
+} 
+
+.order_img{
+ width:10%
+}
+.table_cell{
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26) !important;
+ color:#fd5c63 !important;
+ font-weight:600!important;
+ 
+}
+
+/* text-shadow: "5px 4px 11px rgba(0, 0, 0, 0.26)"; */
+/* .MuiTableCell-root{
+ padding:0 !important
+} */

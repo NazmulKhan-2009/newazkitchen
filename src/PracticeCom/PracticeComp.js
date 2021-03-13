@@ -1,15 +1,20 @@
 import { Button } from '@material-ui/core';
 import axios from 'axios';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState ,useMemo, useEffect} from 'react';
 import { orderedData } from '../components/DataManagement';
 import ChildrenComp from './ChildrenComp/ChildrenComp';
 import ClassComPrac from './ClassComPrac/ClassCompPrac';
 import CousinComp,{info} from './CousinComp/CousinComp';
 import ParentCom from './ParentCom/ParentCom';
+import PracMemo from './PracMemo';
 import { PracticeProvider } from './PracticePro';
 
 
-
+const fetchData=(use)=>{
+  fetch(`https://jsonplaceholder.typicode.com/${use}`)
+  .then(response => response.json())
+  .then(json => console.log(json))
+}
 const PracticeComp = () => {
  
   // const[dist,setDist]=useState(<h2>Canada Usa</h2>)
@@ -99,7 +104,18 @@ const email="ustciiucbracbank@gmail.com";
       setOrderInfo(resInfoOrder)
   }
   
-  
+  // const title=["dhaka",'ctg','cumilla']
+  // const title='dhaka'
+
+  const title=useMemo(()=>{
+    return ["dhaka",'ctg','cumilla']
+  },[])
+
+
+
+  useEffect(()=>{
+    fetchData('todos/1')
+  },[])
   
  return (
   
@@ -131,6 +147,7 @@ const email="ustciiucbracbank@gmail.com";
     <h1>{orderInfo.purchasedInfo && orderInfo.purchasedInfo.payment_by}</h1>
     <button onClick={handleCount}>click={count}</button>
 
+    <PracMemo value={"rending okay"} title={title} fetchData={fetchData}/>
   </PracticeProvider>
   
 

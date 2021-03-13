@@ -13,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    height: 250,
+    height: 300,
     overflow: 'scroll',
     backgroundColor: theme.palette.background.paper,
+   
   },
   // gridList: {
   //   width: 400,
@@ -53,7 +54,7 @@ export default function OrderDetailImages({orderInfo}) {
   return (
     <>
     {orderInfo ? <div className={classes.root}>
-      <GridList cellHeight={80} className={classes.gridList}>
+      <GridList cellHeight={100} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
           {/* <ListSubheader component="div">December</ListSubheader> */}
         </GridListTile>

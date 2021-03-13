@@ -23,6 +23,8 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
   //? const [orderInfo,setOrderInfo]= useState({}) 
   const [orderInfo,setOrderInfo]=useContext(UserContext)
 
+  const [isDisable, setIsDisable]=useState(false)
+
   // console.log(orderInfo)
   // let history = useHistory();
 
@@ -67,13 +69,14 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
     //  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
     //!  sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
 
-    const email="ustciiucbracbank@gmail.com";
-    const orderedDetails=await orderedData(email,dialogInfo.title,purchasedInfo)
+    const email="nazmulustc09@gmail.com";
+    const order_status='processing'
+    const orderedDetails=await orderedData(email,dialogInfo.title,order_status,purchasedInfo)
     // dbOrderedInfo(orderedDetails)
     setOrderInfo(orderedDetails)
      dialogInfo.purchaseDone(true)
     }   
-    
+    setIsDisable(true)
     handleAgree(false,true)
   
  }
@@ -177,7 +180,7 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
               {dialogInfo && dialogInfo.btnNo}
             </Button>
           
-            <Button type='submit'  color="primary">
+            <Button type='submit'  color="primary" disabled={isDisable}>
               {dialogInfo && dialogInfo.btnYes} 
             </Button>
           </Grid>

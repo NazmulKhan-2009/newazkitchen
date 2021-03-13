@@ -6,7 +6,7 @@ import CashOnDelivery from './CashOnDelivery/CashOnDelivery';
 import MobileTransfer from './MobileTransfer/MobileTransfer';
 import SelectMethod from './SelectMethod/SelectMethod';
 import { UserContext } from '../../../App';
-
+import classes from "./PaymentMethod.module.css"
 const PaymentMethod = ({setPaymentData,handleDialog,purchaseDone,purchaseNotify,dbOrderedInfo}) => {
 const [paymentMethod, setPaymentpaymentMethod]=useState({isType:false,methodName:''})
 const [paymentType,setPaymentType]=useState(false)
@@ -35,14 +35,14 @@ const handlePayment=(paymentType,bool)=>{
    sm={5} 
    xs={10} >
    {!purchaseNotify && <>
-   <h3 className='head'>Payment Method</h3>
+   <h3 className={classes.head}>Payment Method</h3>
    <SelectMethod  handlePayment={handlePayment} handleDialog={handleDialog} purchaseDone={purchaseDone} purchaseNotify={purchaseNotify}/>
    </>
    }
    {
     paymentMethod.isType?
     <>
-     {paymentMethod.methodName==='Card Payment' && <CardPayment setPaymentData={setPaymentData} purchaseDone={purchaseDone} dbOrderedInfo={dbOrderedInfo}/>}
+     {paymentMethod.methodName==='Card Payment' && <CardPayment setPaymentData={setPaymentData} purchaseDone={purchaseDone} dbOrderedInfo={dbOrderedInfo} purchaseNotify={purchaseNotify}/>}
      {paymentMethod.methodName==='Mobile Transfer' && <MobileTransfer handleDialog={handleDialog} purchaseDone={purchaseDone} purchaseNotify={purchaseNotify}/>}
      {paymentMethod.methodName=== 'Cash On Delivery' && <CashOnDelivery purchaseDone={purchaseDone} purchaseNotify={purchaseNotify} /> }
    </>:

@@ -6,7 +6,7 @@ const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
   const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
 
  return (
-   <Grid  item={true} xs={10} md={confirmCart? 4:8} >
+   <Grid  item={true} xs={10} md={confirmCart? 4:10} style={{margin:"auto"}}>
    
      {/* <h3
       style={{
@@ -28,7 +28,7 @@ const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
      src="https://media1.giphy.com/media/LVd5BbSMsgKLEjKpqL/source.gif" alt=""/> */}
 
      
-     <Grid container justify='center'>
+     <Grid >
       <h3
       style={{
         textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
@@ -39,9 +39,9 @@ const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
      > {info.text}</h3>
      <img 
        style={{
-        margin: '0 50%',       
+        margin: '0 auto',       
         display: 'block',
-        maxWidth: '50%',
+        maxWidth: info.width || '50%',
         maxHeight: '70%',
        
       }}

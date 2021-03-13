@@ -294,7 +294,9 @@ const CheckoutForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
     } else {
 
       const email="ustciiucbracbank@gmail.com";
-    const orderedDetails=await orderedData(email,payload.paymentMethod)
+      const order_status='processing';
+      
+    const orderedDetails=await orderedData(email,payload.paymentMethod,order_status)
     
     // dbOrderedInfo(orderedDetails)
     setOrderInfo(orderedDetails)

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const orderedData=(email,payment_by,purchasedInfo)=>{
+export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
 
  const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
 //  const purchasedInfo=JSON.parse(sessionStorage.getItem('purchasedInfo'))
@@ -8,6 +8,7 @@ export const orderedData=(email,payment_by,purchasedInfo)=>{
    email,
    cart:cartInfo,
    payment_by,
+   order_status,
    purchasedInfo:purchasedInfo,  
    deliveryInfo: JSON.parse(sessionStorage.getItem('deliveryInfo'))
  }
@@ -23,5 +24,35 @@ export const orderedData=(email,payment_by,purchasedInfo)=>{
  }  
  
  return orderFood()
+
+}
+
+
+//Order Hisotry
+
+// export const orderHistory=async(email)=>{
+//   try {
+//    const response= await axios.get(`http://localhost:5000/api/order/orderhistory/${email}`)
+
+//    return response.data.data
+//   } catch (e) {
+//     console.log(`error to get order history ${e}`)
+//   }
+
+// }
+
+export const orderHistory=(email)=>{
+const orderData=async()=>{
+
+  try {
+    const response= await axios.get(`http://localhost:5000/api/order/orderhistory/${email}`)
+ 
+    return response.data.data
+   } catch (e) {
+     console.log(`error to get order history ${e}`)
+   }
+}
+    
+return orderData()
 
 }

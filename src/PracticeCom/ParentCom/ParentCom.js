@@ -5,6 +5,8 @@ import { myContext } from '../PracticePro';
 
 const ParentCom = () => {
   const {info, setInfo} =useContext(myContext)
+  // console.log('Parent comp rendering')
+
  return (
   <div>
    
