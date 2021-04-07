@@ -6,80 +6,57 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { Badge, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { orderedData } from '../../DataManagement';
-import { UserContext } from '../../../App';
+import CreateFood from '../CreateFood/CreateFood';
+// import { orderedData } from '../../DataManagement';
+// import { UserContext } from '../../../App';
+// import CreateFood from '../foodcms/Components/Createfood/CreateFood';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
+const ControlDialog=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo,handleDialog,formTitle,adminForm})=>{
 
   const [purchasedInfo,setPrchasedInfo]= useState({}) 
+const [cancel,setCancel]= useState({}) 
   //? const [orderInfo,setOrderInfo]= useState({}) 
-  const [orderInfo,setOrderInfo]=useContext(UserContext)
-
-  const [isDisable, setIsDisable]=useState(false)
-
-  // console.log(orderInfo)
-  // let history = useHistory();
-
-  // const handleDisagree = (bool) => {
-    
-    
-  //     // history.push("/")
-    
-  // };
-
-  // const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
-
-  const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
-  const StyledBadge = withStyles((theme) => ({
-    badge: {
-      right: -3,
-      top: 13,
-      border: `2px solid ${theme.palette.background.paper}`,
-      padding: '0 4px',
-    },
-  }))(Badge);
+  
+  // const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
+  // const StyledBadge = withStyles((theme) => ({
+  //   badge: {
+  //     right: -3,
+  //     top: 13,
+  //     border: `2px solid ${theme.palette.background.paper}`,
+  //     padding: '0 4px',
+  //   },
+  // }))(Badge);
 
   
 
-  // ! const handleSubmit=(e)=>{
-  //    e.preventDefault()
-  //    if(dialogInfo.title!=='Payment Process....'){
-  //     const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
-  //     sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
-
-  //     dialogInfo.purchaseDone(true)
-  //    }   
-     
-  //    handleAgree(false,true)
-   
-  // }
-
-
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
-    if(dialogInfo.title!=='Payment Process....'){
-    //  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
-    //!  sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
-
-    const email="nazmulustc09@gmail.com";
-    const order_status='processing'
-    const orderedDetails=await orderedData(email,dialogInfo.title,order_status,purchasedInfo)
-    // dbOrderedInfo(orderedDetails)
-    setOrderInfo(orderedDetails)
-     dialogInfo.purchaseDone(true)
-    }   
-    setIsDisable(true)
-    handleAgree(false,true)
   
- }
+
+
+//   const handleSubmit=async(e)=>{
+//     e.preventDefault()
+//     // if(dialogInfo.title!=='Payment Process....'){
+//     // //  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
+//     // //!  sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
+
+//     // const email="nazmulustc09@gmail.com";
+//     // const order_status='processing'
+//     // const orderedDetails=await orderedData(email,dialogInfo.title,order_status,purchasedInfo)
+//     // // dbOrderedInfo(orderedDetails)
+//     // setOrderInfo(orderedDetails)
+//     //  dialogInfo.purchaseDone(true)
+//     // }   
+//     setIsDisable(true)
+//     handleAgree(false,true)
+  
+//  }
 
   const handleInput=e=>{   
     setPrchasedInfo({...purchasedInfo,[e.target.name]:e.target.value})
@@ -88,10 +65,8 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
 
 
   return (
-    <div>
-      {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Slide in alert dialog
-      </Button> */}
+    <Grid>
+      
       <Dialog
         open={dial}
         TransitionComponent={Transition}
@@ -101,30 +76,27 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
         aria-describedby="alert-dialog-slide-description"
         
       >
-        <DialogTitle id="alert-dialog-slide-title">{dialogInfo && dialogInfo.title}</DialogTitle>
-        <Grid container justify="center">
-        {cartInfo!==null &&  cartInfo.map((purchasedFoodInfo)=> 
-        <Grid key={purchasedFoodInfo._id} item xs={3}> 
-          <StyledBadge badgeContent={purchasedFoodInfo.quantity} color="secondary">
-          
-           
-          <ShoppingCartIcon />
-          </StyledBadge>     
-          <img  src={purchasedFoodInfo.imageUrl} alt="" width="70%" style={{borderRadius:'50px'}}/> 
-        </Grid>              
-        )
-        }
-        </Grid>
-        <DialogContent>
+        <DialogTitle  id="alert-dialog-slide-title">Food Control</DialogTitle>
+        
+        {/* <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {dialogInfo && dialogInfo.content}<span style={{textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
         color:"#fd5c63"}}>{dialogInfo && `${dialogInfo.payment}/- `}</span> {dialogInfo && dialogInfo.contentEnd}
           </DialogContentText>
-        </DialogContent>
+        </DialogContent> */}
         
         
         
         <DialogActions>
+
+        
+         <CreateFood
+          formTitle={formTitle}
+          adminForm={adminForm}
+          handleDialog={handleDialog}
+
+          
+         />
         
         
         
@@ -138,11 +110,11 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
             {dialogInfo && dialogInfo.btnYes} 
           </Button> */}
           
-          <form   autoComplete="on" onSubmit={handleSubmit}>
+          {/* <form   autoComplete="on" onSubmit={handleSubmit}> */}
           
            
           
-         {dialogInfo.inputOption==='do' &&
+         {/* {dialogInfo.inputOption==='do' &&
          <>
           <TextField
             id="transaction no"
@@ -169,12 +141,12 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
           />
           </>
          }
+           */}
           
-          
-          
+           
           
          
-          <Grid container justify="flex-end">
+          {/* <Grid container justify="flex-end">
           
             <Button onClick={()=>handleDisagree(false)} color="primary">
               {dialogInfo && dialogInfo.btnNo}
@@ -183,17 +155,20 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
             <Button type='submit'  color="primary" disabled={isDisable}>
               {dialogInfo && dialogInfo.btnYes} 
             </Button>
-          </Grid>
+          </Grid> */}
 
-          </form>
+          {/* </form> */}
           
         </DialogActions>
 
+        {/* <Button onClick={()=>{handleDialog(false); window.location.reload()}} color="primary">
+              cancel
+        </Button> */}
         
       </Dialog>
-    </div>
+    </Grid>
   );
 }
 
 
-export default Dialogs
+export default ControlDialog

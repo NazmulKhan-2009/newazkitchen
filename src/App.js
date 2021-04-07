@@ -5,9 +5,12 @@ import {
   Route, Switch
 } from "react-router-dom";
 import './App.css';
+
+
 import Cart from './components/Cart/Cart/Cart';
 import CartEmpty from './components/Cart/Cart/CartEmpty';
 import NotFound from './components/Common/NotFound/NotFound';
+import AdminPanel from './components/Dashboard/AdminPanel/AdminPanel';
 import FormForUpload from './components/Dashboard/AdminPanel/UploadFood/FormForUpload/FormForUpload';
 import UploadFoods from './components/Dashboard/AdminPanel/UploadFood/UploadFoods/UploadFoods';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -59,7 +62,10 @@ function App(){
          
         {/* <Route exact path="/practicecomp" component={PracticeComp} />  */}
          
-        <Route exact path="/uploadfoods" component={UploadFoods} />  
+         {/*//! bellow transmission from next js */}
+        {/* <Route exact path="/uploadfoods" component={UploadFoods} />   */}
+        <Route exact path="/adminpanel" component={AdminPanel} />
+          
         
           <Route exact path="/dashboard/payment" component={cusInfo ? PaymentProcess : NotFound} />
         

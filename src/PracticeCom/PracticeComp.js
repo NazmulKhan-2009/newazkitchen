@@ -5,6 +5,7 @@ import { orderedData } from '../components/DataManagement';
 import ChildrenComp from './ChildrenComp/ChildrenComp';
 import ClassComPrac from './ClassComPrac/ClassCompPrac';
 import CousinComp,{info} from './CousinComp/CousinComp';
+import  {MyCity} from './myCity';
 import ParentCom from './ParentCom/ParentCom';
 import PracMemo from './PracMemo';
 import { PracticeProvider } from './PracticePro';
@@ -123,6 +124,10 @@ const email="ustciiucbracbank@gmail.com";
   <PracticeProvider
   color={{color:"red"}}
   >
+
+  <h1>bye {MyCity()}</h1>
+  <h1>hi <MyCity/></h1>
+
     <ClassComPrac
       greet={'Welcome Bangladesh'}
       localeTime={"bn-BD"}

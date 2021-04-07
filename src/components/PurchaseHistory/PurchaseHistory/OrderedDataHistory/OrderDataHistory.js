@@ -149,7 +149,7 @@ export default function OrderDataHistory({orderHistoryData}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {orderHistoryData.map(item => (
+          {orderHistoryData.slice(0).reverse().map(item => (
             <Row key={item._id} item={item} />
           ))}
         </TableBody>
