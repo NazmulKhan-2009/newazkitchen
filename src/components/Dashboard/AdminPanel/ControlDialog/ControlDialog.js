@@ -10,7 +10,8 @@ import Slide from '@material-ui/core/Slide';
 import { Badge, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import CreateFood from '../CreateFood/CreateFood';
+import DataUpdateForm from '../DataUpdateForm/DataUpdateForm';
+import './ControlDialog.css'
 // import { orderedData } from '../../DataManagement';
 // import { UserContext } from '../../../App';
 // import CreateFood from '../foodcms/Components/Createfood/CreateFood';
@@ -19,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const ControlDialog=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo,handleDialog,formTitle,adminForm})=>{
+const ControlDialog=({dial,closeDialog,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo,handleDialog,formTitle,adminForm})=>{
 
   const [purchasedInfo,setPrchasedInfo]= useState({}) 
 const [cancel,setCancel]= useState({}) 
@@ -90,10 +91,11 @@ const [cancel,setCancel]= useState({})
         <DialogActions>
 
         
-         <CreateFood
+         <DataUpdateForm
           formTitle={formTitle}
           adminForm={adminForm}
           handleDialog={handleDialog}
+          
 
           
          />

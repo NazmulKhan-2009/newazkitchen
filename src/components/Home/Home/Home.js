@@ -1,4 +1,5 @@
 import React from 'react';
+import ContactUs from '../../ContactUs/ContactUs';
 
 
 
@@ -11,7 +12,7 @@ const Home = () => {
   <>
   <Header/>
   <Food/>
-  
+  <ContactUs/>
   
  
   </>

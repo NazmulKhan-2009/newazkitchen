@@ -15,17 +15,25 @@ export default function AdminNav() {
 
  const [isOpen, setIsOpen]=useState(false)
  const [titleWise, setTitlewise]=useState("")
+ 
+
+
+ 
+
  const adminTask=[
  {title:"Food Control Management", comp:<FoodController/> },
  {title:"Admin Control Management", comp:<AdminController/>},
- {title:"Order Control Management", comp:<OrderController/> },
+ {title:"Order Control Management", comp:<OrderController openDial={isOpen}/> },
  {title:"Service Control Management",comp:<ServiceController/>}
   ]
 
  const handleSelector=(item)=>{
-  setIsOpen(true)
+//   setIsOpen(true)
+setIsOpen(!isOpen)
   setTitlewise(item)
  }
+
+
  
  return (
   <Grid >

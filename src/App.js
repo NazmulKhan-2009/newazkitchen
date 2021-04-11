@@ -10,6 +10,7 @@ import './App.css';
 import Cart from './components/Cart/Cart/Cart';
 import CartEmpty from './components/Cart/Cart/CartEmpty';
 import NotFound from './components/Common/NotFound/NotFound';
+import ContactUs from './components/ContactUs/ContactUs';
 import AdminPanel from './components/Dashboard/AdminPanel/AdminPanel';
 import FormForUpload from './components/Dashboard/AdminPanel/UploadFood/FormForUpload/FormForUpload';
 import UploadFoods from './components/Dashboard/AdminPanel/UploadFood/UploadFoods/UploadFoods';
@@ -57,6 +58,7 @@ function App(){
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/gallery" component={Gallery} />
+        <Route exact path="/contact" component={ContactUs} />
         <Route exact path="/dashboard" component={Dashboard} />    
         <Route exact path="/cart" component={cartItem ? Cart : CartEmpty} />  
          

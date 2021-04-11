@@ -10,12 +10,15 @@ import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import FileBase64 from 'react-file-base64';
 import axios from 'axios';
-import Style from './CreateFood.module.css'
 import EditIcon from '@material-ui/icons/Edit';
 import ListIcon from '@material-ui/icons/List';
 import YoutubeSearchedForIcon from '@material-ui/icons/YoutubeSearchedFor';
 import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Style from './DataUpdateForm.module.css'
+import OrderedInfo from '../OrderedInfo/OrderedInfo';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateFood=({formTitle,adminForm,cancel,handleDialog})=> {
+const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog})=> {
 //!console.log(adminForm)
 // const {field1, field2, field3}=adminForm
 //!console.log(field2,field3)
@@ -47,7 +50,16 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog})=> {
   const[displayed,setDisplayed]= useState(false) 
   const[changeType,setChangeType]= useState(false) 
   const[searchBtn,setSearchBtn]= useState(false) 
+  const[orderInfo,setOrderedInfo]= useState(false) 
   const[fieldEnable,setFieldEnable]= useState({foodTitleField:true,descriptionField:true,priceField:true}) 
+  const [changedOrderStatus,  setChangedOrderStatus]=useState('')
+
+
+  //!changing Oreder status 
+  console.log(changedOrderStatus)
+  const handleOrderStatus=(status)=>{
+    setChangedOrderStatus(status)
+  }
 
   
   // #### CONSOLE ZONE START POINT ####
@@ -157,6 +169,23 @@ else if(formTitle ==="update_Food"){
 
     updateFood()
 
+  }else if(formTitle==='orderControl'){
+    
+    const updateOrderStatus=async()=>{
+
+      try{
+        const response=await axios.patch(`http://localhost:5000/api/order/${foodInfo.orderId}`,{order_status:changedOrderStatus})
+        console.log(response.data.sms)
+
+      }catch(e){
+          console.log(`error in pathcing order status ${e}`)
+      }
+
+        
+    }
+
+    updateOrderStatus()
+
   }
  
   }
@@ -176,8 +205,11 @@ else if(formTitle ==="update_Food"){
     
   }
 
-  const handleSearch=()=>{
-    console.log('search done')
+  const handleSearch=(formType)=>{
+
+    if(formType==="update_Food"){
+
+      console.log('search done')
 
     const searchFood=async()=>{
 
@@ -198,6 +230,36 @@ else if(formTitle ==="update_Food"){
 
     }
       searchFood()
+
+    }else if(formType==="orderControl"){
+      const getOrderedItem=async()=>{
+
+        try{
+          const response=await axios.get(`http://localhost:5000/api/order/${foodInfo.orderId}`)
+          //!console.log(response.data.data)
+          setSearchFood(response.data.data)
+          console.log(response.data.data)
+          if(response.data.data){
+            setEditBtn(true)
+          }
+          // setEditBtn(true)
+          // setDisplayed(false)
+          setOrderedInfo(true)
+         }catch(e){
+          // console.log(`search Food error ${e}`)
+          alert("Nothing Found ")
+          } ;
+          
+  
+      }
+      getOrderedItem()
+
+// api/order/orderStatusX
+
+      
+    }
+
+    
   }
 console.log(searchFood)
 
@@ -210,6 +272,7 @@ const handleRefresh=()=>{
   setSearchBtn(false)
   setFieldEnable({foodTitleField:true,descriptionField:true,priceField:true})
   setEditBtn(false)
+  setOrderedInfo(false)
   // setFoodInfo({})
   // window.location.reload()
 }
@@ -222,20 +285,21 @@ const handleCancel=()=>{
   setSearchBtn(false)
   setFieldEnable({foodTitleField:true,descriptionField:true,priceField:true}) 
   setEditBtn(false)
-}
-
-const handleEdit=()=>{
-  // {formTitle ==="update_Food" && editBtn===true && <span style={{cursor:"pointer"}} onClick={()=>{setSearchFood({...searchFood,foodTitle:""}); setEditBtn(false);setDisplayed(true)}}>edit</span>}
-
-  
-    // setSearchFood({...searchFood,[fieldName]:""});
-    // setEditBtn(false);
-    // setDisplayed(true)
-
-    handleSearch()
-  
   
 }
+
+// const handleEdit=()=>{
+//   // {formTitle ==="update_Food" && editBtn===true && <span style={{cursor:"pointer"}} onClick={()=>{setSearchFood({...searchFood,foodTitle:""}); setEditBtn(false);setDisplayed(true)}}>edit</span>}
+
+  
+//     // setSearchFood({...searchFood,[fieldName]:""});
+//     // setEditBtn(false);
+//     // setDisplayed(true)
+
+//     handleSearch()
+  
+  
+// }
 const editFoodInfo=(field)=>{
   
   if(field==="foodTitle"){
@@ -303,7 +367,7 @@ const handleDel=()=>{
 
         { 
             
-          formTitle ==="delete_Food" | formTitle ==="search_Food" | formTitle ==="update_Food" | formTitle==="update_Admin"? 
+          formTitle ==="delete_Food" | formTitle ==="search_Food" | formTitle ==="update_Food" | formTitle==="update_Admin" | formTitle==="orderControl"? 
             
             
           <>
@@ -330,16 +394,18 @@ const handleDel=()=>{
             // onBlur={handleInput}
             // onBlur={handleFindFood}
             required={true}
-            value={foodInfo.foodId} 
+            value={foodInfo.foodId || foodInfo.orderId || ""} 
           /> 
 
-{formTitle ==="update_Food" && searchBtn && <span style={{cursor:"pointer"}} onClick={handleEdit}><YoutubeSearchedForIcon/></span>}
+{formTitle ==="update_Food" | formTitle==="orderControl" && searchBtn && <span style={{cursor:"pointer"}} onClick={()=>handleSearch(formTitle)}><YoutubeSearchedForIcon/></span>}
           
           </>
           
           :""
           
           }
+{/*//! ======-------->Order Status Check and edit<---------====== */}
+         {orderInfo && <OrderedInfo searchFood={searchFood} handleOrderStatus={handleOrderStatus}/>}
 
         {adminForm &&
           formTitle ==="create_Food" | formTitle=== "create_Admin" | formTitle ==="update_Food" | formTitle==="update_Admin" ?
@@ -472,7 +538,10 @@ const handleDel=()=>{
               </div>
             }
             <Grid>
-            {formTitle ==="update_Food" && <Button variant="outlined" color="primary"  onClick={()=>{setChangeType(!changeType)}}> Change Food Type</Button>}
+            {
+              formTitle ==="update_Food" && <Button variant="outlined" color="primary"  onClick={()=>{setChangeType(!changeType)}}> Change Food Type</Button>
+            
+            }
           <Button variant="outlined" color="secondary" type="submit" style={{margin:"5px"}}>
             {/* {formTitle.replace('_'," ")} */}
             {formTitle}

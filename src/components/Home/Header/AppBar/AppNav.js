@@ -22,7 +22,7 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../../../../App';
 import './AppNav.css';
 import logo2 from '../../../../images/logo/logo-2.png'
-
+import { Link as SmoothLink} from 'react-scroll'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -283,12 +283,15 @@ const AppNav=()=>{
               <Link to="/gallery" style={{textDecoration:"none"}}>
                 Gallery
               </Link>
+              
+              <SmoothLink  to="contact" smooth={true} duration={800}>Contact</SmoothLink>
+              
               <Link to="/dashboard" style={{textDecoration:"none"}}>
                 Dashboard
               </Link>
             </Typography>
-                 
-
+              
+           
 
     <div className={classes.sectionDesktop}>
 
