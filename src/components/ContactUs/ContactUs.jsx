@@ -13,6 +13,7 @@ import linkedIn from  "../../images/icon/5.png"
 
 export default function ContactUs() {
  return (
+
   <section id="contact">
 			<div className="container">
 				<div className="contactInfo">
@@ -82,5 +83,6 @@ export default function ContactUs() {
 				</div>
 			</div>
 		</section>
+		
  )
 }

@@ -1,0 +1,273 @@
+// import { Grid } from '@material-ui/core';
+// import React, { useState } from 'react'
+// import WaitingOrder from '../../Cart/Cart/WaitingOrder';
+// import { AdminForm } from '../../Dashboard/AdminPanel/commonClass/CommonClass';
+// import ControlDialog from "../../Dashboard/AdminPanel/ControlDialog/ControlDialog";
+
+// import DataUpdateForm from "../../Dashboard/AdminPanel/DataUpdateForm/DataUpdateForm"
+
+
+
+// export default function Login() {
+//   const [signUp, setSignUp]=useState(false)
+
+//   const handleSignUp=(isSignUp)=>{
+//     setSignUp(isSignUp)
+//   }
+  
+//   // let dialCall=true
+  
+//   // const [dial, setDial]=useState(dialCall)
+ 
+
+
+
+//   // const handleDialog=(isClose)=>{
+//   //   setDial(isClose)
+//   //   dialCall=false
+//   //  }
+
+   
+
+//   // const userForm={
+//   //   field0:new UserForm("userId","User Id","outlined","userId"),
+//   //   field1:new UserForm("userName","User Name","outlined","user_name"),
+//   //   field2:new UserForm("userEmail","email","outlined","email"),
+//   //   field3:new UserForm("phone","Phone","outline","user_phone"),
+    
+//   // }
+
+//   const adminForm={
+//     field0:new AdminForm("userId","User Id","outlined","userId"),
+//     field1:new AdminForm("userName","User Name","outlined","user_name"),
+//     field2:new AdminForm("userEmail","email","outlined","email"),
+//     field3:new AdminForm("phoneNumber","User Phone","outlined","user_phone"),
+//     field4:new AdminForm("password","Password","outlined","password"),
+//     field5:new AdminForm("resetPassword","Reset Password","outlined","reset_password"),
+//   }
+
+//   // const existingUser={
+//   //   field2:new AdminForm("userEmail","email","outlined","email"),
+//   //   field4:new AdminForm("password","Password","outlined","password"),
+//   // }
+
+
+//   return (
+//     <Grid container >
+    
+
+//       {!signUp && 
+      
+//       <Grid item md={5} xs={10} container style={{margin:"auto"}}>
+
+      
+        
+//         <WaitingOrder
+//         info={{text:"User Login",img:"https://lh3.googleusercontent.com/proxy/9QTbRN7oNo_XP0An816YPcLfwww1VkkO1aA-vej4UuVcPWGfMP2dHwU82RDAlgLYj10OGhurwqEsvKpPAMmowyNN02TAQ3Rf"}}
+//       />
+
+
+
+//         <DataUpdateForm
+//           formTitle={"Log In"}
+//           newUser={signUp}
+//           adminForm={adminForm}
+//           handleSignUp={handleSignUp}
+//       // // handleDialog={handleDialog}
+//         /> 
+       
+//       </Grid>
+      
+//       }
+
+//       {signUp && 
+//       <Grid container item md={5} xs={10} justify="center">
+         
+
+//         <DataUpdateForm
+//           formTitle={"Log In"}
+//           adminForm={adminForm}
+//           newUser={true}
+//       // // handleDialog={handleDialog}
+//         /> 
+//       </Grid>
+//       }
+    
+  
+//    </Grid>
+//   )
+// }
+
+
+
+// <------------------==========slider login ==========--------------->
+import { Grid } from '@material-ui/core';
+import { PhotoCamera } from '@material-ui/icons';
+import React, { useContext, useState } from 'react';
+import FileBase64 from 'react-file-base64';
+import { userSignIn, userSignUp } from '../../DataManagement';
+import Alert from '@material-ui/lab/Alert';
+// import img1 from '../../../img/img1.jpg'
+// import img2 from '../../../img/img2.jpg'
+import "./login.css"
+import { UserContext } from '../../../App';
+const Login = () => {
+
+const [loginInfo,setLoginInfo]=useContext(UserContext)  
+// console.log(loginInfo)
+
+const [signUpFlip, setSignUpFlip]=useState(false)
+const [userInfo, setUserInfo]=useState({})
+const [notify, setNotify]=useState(false)
+// const [file, setFile]=useState('')
+// const [userData, setUserData]=useState({})
+
+// console.log(userInfo)
+
+const handleOfFlip=()=>{
+    setSignUpFlip(!signUpFlip)
+    setUserInfo({})
+    
+}
+
+//input field of data
+const handleInput=e=>{   
+    setUserInfo({...userInfo,[e.target.name]:e.target.value})
+  }
+
+//submit form
+const handleSubmit=(e)=>{
+     e.preventDefault()
+     userInfo.user_password===userInfo.confirm_password ? 
+     userSignUp(userInfo)
+     .then(res=>{
+        // console.log(res)
+        alert(`${res.data.response}`)
+        setSignUpFlip(false)
+        setUserInfo({})
+        
+        }) :
+        alert("Password differ")
+     
+    // userSignUp(userInfo)
+
+    //! bellow code require if any kind of file added like image file
+    // const {user_name, user_password,user_phone,user_email,user_res_pass}=userInfo
+    // const formData=new FormData()
+
+    // formData.append('user_name',user_name)
+    // formData.append('user_email',user_email)
+    // formData.append('user_phone',user_phone)
+    // formData.append('user_password',user_password)
+    // formData.append('user_res_pass',user_res_pass)
+    // formData.append('imageUrl', file);
+
+
+     console.log(userInfo)
+     
+     
+}
+
+
+const handleSignIn=(e)=>{
+     e.preventDefault()
+     userSignIn(userInfo)
+     .then(res=>{
+        //  console.log(res)
+        setLoginInfo(res)
+         setNotify(true)
+     })
+    
+
+
+}
+
+setTimeout(()=>{
+    setNotify(false)
+},5000)
+
+ return (
+ <div className="login_style">    
+  <div className={signUpFlip && "active"}>
+     <div className={signUpFlip ? "login_container active ": "login_container" }>
+
+        <div className="user signinBx">
+            <div className="imgBx">
+                <img src="http://irtrd.com/wp-content/uploads/2018/08/login.gif" alt=""/>
+               
+                
+                
+            </div>
+
+            <div className="formBx">
+            
+                <form onSubmit={handleSignIn}>
+               
+                    <h2>Sign In</h2>
+                    
+                    <input type="text" name="user_name" placeholder="Username" onChange={handleInput} required/>
+                    <input type="password" name="user_password" placeholder="Password" onChange={handleInput}/>
+                    <input type="submit" name="" value="Login"/>
+                    
+                    <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p>
+                </form>
+    {/* //!SOCIAL LOGiN */}
+                                
+                <div className="google-btn">
+                    <img src="https://i.imgur.com/P9ZVhek.png" alt="" width="40" />
+                    <span style={{fontSize:"20px"}}>Continue</span>
+                    {/* <img src="https://i.imgur.com/oozxCkP.png" alt="" width="40"/> */}
+                    <img src="https://i.imgur.com/oozxCkP.png" alt="" width="40" />
+                </div>
+    {/*//! // TOASTIFY */}
+                {notify && 
+                    <Alert severity={loginInfo.data.status[0]}>{loginInfo.data.status[1]}</Alert>
+                }
+            </div>
+        </div>
+
+        <div className="user signupBx">
+         <div className="formBx">
+            <form onSubmit={handleSubmit}>
+                <h2>Create an account</h2>
+                <input type="text" name="user_name" placeholder="Username"  onChange={handleInput} value={userInfo.user_name || ""}/>
+                <input type="email" name="user_email" placeholder="Email Address" onChange={handleInput} value={userInfo.user_email || ""}/>
+                <input type="text" name="user_phone" placeholder="Phone No" onChange={handleInput} value={userInfo.user_phone || ""}/>
+                <input type="password" name="user_password" placeholder="Create Password" onChange={handleInput} value={userInfo.user_password || ""}/>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" onChange={handleInput} value={userInfo.confirm_password || ""}/>
+
+
+                    {/* filebase-64 start of coding */}
+
+                 {/* <div className="upload_Button file_base">
+                    <label htmlFor="fileInput">
+                    <PhotoCamera  style={{position:"absolute",width:"35px",height:"30px",cursor:'pointer',paddingTop:"5px"}} color="secondary"/>
+                    </label>
+
+                    
+                    <FileBase64 required={true} multiple={false} onDone={image =>image.type.slice(0,5)==="image" ? setFile(image.base64) : alert("Please Upload an Image within 5MB")}
+                    />                       
+                 </div>   */}
+                    {/* filebase-64 end  of coding */}
+
+
+                <input type="submit" name="" value="Sign up"/>
+
+                                <p className="signup">Already have an account? <span onClick={handleOfFlip}>Sign in.</span></p>
+
+
+                            
+            </form>
+        </div>
+
+        <div className="imgBx">
+            <img src='https://st.depositphotos.com/1092019/4610/i/600/depositphotos_46103085-stock-photo-sing-up-on-red-keyboard.jpg' alt=""/></div>
+        </div>
+        
+    </div>
+  </div>
+</div>
+ );
+};
+
+export default Login;

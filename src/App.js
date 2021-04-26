@@ -4,7 +4,8 @@ import {
 
   Route, Switch
 } from "react-router-dom";
-import './App.css';
+
+import Login from './components/Authentication/Login/Login';
 
 
 import Cart from './components/Cart/Cart/Cart';
@@ -21,7 +22,7 @@ import Home from './components/Home/Home/Home';
 import PaymentProcess from './components/PaymentProcess/PaymentProcess';
 import PurchaseHistory from './components/PurchaseHistory/PurchaseHistory/PurchaseHistory';
 import PracticeComp from './PracticeCom/PracticeComp';
-
+import './App.css';
 
 export const UserContext=createContext()
 
@@ -30,6 +31,7 @@ function App(){
   
   const [cartItem, setCartItem]=useState([])
   const [orderInfo, setOrderInfo]=useState([])
+  const [loginInfo, setLoginInfo]=useState({})
   
 
   useEffect(()=>{
@@ -49,6 +51,9 @@ function App(){
       setCartItem, 
       orderInfo,
       setOrderInfo,
+      loginInfo,
+      setLoginInfo
+
       
     ]}
     
@@ -60,6 +65,7 @@ function App(){
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/contact" component={ContactUs} />
         <Route exact path="/dashboard" component={Dashboard} />    
+        <Route exact path="/login" component={Login} />    
         <Route exact path="/cart" component={cartItem ? Cart : CartEmpty} />  
          
         {/* <Route exact path="/practicecomp" component={PracticeComp} />  */}

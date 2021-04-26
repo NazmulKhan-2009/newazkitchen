@@ -22,6 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const ControlDialog=({dial,closeDialog,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo,handleDialog,formTitle,adminForm})=>{
 
+  console.log(formTitle)
   const [purchasedInfo,setPrchasedInfo]= useState({}) 
 const [cancel,setCancel]= useState({}) 
   //? const [orderInfo,setOrderInfo]= useState({}) 

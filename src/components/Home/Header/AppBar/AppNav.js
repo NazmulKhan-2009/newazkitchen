@@ -102,6 +102,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AppNav=()=>{
+  
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -109,7 +110,7 @@ const AppNav=()=>{
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   // const [cartInfo, setCartInfo]=useState(0)
-  const [cartItem, setCartItem]=useContext(UserContext)
+  const [cartItem, setCartItem,loginInfo]=useContext(UserContext)
   // const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
 
   // useEffect(()=>{
@@ -263,6 +264,7 @@ const AppNav=()=>{
           
           
             
+{/* {loginInfo.data && <h1 style={{color:'red'}}>{loginInfo.data.user_name}</h1>} */}
 
             <Typography className={classes.root} >
 
@@ -288,6 +290,10 @@ const AppNav=()=>{
               
               <Link to="/dashboard" style={{textDecoration:"none"}}>
                 Dashboard
+              </Link>
+
+              <Link to="/login" style={{textDecoration:"none"}}>
+                Login
               </Link>
             </Typography>
               

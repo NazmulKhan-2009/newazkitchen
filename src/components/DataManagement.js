@@ -56,3 +56,58 @@ const orderData=async()=>{
 return orderData()
 
 }
+
+
+//!USER INFO CONNECTION WITH DATA BASE
+
+export const userDataDb=(db)=>{
+  console.log(`data base is connected with ${db}`)
+}
+
+
+//USER SIGN UP 
+// export const userSignUp=(userData)=>{
+
+//   const userCreate=async()=>{
+
+//     try {
+//       const responsedData=await axios.post("http://localhost:5000/api/user/signup", userData)
+//       console.log(responsedData)
+      
+//     } catch (error) {
+//       console.log(`something problem in sign up`)
+//     }
+
+//   }
+//   userCreate()
+    
+  
+// }
+
+//SIGN UP 
+export const userSignUp=async(userData)=>{
+  try {
+    const resData=await axios.post('http://localhost:5000/api/user/signup' , userData)
+    // console.log(resData)
+    return resData
+    
+  } catch(e){
+  //  console.log(e)
+  // return 
+  }
+    
+}
+
+//SIGN IN
+
+export const userSignIn=async(userData)=>{
+ 
+ try{
+    const resData=await axios.post('http://localhost:5000/api/user/signin' , userData) 
+
+    return resData
+  }catch{
+    console.log()
+   } ;
+
+}

@@ -30,7 +30,7 @@ section::before
 {
   position: relative;
   min-width: 1100px;
-  min-height: 550px;
+  min-height: 500px;
   display: flex;
   z-index: 1000;
 }

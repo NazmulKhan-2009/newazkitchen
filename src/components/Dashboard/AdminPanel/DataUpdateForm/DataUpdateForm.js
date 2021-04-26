@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog})=> {
+const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,newUser,handleSignUp})=> {
 //!console.log(adminForm)
 // const {field1, field2, field3}=adminForm
 //!console.log(field2,field3)
@@ -343,7 +343,7 @@ const handleDel=()=>{
 
 
   return (
-    <Grid item md={10} xs={10} >
+  <Grid item md={formTitle==="Log In" ? 6:10} xs={10} >
      
      
         <h3
@@ -367,7 +367,7 @@ const handleDel=()=>{
 
         { 
             
-          formTitle ==="delete_Food" | formTitle ==="search_Food" | formTitle ==="update_Food" | formTitle==="update_Admin" | formTitle==="orderControl"? 
+          formTitle ==="delete_Food" | formTitle ==="search_Food" | formTitle ==="update_Food" | formTitle==="update_Admin" | formTitle==="orderControl" ? 
             
             
           <>
@@ -394,7 +394,7 @@ const handleDel=()=>{
             // onBlur={handleInput}
             // onBlur={handleFindFood}
             required={true}
-            value={foodInfo.foodId || foodInfo.orderId || ""} 
+            value={foodInfo.foodId || foodInfo.orderId || foodInfo.adminId ||""} 
           /> 
 
 {formTitle ==="update_Food" | formTitle==="orderControl" && searchBtn && <span style={{cursor:"pointer"}} onClick={()=>handleSearch(formTitle)}><YoutubeSearchedForIcon/></span>}
@@ -408,10 +408,10 @@ const handleDel=()=>{
          {orderInfo && <OrderedInfo searchFood={searchFood} handleOrderStatus={handleOrderStatus}/>}
 
         {adminForm &&
-          formTitle ==="create_Food" | formTitle=== "create_Admin" | formTitle ==="update_Food" | formTitle==="update_Admin" ?
+          formTitle ==="create_Food" | formTitle=== "create_Admin" | formTitle ==="update_Food" | formTitle==="update_Admin" | formTitle==="Log In" ?
         <>
            {/* Food Title */}
-          <TextField
+         <TextField
             // id="food-title"
             id={adminForm.field1.id}
             // label="Food Title" 
@@ -426,10 +426,11 @@ const handleDel=()=>{
            
             // disabled={formTitle ==="update_Food" && !displayed}
             disabled={formTitle ==="update_Food" && fieldEnable.foodTitleField}
-            value={foodInfo.foodTitle || searchFood.foodTitle||""}  
+            value={foodInfo.foodTitle || searchFood.foodTitle|| foodInfo.admin_name||""}  
             
             
           />
+          
           {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('foodTitle')}><EditIcon/></span>}
           
 
@@ -480,7 +481,7 @@ const handleDel=()=>{
             onChange={handleInput} 
             required={true}
             disabled={formTitle ==="update_Food" && fieldEnable.descriptionField}
-            value={foodInfo.description ||  searchFood.description||""} 
+            value={foodInfo.description ||  searchFood.description|| foodInfo.admin_email ||""} 
           />
           {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('descriptionField')}><EditIcon/></span>}
 
@@ -488,7 +489,7 @@ const handleDel=()=>{
     setDisplayed(true)}}><EditIcon/></span>} */}
 
           {/* Price */}
-          <TextField
+         <TextField
             // id="priceInput"
             id={adminForm.field3.id}
             // label="Price" 
@@ -501,14 +502,53 @@ const handleDel=()=>{
             onChange={handleInput} 
             required={true}
             disabled={formTitle ==="update_Food" && fieldEnable.priceField}
-            value={foodInfo.price ||searchFood.price ||""}  
+            value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
           /> 
-
+         
 {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('priceField')}><EditIcon/></span>}
           {/* {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>{setSearchFood({...searchFood,description:""});setEditBtn(false);
     setDisplayed(true)}}><EditIcon/></span>} */}
           </>:""
           }
+
+      
+         
+          
+           {/* Password field */}
+          {/* <TextField
+            // id="priceInput"
+            id={adminForm.field4.id}
+            // label="Price" 
+            label={adminForm.field4.label}  
+            variant={adminForm.field4.variant}  
+            // name="price" 
+            name={adminForm.field4.name}  
+            type="number" 
+            inputProps={{ minLength: 2,maxLength: 4 }}
+            onChange={handleInput} 
+            required={true}
+            disabled={formTitle ==="update_Food" && fieldEnable.priceField}
+            // value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
+          />  */}
+
+          {/* reset Password field */}
+         {/* <TextField
+          
+            // id="priceInput"
+            id={adminForm.field5.id}
+            // label="Price" 
+            label={adminForm.field5.label}  
+            variant={adminForm.field5.variant}  
+            // name="price" 
+            name={adminForm.field5.name}  
+            type="number" 
+            inputProps={{ minLength: 2,maxLength: 4 }}
+            onChange={handleInput} 
+            required={true}
+            disabled={formTitle ==="update_Food" && fieldEnable.priceField}
+            // value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
+          /> */}
+          
 
       
           
@@ -517,7 +557,7 @@ const handleDel=()=>{
           
             {/* Upload Food Photo */}
           {/* <Grid className="upload_Button file_base"> */}
-          {formTitle === "create_Food" | formTitle=== "create_Admin"  ? <Grid className={`${Style.file_base} ${Style.upload_Button}`}>
+          {formTitle === "create_Food" | formTitle=== "create_Admin" |formTitle==="userForm"   ? <Grid className={`${Style.file_base} ${Style.upload_Button}`}>
             <label htmlFor="fileInput">
             <PhotoCamera  style={{position:"absolute",width:"35px",height:"30px",cursor:'pointer',paddingTop:"5px"}} color="secondary"/>
             </label>
@@ -546,19 +586,22 @@ const handleDel=()=>{
             {/* {formTitle.replace('_'," ")} */}
             {formTitle}
           </Button> 
-
-          <Button variant="outlined" color="primary" style={{marginRight:"5px"}}  onClick={handleRefresh}>
-            
-            Refreash
-          </Button> 
+         
+          
+        
 
           
-          
-          
+            <Button variant="outlined" color="primary" style={{marginRight:"5px"}}  onClick={handleRefresh}>
+              
+              Refreash
+            </Button> 
 
-          <Button variant="outlined" color="secondary"   onClick={handleCancel}>            
-            <CancelIcon/>
-          </Button> 
+        
+            <Button variant="outlined" color="secondary"   onClick={handleCancel}>            
+              <CancelIcon/>
+            </Button> 
+          
+          
 
           
         {formTitle ==="update_Food" && <Button variant="outlined" color="secondary"   onClick={handleDel}>            
