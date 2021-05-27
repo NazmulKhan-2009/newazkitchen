@@ -11,6 +11,8 @@ import axios from 'axios';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LoadingCart from '../../../Common/NotFound/LoadingCard';
+import SearchIcon from '@material-ui/icons/Search';
+import { SearchItem } from '../../../Utility';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,12 +94,21 @@ const handleFood=(item,color)=>{
       <Button variant="contained" color="primary" onClick={()=>handleFood('other')}>
         Others
       </Button> */}
+      
+      {/* SEARCH FOOD */}
+  <Grid container item md={10} justify="space-evenly" className="my_search">
+  <div>
+      <SearchItem/>
+      </div>
+      <div>
+
 {
      itemBtn.map((item,i)=>
         <Button key={i} variant= {item===colValue ? "contained" :"outlined"} color={item===colValue ? "primary" :"secondary"} onClick={()=>handleFood(item)}>{item}</Button>
      )
-}       
-      
+}    
+</div>   
+ </Grid>     
 
     </div>
      

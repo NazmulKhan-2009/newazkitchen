@@ -56,7 +56,7 @@ import WaitingOrder from '../../../Cart/Cart/WaitingOrder';
 import { orderHandleImg } from '../../../CommonFunction';
 
 const OrderStatus = () => {
-  const [orderInfo]=useContext(UserContext)
+  const {orderInfo}=useContext(UserContext)
 
 
 // const orderHandleImg=()=>{

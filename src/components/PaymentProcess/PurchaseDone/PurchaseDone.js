@@ -7,7 +7,7 @@ import OrderDetailsDB from '../OrderDetailsDB/OrderDetailsDB';
 import PurchaseDoneNotification from './PurchaseDoneNotification';
 const PurchaseDone = ({successInfo}) => {
 
-  const [orderInfo]=useContext(UserContext)
+const {orderInfo}=useContext(UserContext)
   // console.log(orderInfo.orderId)
  const history = useHistory();
  return (
@@ -31,7 +31,9 @@ const PurchaseDone = ({successInfo}) => {
           variant="outlined" 
           color="primary" 
           className="MuiButton-outlinedSizeSmall" 
-          onClick={()=>history.push("/dashboard/purchaseHistory")}>
+          // onClick={()=>history.push("/dashboard/purchasehistory")}
+          onClick={()=>history.push("/purchasehistory")}
+        >  
           Go to Purchase History
         </Button>
     </Grid>     

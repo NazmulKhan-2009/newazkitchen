@@ -23,6 +23,7 @@ import PaymentProcess from './components/PaymentProcess/PaymentProcess';
 import PurchaseHistory from './components/PurchaseHistory/PurchaseHistory/PurchaseHistory';
 import PracticeComp from './PracticeCom/PracticeComp';
 import './App.css';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 export const UserContext=createContext()
 
@@ -32,6 +33,8 @@ function App(){
   const [cartItem, setCartItem]=useState([])
   const [orderInfo, setOrderInfo]=useState([])
   const [loginInfo, setLoginInfo]=useState({})
+  const [admin, setAdmin]=useState("")
+  const [isAdmin,setIsAdmin]=useState(false)
   
 
   useEffect(()=>{
@@ -40,31 +43,52 @@ function App(){
     // console.log(cartGet)
   },[])
 
+  // const accessAdmin=JSON.parse(sessionStorage.getItem('userInfo'))
+
+  // useEffect(()=>{
+  
+  //   accessAdmin!==null ? setAdmin(accessAdmin.accessAs):setAdmin('');
+    
+  // },[accessAdmin])
+
   // ??????
   // const cusInfo=JSON.parse(localStorage.getItem('deliveryInfo'))
   const cusInfo=true  
 
   return (
     <UserContext.Provider
-    value={[
+    value={{
       cartItem,
       setCartItem, 
       orderInfo,
       setOrderInfo,
       loginInfo,
-      setLoginInfo
+      setLoginInfo,
+      isAdmin,
+      setIsAdmin
 
       
-    ]}
+    }}
+
+    // value={{cart:cartItem,setCart:setCartItem,order:orderInfo,login:loginInfo,setLogin:setLoginInfo}}
     
     >
+    
     <Router>
-     <AppNav/>     
+    
+     <AppNav />
+         
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/gallery" component={Gallery} />
         <Route exact path="/contact" component={ContactUs} />
-        <Route exact path="/dashboard" component={Dashboard} />    
+
+        {/* <Route exact path="/dashboard" component={Dashboard} />  */}
+
+        <PrivateRoute exact path="/dashboard">
+            <Dashboard/>
+          </PrivateRoute>  
+
         <Route exact path="/login" component={Login} />    
         <Route exact path="/cart" component={cartItem ? Cart : CartEmpty} />  
          
@@ -75,9 +99,17 @@ function App(){
         <Route exact path="/adminpanel" component={AdminPanel} />
           
         
-          <Route exact path="/dashboard/payment" component={cusInfo ? PaymentProcess : NotFound} />
+          {/* <Route exact path="/dashboard/payment" component={cusInfo ? PaymentProcess : NotFound} /> */}
+
+          <PrivateRoute exact path="/payment">
+            
+            <PaymentProcess/> 
+          </PrivateRoute> 
         
-          <Route exact path="/dashboard/purchaseHistory" component={PurchaseHistory} /> 
+          {/* <Route exact path="/purchaseHistory" component={PurchaseHistory} />  */}
+          <PrivateRoute exact path="/purchasehistory">
+            <PurchaseHistory/>
+          </PrivateRoute> 
 
 
         <Route exact path="*" component={NotFound} /> 

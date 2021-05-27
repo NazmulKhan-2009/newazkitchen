@@ -21,7 +21,7 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
 
   const [purchasedInfo,setPrchasedInfo]= useState({}) 
   //? const [orderInfo,setOrderInfo]= useState({}) 
-  const [orderInfo,setOrderInfo]=useContext(UserContext)
+  const {orderInfo,setOrderInfo,loginInfo}=useContext(UserContext)
 
   const [isDisable, setIsDisable]=useState(false)
 
@@ -69,7 +69,11 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
     //  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
     //!  sessionStorage.setItem('purchasedInfo',JSON.stringify({payment_by:dialogInfo.title,...purchasedInfo,...deliveryInfo}))
 
-    const email="nazmulustc09@gmail.com";
+    // const email="nazmulustc09@gmail.com";
+    // const email=loginInfo.data.user_email
+    const userInfo=JSON.parse(sessionStorage.getItem("userInfo"))
+    const email=userInfo.userEmail
+    console.log(email)
     const order_status='processing'
     const orderedDetails=await orderedData(email,dialogInfo.title,order_status,purchasedInfo)
     // dbOrderedInfo(orderedDetails)

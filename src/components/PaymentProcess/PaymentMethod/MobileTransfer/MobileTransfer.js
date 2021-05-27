@@ -6,7 +6,7 @@ import MoneyTrfCom from './MoneyTrfCom';
 
 const MobileTransfer = ({handleDialog,purchaseDone,purchaseNotify}) => {
 
-    const [orderInfo]=useContext(UserContext)
+    const {orderInfo}=useContext(UserContext)
 
  const moneyTrfCo=[
   {

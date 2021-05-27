@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PriceDetails=()=>{
   const classes = useStyles();
-  const [cartItem, setCartItem]=useContext(UserContext)
+  const {cartItem, setCartItem}=useContext(UserContext)
 
   //RADIOS BOX
  

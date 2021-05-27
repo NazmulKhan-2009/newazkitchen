@@ -20,7 +20,8 @@ const PaymentProcess = () => {
    const [open, setOpen] = React.useState(false);
    const [purchaseNotify, setPurchaseNotify] = React.useState(false);
    //! const [orderInfo,setOrderInfo]= useState({})
-   const [orderInfo, setOrderInfo]=useContext(UserContext)
+   const {orderInfo, setOrderInfo,loginInfo,setLoginInfo}=useContext(UserContext)
+   
 
   //!console.log(orderInfo)
 

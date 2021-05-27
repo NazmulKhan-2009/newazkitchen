@@ -111,14 +111,24 @@ import Alert from '@material-ui/lab/Alert';
 // import img2 from '../../../img/img2.jpg'
 import "./login.css"
 import { UserContext } from '../../../App';
+import { useHistory, useLocation } from "react-router-dom";
 const Login = () => {
 
-const [loginInfo,setLoginInfo]=useContext(UserContext)  
+const {loginInfo,setLoginInfo,setIsAdmin}=useContext(UserContext)  
+
 // console.log(loginInfo)
 
 const [signUpFlip, setSignUpFlip]=useState(false)
 const [userInfo, setUserInfo]=useState({})
 const [notify, setNotify]=useState(false)
+const [isSignIn, setIsSignIn]=useState(false)
+const [isSignOut, setIsSignOut]=useState(true)
+const [signOutNotify, setSignOutNotify]=useState(true)
+
+const history = useHistory();
+ const location = useLocation();
+ const { from } = location.state || { from: { pathname: "/" } };
+// console.log(signIn)
 // const [file, setFile]=useState('')
 // const [userData, setUserData]=useState({})
 
@@ -143,6 +153,8 @@ const handleSubmit=(e)=>{
      .then(res=>{
         // console.log(res)
         alert(`${res.data.response}`)
+        
+        // console.log(res)
         setSignUpFlip(false)
         setUserInfo({})
         
@@ -168,14 +180,61 @@ const handleSubmit=(e)=>{
      
 }
 
+//sign in function
+
+const successSign=(loginData,token,loginByName,loginByEmail,who,bool)=>{
+    setLoginInfo(loginData)
+    sessionStorage.setItem('token',token)
+    bool ? sessionStorage.setItem('isAdmin',bool):sessionStorage.setItem(null,null)
+    sessionStorage.setItem('userInfo',JSON.stringify({userName:loginByName,userEmail:loginByEmail,accessAs:who}))
+
+    setIsAdmin(bool)
+    setIsSignIn(true)
+    history.replace(from)
+}
+
 
 const handleSignIn=(e)=>{
      e.preventDefault()
      userSignIn(userInfo)
      .then(res=>{
         //  console.log(res)
-        setLoginInfo(res)
-         setNotify(true)
+        if(res.data.status[0]==='success'){
+            // setLoginInfo(res.data)
+            // sessionStorage.setItem('token',res.data.token)
+            // sessionStorage.setItem('userInfo',JSON.stringify({userName:res.data.data.user_name,userEmail:res.data.data.user_email}))
+             
+            //  setIsSignIn(true)
+            //  history.replace(from)
+            successSign(res.data,
+                        res.data.token,
+                        res.data.data.user_name,
+                        res.data.data.user_email,
+                        res.data.status[0],
+                        
+                        )
+
+
+             
+        
+
+        }else if(res.data.status[0]==='admin'){
+            // alert(res.data.status[1])
+            successSign(res.data,
+                res.data.token,
+                res.data.data.admin_name,
+                res.data.data.admin_email,
+                res.data.status[0],
+                true
+                )
+        }
+        else if(res.data.status[0]==='error'){
+            setLoginInfo(res.data)
+            setNotify(true)
+        }
+       
+         
+         
      })
     
 
@@ -184,7 +243,15 @@ const handleSignIn=(e)=>{
 
 setTimeout(()=>{
     setNotify(false)
-},5000)
+    setSignOutNotify(false)
+},10000)
+
+
+const handleSignOut=()=>{
+    setIsSignIn(false)
+    setIsSignOut(false)
+    setSignOutNotify(true)
+}
 
  return (
  <div className="login_style">    
@@ -192,7 +259,17 @@ setTimeout(()=>{
      <div className={signUpFlip ? "login_container active ": "login_container" }>
 
         <div className="user signinBx">
+        
             <div className="imgBx">
+                {/* {isSignIn && <p style={{textAlign:"center"}}> welcome {loginInfo.data.data.user_name} <span style={{color:'red'}} onClick={handleSignOut}>Sign out</span> </p>
+                } */}
+
+                {!isSignOut && signOutNotify && <Alert severity="warning">Succesfully loged out</Alert>}
+
+                
+
+                
+
                 <img src="http://irtrd.com/wp-content/uploads/2018/08/login.gif" alt=""/>
                
                 
@@ -206,7 +283,12 @@ setTimeout(()=>{
                     <h2>Sign In</h2>
                     
                     <input type="text" name="user_name" placeholder="Username" onChange={handleInput} required/>
+                    <input type="email" name="user_email" placeholder="email" onChange={handleInput} required/>
                     <input type="password" name="user_password" placeholder="Password" onChange={handleInput}/>
+
+                    {/* admin access through email */}
+                
+
                     <input type="submit" name="" value="Login"/>
                     
                     <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p>
@@ -219,9 +301,9 @@ setTimeout(()=>{
                     {/* <img src="https://i.imgur.com/oozxCkP.png" alt="" width="40"/> */}
                     <img src="https://i.imgur.com/oozxCkP.png" alt="" width="40" />
                 </div>
-    {/*//! // TOASTIFY */}
+    {/* //! // TOASTIFY */}
                 {notify && 
-                    <Alert severity={loginInfo.data.status[0]}>{loginInfo.data.status[1]}</Alert>
+                    <Alert severity={loginInfo.status[0]}>{loginInfo.status[1]}</Alert>
                 }
             </div>
         </div>

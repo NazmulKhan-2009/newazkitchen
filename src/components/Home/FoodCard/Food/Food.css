@@ -6,3 +6,12 @@
  color: #fd5c63;
  margin-top:5rem;
 }
+
+.my_search .MuiToolbar-regular {
+ min-height: 20px;
+}
+.my_search .MuiAppBar-colorPrimary{
+ color:black !important;
+ background-color:white !important;
+
+}

@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart,handleDialog}) => {
- const [cartItem, setCartItem]=useContext(UserContext)
+ const {cartItem, setCartItem}=useContext(UserContext)
 //  const [confirmBtn, setConfirmBtn]=useState(false)
  const classes = useStyles();
 

@@ -55,6 +55,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
   const [changedOrderStatus,  setChangedOrderStatus]=useState('')
 
 
+  console.log(formTitle)
   //!changing Oreder status 
   console.log(changedOrderStatus)
   const handleOrderStatus=(status)=>{
@@ -74,7 +75,8 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
   const handleSubmit=(e)=>{
      e.preventDefault()
 
-  if(formTitle ==="create_Food"){if(file===null){
+  if(formTitle ==="create_Food"){
+    if(file===null){
       alert("Plaese select an Image")
      }
 
@@ -89,6 +91,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
     formData.append('price',price)
     formData.append('imageUrl', file); //file base64
    
+    console.log(formData)
      //****AXIOS ASYNC AWAIT WAY XXXX ASTAGFIRULLAH XXXXXX
     const addFood= async()=>{
       try{
@@ -187,6 +190,59 @@ else if(formTitle ==="update_Food"){
     updateOrderStatus()
 
   }
+
+  //START ADMIN MANAGEMENT
+
+  //START CRAETE ADMIN
+  else if(formTitle ==="create_Admin"){
+    if(file===null){
+      alert("Plaese select an Image")
+     }
+    
+     const {admin_email,admin_name,admin_mobile,admin_password,confirm_password}=foodInfo
+    //   console.log(foodInfo.foodId)
+    // //  New Form Constructor
+if(admin_password!==confirm_password){
+  alert("password mismatch")
+}else{
+
+
+
+    const formData=new FormData()
+
+    formData.append('admin_name',admin_name)
+    formData.append('admin_email',admin_email)
+    formData.append('admin_mobile',admin_mobile)
+    formData.append('admin_imageUrl', file); //file base64
+    formData.append('admin_password',admin_password)
+    //  //****AXIOS ASYNC AWAIT WAY XXXX ASTAGFIRULLAH XXXXXX
+    const createAdmin= async()=>{
+      try{
+          const res=await axios.post("http://localhost:5000/api/admin/createadmin",formData) 
+          console.log(res)
+          alert(res.data.response)
+          // setFoodsInfo(response.data.data)
+          // if(response.data.data){
+          //   setFoodInfo({})
+          //   alert("Admin successfully added")
+          // }
+       }catch(e){
+         console.log(`Admin Create error ${e}`)
+        } ;
+    }    
+    createAdmin()
+    setFile(null)
+
+    console.log('admin create pattern click')
+    console.log(foodInfo)
+    console.log(formData)
+}  
+
+  }
+
+  //END CREATE ADMIN
+
+  //END ADMIN MANAGEMENT
  
   }
   
@@ -476,7 +532,8 @@ const handleDel=()=>{
             variant={adminForm.field2.variant} 
             // name="description"
             name={adminForm.field2.name}
-            type="text" 
+            // type="text" 
+            type={formTitle=== "create_Admin" ? "email" : "text"}
             inputProps={{ minLength: 3,maxLength: 200 }}
             onChange={handleInput} 
             required={true}
@@ -497,8 +554,8 @@ const handleDel=()=>{
             variant={adminForm.field3.variant}  
             // name="price" 
             name={adminForm.field3.name}  
-            type="number" 
-            inputProps={{ minLength: 2,maxLength: 4 }}
+            type={formTitle==="create_Admin"?"text":"number"} 
+            inputProps={formTitle==="create_Admin" ?{minLength:11,maxLength:11}: { minLength: 2,maxLength: 4 }}
             onChange={handleInput} 
             required={true}
             disabled={formTitle ==="update_Food" && fieldEnable.priceField}
@@ -552,8 +609,42 @@ const handleDel=()=>{
 
       
           
-      
-          
+          {/* ADMIN PASSWORD */}
+          {formTitle==="create_Admin" &&
+          <>
+          <TextField
+            // id="priceInput"
+            id="admin_pass"
+            // label="Price" 
+            label="Password"  
+            variant={adminForm.field3.variant}  
+            // name="price" 
+            name="admin_password" 
+            type="password" 
+            // inputProps={{ minLength: 2,maxLength: 4 }}
+            onChange={handleInput} 
+            required={true}
+            // disabled={formTitle ==="update_Food" && fieldEnable.priceField}
+            // value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
+          /> 
+
+          <TextField
+            // id="priceInput"
+            id="confirm_pass"
+            // label="Price" 
+            label="Confirm Password"  
+            variant={adminForm.field3.variant}  
+            // name="price" 
+            name="confirm_password" 
+            type="password" 
+            // inputProps={{ minLength: 2,maxLength: 4 }}
+            onChange={handleInput} 
+            required={true}
+            // disabled={formTitle ==="update_Food" && fieldEnable.priceField}
+            // value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
+          /> 
+          </>
+          }
           
             {/* Upload Food Photo */}
           {/* <Grid className="upload_Button file_base"> */}

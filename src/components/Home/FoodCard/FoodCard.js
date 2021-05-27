@@ -66,7 +66,7 @@ const FoodCard=({item,ind,foodDet,count})=>{
   const [expanded, setExpanded] = React.useState(false);
   const [cartCount, setCartCount] = useState(0)
   // const [cart,setCart]=useState([])
- const [cartItem, setCartItem]=useContext(UserContext)
+ const {cartItem, setCartItem}=useContext(UserContext)
 
  const [foodIdCount,setFoodIdCount]=useState({id:"",count:0})
 // console.log(`for ${item._id} count is ${cartCount}`)

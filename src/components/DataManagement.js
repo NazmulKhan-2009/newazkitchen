@@ -3,6 +3,7 @@ import axios from "axios";
 export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
 
  const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
+ const token=sessionStorage.getItem('token')
 //  const purchasedInfo=JSON.parse(sessionStorage.getItem('purchasedInfo'))
  const orderedData={
    email,
@@ -14,7 +15,7 @@ export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
  }
  const orderFood= async()=>{
    try{
-       const response=await axios.post("http://localhost:5000/api/order/orderdetail", orderedData) 
+       const response=await axios.post("http://localhost:5000/api/order/orderdetail", orderedData,{headers: {'Authorization': 'Bearer '+ token}}) 
        //! setOrderInfo(response.data.data)
        return response.data.data
        
@@ -41,16 +42,27 @@ export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
 
 // }
 
-export const orderHistory=(email)=>{
+export const orderHistory=(email,token)=>{
 const orderData=async()=>{
 
-  try {
-    const response= await axios.get(`http://localhost:5000/api/order/orderhistory/${email}`)
+  // try {
+  //   const response= await axios.get(`http://localhost:5000/api/order/orderhistory/${email}`)
  
-    return response.data.data
-   } catch (e) {
-     console.log(`error to get order history ${e}`)
-   }
+  //   return response.data.data
+  //  } catch (e) {
+  //    console.log(`error to get order history ${e}`)
+  //  }
+
+  try{
+      const response=await axios({
+        method:"get",
+        url:`http://localhost:5000/api/order/orderhistory/${email}`,
+        headers: {'Authorization': 'Bearer '+ token}
+      })
+      return response.data.data
+   }catch(e){
+     
+    } ;
 }
     
 return orderData()

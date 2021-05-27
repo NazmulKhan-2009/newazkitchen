@@ -11,7 +11,7 @@ import PriceDetails from './PriceDetails';
 import PaymentDetails from './PaymentDetails/PaymentDetails';
 
 const CartOrder=({handleDialog})=>{
-  const [cartItem, setCartItem]=useContext(UserContext)
+  const {cartItem, setCartItem}=useContext(UserContext)
   const [placeOrder, setPlaceOrder]=useState(false)
   const [confirmCart, setConfirmCart]=useState(false)
   

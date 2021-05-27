@@ -1,5 +1,6 @@
 import { Grid } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../../App';
 import WaitingOrder from '../../Cart/Cart/WaitingOrder';
 import { orderHistory } from '../../DataManagement';
 import Loader from './Loader';
@@ -11,21 +12,28 @@ import OrderDataHistory from './OrderedDataHistory/OrderDataHistory';
 const PurchaseHistory = () => {
 
  const [orderHistoryData, setOrderHistoryData]=useState([])
+ const {loginInfo}=useContext(UserContext)
+ console.log(loginInfo)
 //  const [dataFound, setDataFound]=useState(false)
  //todo console.log(orderHistoryData)
 //  const email="nazmulustc09@yahoo.com"
 //  const email="ustciiucbracbank@gmail.com"
 //  const email="ustciiucbracbank@outlook.com"
- const email="nazmulustc09@gmail.com"
+//  const email="nazmulustc09@gmail.com"
+// const email=loginInfo.data.user_email
+
+const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+const email=userInfo.userEmail
+const token=sessionStorage.getItem('token')
 
 
   
 
    useEffect(()=>{
     const orderDataHistory =async()=>{
-     const data=await orderHistory(email)
+     const data=await orderHistory(email,token)
      setOrderHistoryData(data)
-     // console.log(data)
+     console.log(data)
      
     }
      orderDataHistory()

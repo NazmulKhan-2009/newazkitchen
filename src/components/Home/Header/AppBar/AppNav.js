@@ -17,7 +17,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Alert from '@material-ui/lab/Alert';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../../App';
 import './AppNav.css';
@@ -101,7 +101,9 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-const AppNav=()=>{
+
+
+const AppNav=({admin})=>{
   
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -110,13 +112,41 @@ const AppNav=()=>{
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   // const [cartInfo, setCartInfo]=useState(0)
-  const [cartItem, setCartItem,loginInfo]=useContext(UserContext)
+  const {cartItem, setCartItem,loginInfo, setLoginInfo,isAdmin}=useContext(UserContext)
   // const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
+  // const [adminAccess, setAdminAccess]=useState(false)
+ 
 
+  const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+  console.log(userInfo)
+
+  console.log(loginInfo)
+  // let isAdmin=false
+
+  // if(userInfo===null){
+  //   isAdmin=false
+  // }else if(userInfo.accessAs==='admin'){
+  //   isAdmin=true
+  // }else{
+  //   isAdmin=false
+  // }
+
+  // useEffect(()=>{
+  //   // setAdminAccess(true)
+  // },[userInfo])
   // useEffect(()=>{
     
   //   setCartInfo(cartGet.length)
   // },cartInfo)
+console.log(admin)
+ 
+
+  const handleLogout=()=>{
+    setLoginInfo({})
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('userName')
+
+  }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -257,14 +287,15 @@ const AppNav=()=>{
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
+            
           </div>
-          
+           <p>{loginInfo.data && loginInfo.data.user_name || !loginInfo.data && sessionStorage.getItem('userName')}</p>
           <div className={classes.grow} />
          
           
           
             
-{/* {loginInfo.data && <h1 style={{color:'red'}}>{loginInfo.data.user_name}</h1>} */}
+          
 
             <Typography className={classes.root} >
 
@@ -273,9 +304,22 @@ const AppNav=()=>{
                 Add FOOD
               </Link> */}
               {/*//! BELLOW TRANSMISSION FROM NEXT */}
+              {/* {admin==="admin" ?
               <Link to="/adminpanel" style={{textDecoration:"none",fontWeight:'bold',color:'red'}}>
                 Admin
-              </Link>
+              </Link>:""
+              } */}
+              {
+                isAdmin || sessionStorage.getItem('isAdmin')?
+                    <Link to="/adminpanel" style={{textDecoration:"none",fontWeight:'bold',color:'red'}}>
+                      {`Admin-${userInfo.userName}`}
+                    </Link>:
+                    <Link to="/profile" style={{textDecoration:"none",fontWeight:'bold',color:'red'}}>
+                      {userInfo && `${userInfo.userName}`}
+                    </Link>
+              }
+              
+
               <Link to="/practicecomp" style={{textDecoration:"none",fontWeight:'bold'}}>
                 Practice
               </Link>
@@ -292,9 +336,17 @@ const AppNav=()=>{
                 Dashboard
               </Link>
 
-              <Link to="/login" style={{textDecoration:"none"}}>
+              { !loginInfo.data && sessionStorage.getItem('token')===null ? <Link to="/login" style={{textDecoration:"none"}}>
                 Login
               </Link>
+              :
+              <span style={{textDecoration:"none"}} onClick={handleLogout}>
+                Log Out
+              </span>
+              
+              }
+
+
             </Typography>
               
            

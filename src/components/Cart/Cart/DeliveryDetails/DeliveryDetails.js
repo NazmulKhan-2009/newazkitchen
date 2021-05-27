@@ -41,7 +41,8 @@ const DeliveryDetails=()=> {
   sessionStorage.setItem("deliveryInfo", JSON.stringify({...deliveryInfo,totalPrice}))
     // localStorage.removeItem('cartInfo')
     SetDeliveryInfo({})
-    history.push("/dashboard/payment")
+    // history.push("/dashboard/payment")
+    history.push("/payment")
   }
 
   const handleInput=e=>{ 

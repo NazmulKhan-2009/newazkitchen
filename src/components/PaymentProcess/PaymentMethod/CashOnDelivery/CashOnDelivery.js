@@ -6,7 +6,7 @@ import { UserContext } from '../../../../App';
 
 const CashOnDelivery = ({purchaseNotify}) => {
 
-  const [orderInfo]=useContext(UserContext)
+  const {orderInfo}=useContext(UserContext)
   // console.log(orderInfo.delivery_Info.totalPrice)
  return (
     <>
