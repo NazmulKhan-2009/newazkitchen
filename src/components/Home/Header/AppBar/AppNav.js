@@ -117,8 +117,18 @@ const AppNav=({admin})=>{
   // const [adminAccess, setAdminAccess]=useState(false)
  
 
+  // let accessBy='user'
   const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
   console.log(userInfo)
+
+
+  // if(!userInfo===null){
+  //   if(userInfo.accessAs==='admin'){
+  //     accessBy=userInfo.accessAs
+  //   }
+
+  // }
+  
 
   console.log(loginInfo)
   // let isAdmin=false
@@ -144,7 +154,9 @@ console.log(admin)
   const handleLogout=()=>{
     setLoginInfo({})
     sessionStorage.removeItem('token')
-    sessionStorage.removeItem('userName')
+    // sessionStorage.removeItem('userName')
+    sessionStorage.removeItem('userInfo')
+    sessionStorage.removeItem('isAdmin')
 
   }
 
@@ -312,7 +324,7 @@ console.log(admin)
               {
                 isAdmin || sessionStorage.getItem('isAdmin')?
                     <Link to="/adminpanel" style={{textDecoration:"none",fontWeight:'bold',color:'red'}}>
-                      {`Admin-${userInfo.userName}`}
+                      {userInfo && `Admin-${userInfo.userName}`}
                     </Link>:
                     <Link to="/profile" style={{textDecoration:"none",fontWeight:'bold',color:'red'}}>
                       {userInfo && `${userInfo.userName}`}
@@ -365,9 +377,10 @@ console.log(admin)
             </IconButton>
             
             {/* Shopping cart */}
-          {cartItem && cartItem.length>0 &&
+          {cartItem && cartItem.length>0 && userInfo?.accessAs!=='admin' &&
             
            <IconButton
+          
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -378,11 +391,32 @@ console.log(admin)
               style={{position:'fixed',bottom:"10px",right:'20px',background:'gray',width:'60px',border:"2px solid black"}}         
             >
             <Badge badgeContent={cartItem && cartItem.length} color="secondary" >
+
             <Link to="/cart"> <ShoppingBasketIcon   style={{color:"blue"}}/></Link>
             </Badge>
               
             </IconButton>
           }
+
+          {/* {isAdmin || sessionStorage.getItem('isAdmin')?
+            "":
+          {cartItem && cartItem.length>0 && <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={null}
+            color="inherit"   
+            size="medium"              
+            style={{position:'fixed',bottom:"10px",right:'20px',background:'gray',width:'60px',border:"2px solid black"}}         
+          >
+          <Badge badgeContent={cartItem && cartItem.length} color="secondary" >
+
+          <Link to="/cart"> <ShoppingBasketIcon   style={{color:"blue"}}/></Link>
+          </Badge>
+            
+          </IconButton>}
+           } */}
             <IconButton
               edge="end"
               aria-label="account of current user"

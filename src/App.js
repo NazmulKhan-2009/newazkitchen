@@ -24,6 +24,7 @@ import PurchaseHistory from './components/PurchaseHistory/PurchaseHistory/Purcha
 import PracticeComp from './PracticeCom/PracticeComp';
 import './App.css';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import FoodSpecification from './components/FoodSpecification/FoodSpecification';
 
 export const UserContext=createContext()
 
@@ -96,8 +97,11 @@ function App(){
          
          {/*//! bellow transmission from next js */}
         {/* <Route exact path="/uploadfoods" component={UploadFoods} />   */}
-        <Route exact path="/adminpanel" component={AdminPanel} />
-          
+        {/* <Route exact path="/adminpanel" component={AdminPanel} /> */}
+        <PrivateRoute exact path="/adminpanel">
+            
+            <AdminPanel/> 
+          </PrivateRoute> 
         
           {/* <Route exact path="/dashboard/payment" component={cusInfo ? PaymentProcess : NotFound} /> */}
 
@@ -110,6 +114,10 @@ function App(){
           <PrivateRoute exact path="/purchasehistory">
             <PurchaseHistory/>
           </PrivateRoute> 
+
+          <PrivateRoute exact path="/foodspecification/:id">
+            <FoodSpecification/>
+          </PrivateRoute>
 
 
         <Route exact path="*" component={NotFound} /> 

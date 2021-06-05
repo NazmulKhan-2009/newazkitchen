@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import LoadingCart from '../../../Common/NotFound/LoadingCard';
 import SearchIcon from '@material-ui/icons/Search';
 import { SearchItem } from '../../../Utility';
+import { searchFood } from '../../../DataManagement';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +31,15 @@ const Food = () => {
   
 
   const classes = useStyles();
+
+  //SEARCH FOOD HANDLE
+
+  const searchingFood=(food)=>{
+    console.log(food)
+    searchFood(food)
+    .then(res=>setItemWise(res.data.data))
+
+  }
   
   // console.log(itemWise)
   //Food from Server
@@ -97,9 +107,9 @@ const handleFood=(item,color)=>{
       
       {/* SEARCH FOOD */}
   <Grid container item md={10} justify="space-evenly" className="my_search">
-  <div>
-      <SearchItem/>
-      </div>
+    <div>
+      <SearchItem searchingFood={searchingFood}/>
+    </div>
       <div>
 
 {

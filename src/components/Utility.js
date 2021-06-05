@@ -50,8 +50,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SearchItem=()=>{
+export const SearchItem=({searchingFood})=>{
   const classes = useStyles();
+
+const searchKey=(e)=>{
+  searchingFood(e.target.value)
+}
 
   return (
    
@@ -70,6 +74,8 @@ export const SearchItem=()=>{
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              name="searchFood"
+              onBlur={searchKey}
             />
           </div>
         </Toolbar>

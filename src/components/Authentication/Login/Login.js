@@ -182,11 +182,12 @@ const handleSubmit=(e)=>{
 
 //sign in function
 
-const successSign=(loginData,token,loginByName,loginByEmail,who,bool)=>{
+const successSign=(loginData,token,loginByName,loginByEmail,who,img,bool)=>{
     setLoginInfo(loginData)
     sessionStorage.setItem('token',token)
     bool ? sessionStorage.setItem('isAdmin',bool):sessionStorage.setItem(null,null)
     sessionStorage.setItem('userInfo',JSON.stringify({userName:loginByName,userEmail:loginByEmail,accessAs:who}))
+    sessionStorage.setItem('image',img)
 
     setIsAdmin(bool)
     setIsSignIn(true)
@@ -211,6 +212,7 @@ const handleSignIn=(e)=>{
                         res.data.data.user_name,
                         res.data.data.user_email,
                         res.data.status[0],
+                        null
                         
                         )
 
@@ -225,6 +227,7 @@ const handleSignIn=(e)=>{
                 res.data.data.admin_name,
                 res.data.data.admin_email,
                 res.data.status[0],
+                res.data.data.admin_imageUrl,
                 true
                 )
         }

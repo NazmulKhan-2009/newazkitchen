@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
 
+const adminVerify=JSON.parse(sessionStorage.getItem('userInfo'))
+
  const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
  const token=sessionStorage.getItem('token')
 //  const purchasedInfo=JSON.parse(sessionStorage.getItem('purchasedInfo'))
@@ -13,7 +15,8 @@ export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
    purchasedInfo:purchasedInfo,  
    deliveryInfo: JSON.parse(sessionStorage.getItem('deliveryInfo'))
  }
- const orderFood= async()=>{
+ if(adminVerify.accessAs==='success'){
+   const orderFood= async()=>{
    try{
        const response=await axios.post("http://localhost:5000/api/order/orderdetail", orderedData,{headers: {'Authorization': 'Bearer '+ token}}) 
        //! setOrderInfo(response.data.data)
@@ -25,6 +28,9 @@ export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
  }  
  
  return orderFood()
+}else if(adminVerify.accessAs==='admin'){
+  alert('You Admin hmmmm!')
+}
 
 }
 
@@ -123,3 +129,30 @@ export const userSignIn=async(userData)=>{
    } ;
 
 }
+
+//SEARCH FOOD
+
+export const searchFood=async(keyWord)=>{
+try{
+    const resData=await axios.post('http://localhost:5000/api/food/searchfood',{keyWord})
+      return resData
+    // console.log(resData)
+ }catch(e){
+   console.log(e)
+  } ;
+}
+
+
+//SPECIFIC FOOD SPECIFICATION
+
+export const foodDetails=async(id)=>{
+
+  try{
+    const resData=await axios.get(`http://localhost:5000/api/food/${id}`) 
+    return resData.data.data
+ 
+    }catch(e){
+      console.log(e)
+    } ;
+ 
+  }

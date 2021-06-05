@@ -16,6 +16,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import { UserContext } from '../../../App';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +70,8 @@ const FoodCard=({item,ind,foodDet,count})=>{
  const {cartItem, setCartItem}=useContext(UserContext)
 
  const [foodIdCount,setFoodIdCount]=useState({id:"",count:0})
+
+ let history=useHistory()
 // console.log(`for ${item._id} count is ${cartCount}`)
 // console.log(`special id ${foodId}`)
 
@@ -141,6 +144,11 @@ const FoodCard=({item,ind,foodDet,count})=>{
     }
       }
 
+  const foodRoute=(foodId)=>{
+    history.push(`/foodspecification/${foodId}`)    
+
+  }    
+
   return (
    
     <Grid container item={true} md={4} xs={10} className={classes.cardStyle}>
@@ -166,6 +174,7 @@ const FoodCard=({item,ind,foodDet,count})=>{
       />
       {item.imageUrl &&
       <CardMedia
+        onClick={()=>foodRoute(item._id)}
         className={classes.media}
         // image={item.image}
         image={item.imageUrl}
