@@ -149,10 +149,25 @@ export const foodDetails=async(id)=>{
 
   try{
     const resData=await axios.get(`http://localhost:5000/api/food/${id}`) 
-    return resData.data.data
+    return resData.data.data[0]
+    // console.log(resData.data.data)
  
     }catch(e){
       console.log(e)
     } ;
  
   }
+
+
+//RATING REVIEW
+export const ratingReview=async(reviewData)=>{
+try{
+    const resData=await axios.post('http://localhost:5000/api/food/review',reviewData)
+
+    // console.log(resData)
+    return resData.data.data
+ }catch(e){
+   
+  } ;
+
+}  

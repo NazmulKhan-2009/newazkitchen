@@ -112,6 +112,7 @@ import Alert from '@material-ui/lab/Alert';
 import "./login.css"
 import { UserContext } from '../../../App';
 import { useHistory, useLocation } from "react-router-dom";
+import { CustomizeLoader } from '../../../components/Utility';
 const Login = () => {
 
 const {loginInfo,setLoginInfo,setIsAdmin}=useContext(UserContext)  
@@ -124,6 +125,8 @@ const [notify, setNotify]=useState(false)
 const [isSignIn, setIsSignIn]=useState(false)
 const [isSignOut, setIsSignOut]=useState(true)
 const [signOutNotify, setSignOutNotify]=useState(true)
+const [loading, setLoading]=useState({loginZone:'',loader_disp:'none'})
+// const [loading, setLoading]=useState('block')
 
 const history = useHistory();
  const location = useLocation();
@@ -190,16 +193,20 @@ const successSign=(loginData,token,loginByName,loginByEmail,who,img,bool)=>{
     sessionStorage.setItem('image',img)
 
     setIsAdmin(bool)
-    setIsSignIn(true)
-    history.replace(from)
+    setIsSignIn(true);
+
+    who==='admin' ? history.replace('/adminpanel') : history.replace(from)
+    // history.replace(from)
 }
 
 
 const handleSignIn=(e)=>{
      e.preventDefault()
+     setLoading({loginZone:"none",loader_disp:'block'})
      userSignIn(userInfo)
      .then(res=>{
         //  console.log(res)
+        
         if(res.data.status[0]==='success'){
             // setLoginInfo(res.data)
             // sessionStorage.setItem('token',res.data.token)
@@ -213,6 +220,7 @@ const handleSignIn=(e)=>{
                         res.data.data.user_email,
                         res.data.status[0],
                         null
+                        
                         
                         )
 
@@ -233,10 +241,12 @@ const handleSignIn=(e)=>{
         }
         else if(res.data.status[0]==='error'){
             setLoginInfo(res.data)
+            setLoading({loginZone:"",loader_disp:'none'})
             setNotify(true)
         }
        
-         
+    
+    
          
      })
     
@@ -257,8 +267,9 @@ const handleSignOut=()=>{
 }
 
  return (
- <div className="login_style">    
-  <div className={signUpFlip && "active"}>
+     <>
+ <div className="login_style" style={{display:loading.loginZone}}>    
+  <div className={signUpFlip && "active "}>
      <div className={signUpFlip ? "login_container active ": "login_container" }>
 
         <div className="user signinBx">
@@ -350,8 +361,20 @@ const handleSignOut=()=>{
         </div>
         
     </div>
+    
   </div>
+
+
+  
 </div>
+
+<div
+style={{maxWidth:'100px',margin:"0 auto",display:loading.loader_disp,top:"0"}}
+>
+<CustomizeLoader/>
+</div>
+</>
+
  );
 };
 

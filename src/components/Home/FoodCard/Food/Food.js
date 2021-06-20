@@ -12,7 +12,7 @@ import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LoadingCart from '../../../Common/NotFound/LoadingCard';
 import SearchIcon from '@material-ui/icons/Search';
-import { SearchItem } from '../../../Utility';
+import { CustomizeLoader, SearchItem } from '../../../Utility';
 import { searchFood } from '../../../DataManagement';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,10 +24,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Food = () => {
-  const [sliceFood, setSliceFood]=useState(6)
+  const [sliceFood, setSliceFood]=useState(8)
   const [itemWise, setItemWise]=useState([])
   const [foodDetails, setFoodDetails]=useState([])
-  // console.log(foodDetails)
+
+
+  console.log(foodDetails.map(item=>item.reviews))
   
 
   const classes = useStyles();
@@ -139,7 +141,8 @@ const handleFood=(item,color)=>{
     {
       itemWise.length<1 ? 
       <Grid container justify="center">
-       <LoadingCart/>  
+       {/* <LoadingCart/>   */}
+       <CustomizeLoader/>
       </Grid>
        
       
@@ -164,7 +167,7 @@ const handleFood=(item,color)=>{
           size="small"
           color="primary"
           aria-label="add"
-          onClick={()=>setSliceFood(sliceFood+3)}
+          onClick={()=>sliceFood<foodDetails.length? setSliceFood(sliceFood+4):alert('finished food collection')}
           
         >
           <NavigationIcon/>

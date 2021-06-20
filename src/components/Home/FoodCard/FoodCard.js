@@ -18,6 +18,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { UserContext } from '../../../App';
+import { StarRated } from '../../Utility';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+    cursor:"pointer"
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FoodCard=({item,ind,foodDet,count})=>{
+const FoodCard=({item,ind,foodDet,count,size,dispRating})=>{
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [cartCount, setCartCount] = useState(0)
@@ -72,6 +74,24 @@ const FoodCard=({item,ind,foodDet,count})=>{
  const [foodIdCount,setFoodIdCount]=useState({id:"",count:0})
 
  let history=useHistory()
+
+
+//  console.log(item.reviews.reduce((pv,cv)=>pv.rate+cv.rate))
+// const review=foodDet.map(item=>item.reviews)
+// console.log(review)
+
+
+let avgRate=''
+if(item.reviews.length>0){
+  const total=item?.reviews.reduce((pv,cv)=>pv.rate+cv.rate)
+  avgRate=total/item.reviews.length
+  console.log(avgRate)
+}
+
+
+ 
+//  const avgRate=item.reviews.reduce((pv,cv)=>pv.rate+cv.rate)
+// console.log(item)
 // console.log(`for ${item._id} count is ${cartCount}`)
 // console.log(`special id ${foodId}`)
 
@@ -151,14 +171,17 @@ const FoodCard=({item,ind,foodDet,count})=>{
 
   return (
    
-    <Grid container item={true} md={4} xs={10} className={classes.cardStyle}>
+    <Grid  item={true} xs={10}  sm={size?.sm||4} md={size?.sm||4}  lg={size?.lg||3} className={classes.cardStyle}>
     <Card className={classes.root}>
+    <StarRated rating={avgRate} />
       <CardHeader
         avatar={
           <Avatar sizes="string" aria-label="recipe" className={classes.avatar} variant='circular' style={{width:'80px'}}>
             <span style={{fontSize:".8rem"}}>{item.price}/-</span> 
           </Avatar>
         }
+         
+      
         action={
           <IconButton aria-label="settings">
           
@@ -172,12 +195,14 @@ const FoodCard=({item,ind,foodDet,count})=>{
         title={item.foodTitle}
         
       />
+      
       {item.imageUrl &&
       <CardMedia
         onClick={()=>foodRoute(item._id)}
         className={classes.media}
         // image={item.image}
         image={item.imageUrl}
+        
         
         
         // title={item.title}
@@ -270,6 +295,7 @@ const FoodCard=({item,ind,foodDet,count})=>{
 
           />
         </Badge>
+        
       
 </CardActions>      
     </Card>

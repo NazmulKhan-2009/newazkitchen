@@ -115,9 +115,9 @@ function App(){
             <PurchaseHistory/>
           </PrivateRoute> 
 
-          <PrivateRoute exact path="/foodspecification/:id">
+          <Route exact path="/foodspecification/:id">
             <FoodSpecification/>
-          </PrivateRoute>
+          </Route>
 
 
         <Route exact path="*" component={NotFound} /> 

@@ -9,7 +9,7 @@
 .login_style
 {
 	position: relative;
-	min-height: 100vh;
+	/* min-height: 100vh; */
 	/* background: #557085; */
 	display: flex;
 	padding: 20px;
@@ -261,3 +261,20 @@ border: none;
  cursor:pointer;
  
 }
+
+/* !login page on  event  */
+
+
+/* .login_style::before{
+	content:"";
+	position: absolute;
+	background-color: black;
+	width:800px;
+	height:450px;
+	opacity: 0.2;
+	z-index: 100;
+} */
+
+/* .loading_style_{
+	display:none;
+} */

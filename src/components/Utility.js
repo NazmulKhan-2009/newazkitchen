@@ -3,10 +3,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles, styled } from '@material-ui/core/styles';
 
 import SearchIcon from '@material-ui/icons/Search';
-
+// import logo2 from '../../../../images/logo/logo-2.png'
+import logo2 from '../images/logo/logo-2.png'
+import Loader_style from './Utility.module.css'
+// import StarsRating from 'stars-rating'
+import StarRatings from 'react-star-ratings';
 const useStyles = makeStyles((theme) => ({
   
   search: {
@@ -82,4 +86,50 @@ const searchKey=(e)=>{
       </AppBar>
    
   );
+}
+
+
+export const CustomizeLoader=()=>{
+
+
+  return(
+    <div className={Loader_style.container}>
+      <img src={logo2} alt="" /> 
+
+    </div>
+  )
+
+}
+
+
+
+export const StarRated=({rating})=>{
+  return (
+    <StarRatings
+      rating={rating?rating:0}
+      starDimension="15px"
+      starSpacing="2px"
+      starRatedColor='red'
+    />
+  );;
+  
+  
+  
+}
+
+export const StarMarking=({changeRating,rating})=>{
+
+  return(
+
+  <StarRatings
+          // rating={rating}
+          starRatedColor="red"
+          changeRating={changeRating}
+          numberOfStars={5}
+          name='rating'
+          starDimension="30px"
+          starSpacing="3px"
+
+        />
+  )
 }

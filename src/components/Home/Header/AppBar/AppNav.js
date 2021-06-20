@@ -18,7 +18,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Alert from '@material-ui/lab/Alert';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../../../App';
 import './AppNav.css';
 import logo2 from '../../../../images/logo/logo-2.png'
@@ -115,7 +115,12 @@ const AppNav=({admin})=>{
   const {cartItem, setCartItem,loginInfo, setLoginInfo,isAdmin}=useContext(UserContext)
   // const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
   // const [adminAccess, setAdminAccess]=useState(false)
- 
+  const history= useHistory()
+
+  //Account Circle to move dashboard
+  const privateAccess=(routeAccess)=>{
+    routeAccess==="login" ? history.push('/login') : history.push('dashboard')
+  }
 
   // let accessBy='user'
   const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
@@ -157,6 +162,8 @@ console.log(admin)
     // sessionStorage.removeItem('userName')
     sessionStorage.removeItem('userInfo')
     sessionStorage.removeItem('isAdmin')
+    history.push('/')
+
 
   }
 
@@ -192,8 +199,8 @@ console.log(admin)
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}><DashboardIcon/> DashBoard</MenuItem>
-      <MenuItem onClick={handleMenuClose}><AssignmentIndIcon/> Log In</MenuItem>
+      <MenuItem onClick={handleMenuClose}><DashboardIcon onClick={()=>privateAccess("dashboard")}/> DashBoard</MenuItem>
+      <MenuItem onClick={handleMenuClose}><AssignmentIndIcon onClick={()=>privateAccess("login")}/> Log In</MenuItem>
     </Menu>
   );
 
@@ -285,7 +292,7 @@ console.log(admin)
           
 
           
-          <div className={classes.search}>
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -300,6 +307,10 @@ console.log(admin)
               inputProps={{ 'aria-label': 'search' }}
             />
             
+          </div> */}
+
+          <div className="brand">
+            <h2>Newaz Kitchen</h2>
           </div>
            <p>{loginInfo.data && loginInfo.data.user_name || !loginInfo.data && sessionStorage.getItem('userName')}</p>
           <div className={classes.grow} />
@@ -352,7 +363,7 @@ console.log(admin)
                 Login
               </Link>
               :
-              <span style={{textDecoration:"none"}} onClick={handleLogout}>
+              <span style={{textDecoration:"none",cursor:"pointer"}} onClick={handleLogout}>
                 Log Out
               </span>
               
@@ -425,7 +436,7 @@ console.log(admin)
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle/>
             </IconButton>
             
           </div>
