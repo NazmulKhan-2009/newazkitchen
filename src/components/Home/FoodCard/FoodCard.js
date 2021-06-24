@@ -78,14 +78,26 @@ const FoodCard=({item,ind,foodDet,count,size,dispRating})=>{
 
 //  console.log(item.reviews.reduce((pv,cv)=>pv.rate+cv.rate))
 // const review=foodDet.map(item=>item.reviews)
-// console.log(review)
+console.log(item)
 
 
 let avgRate=''
+const totalRatedLen=item.reviews.filter(mark=>mark.rate>0)
+console.log(totalRatedLen)
 if(item.reviews.length>0){
-  const total=item?.reviews.reduce((pv,cv)=>pv.rate+cv.rate)
-  avgRate=total/item.reviews.length
-  console.log(avgRate)
+  // console.log(item.reviews.map(mark=>mark.rate))
+  const totRate=item.reviews.map(mark=>mark.rate)
+  const tot=totRate.reduce((p,c)=>p+c)
+  // console.log(tot/item.reviews.length)
+  // avgRate=tot/item.reviews.length
+  avgRate=tot/totalRatedLen.length
+
+
+  
+  // const total=item.reviews.reduce((pv,cv)=>pv.rate+cv.rate)
+  // avgRate=total/item.reviews.length
+  // console.log(avgRate)
+  // console.log(total)
 }
 
 

@@ -96,7 +96,7 @@ const changeRating=( newRating, name )=> {
    
 
    const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
-   const isReviewed=foodInfo.reviews?.find(user=>user.email===userInfo.userEmail)
+   const isReviewed=foodInfo.reviews?.find(user=>user?.email===userInfo?.userEmail)
    console.log(isReviewed)
 
 
@@ -179,7 +179,7 @@ const changeRating=( newRating, name )=> {
             </div> */}
 
             <Grid item lg={6}>
-                <Comments/>
+                <Comments comment={foodInfo.reviews} handleRating={handleRating}/>
             </Grid>
 
 

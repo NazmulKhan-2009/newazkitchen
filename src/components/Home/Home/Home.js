@@ -1,10 +1,8 @@
 import React from 'react';
 import ContactUs from '../../ContactUs/ContactUs';
-
-
-
 import Food from '../FoodCard/Food/Food';
 import Header from '../Header/Header';
+import OurService from '../OurService/OurService';
 
 
 const Home = () => {
@@ -12,6 +10,7 @@ const Home = () => {
   <>
   <Header/>
   <Food/>
+  <OurService/>
   <ContactUs/>
   
  

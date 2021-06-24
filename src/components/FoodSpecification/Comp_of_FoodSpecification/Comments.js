@@ -26,6 +26,7 @@ import Icon from '@material-ui/core/Icon';
 import { useState } from 'react';
 import { SettingsInputCompositeOutlined } from '@material-ui/icons';
 import { deepOrange} from '@material-ui/core/colors'
+import CommentPass from './CommentPass';
 
 const messages = [
   {
@@ -130,16 +131,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Comments() {
+export default function Comments({comment,handleRating}) {
+  console.log(comment?.filter(item=>item.comment!==null?item.comment:null).map(item=>item.comment))
   const classes = useStyles();
 
-  const [comments, setComments]=useState('')
+  const [comments, setComments]=useState({})
 
   const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
 
 
 const handleInput=(e)=>{
-  setComments(e.target.value)
+  setComments({...comments,[e.target.name]:e.target.value})
 }
 
 const submitComment=()=>{
@@ -153,28 +155,37 @@ const submitComment=()=>{
 
 
   return (
-    <React.Fragment>
+    <div>
       {/* <CssBaseline /> */}
       <Paper square className="cont_comments">
         <Typography className={classes.text} variant="h5" gutterBottom>
           Comments
         </Typography>
-        <List className={classes.list}>
-          {messages.map(({ id, primary, secondary, person }) => (
-            <React.Fragment key={id}>
-              {id === 1 && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
-              {id === 3 && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
-              <ListItem button>
-                <ListItemAvatar>
-                  <Avatar alt="Profile Picture" src={person} />
-                </ListItemAvatar>
-                <ListItemText primary={primary} secondary={secondary} />
-              </ListItem>
-            </React.Fragment>
-          ))}
 
+      {comment?.length>0 ? <List className={classes.list}>
+        {/* {messages.map(({ id, primary, secondary, person }) => ( */}
+          {comment?.reverse().filter(item=>item.comment!==null?item.comment:null).map((item,ind)=>(
+          <div key={Math.random()}>
           
-        </List>
+            {/* {item.date === new Date().toDateString()  && <ListSubheader className={classes.subheader}>Today</ListSubheader>}
+            {item.date === new Date((new Date()).valueOf() - 1000*60*60*24).toDateString() && <ListSubheader className={classes.subheader}>Yesterday</ListSubheader>}
+            {item.date === new Date((new Date()).valueOf() - 1000*60*60*48).toDateString() && <ListSubheader className={classes.subheader}>{new Date((new Date()).valueOf() - 1000*60*60*48).toDateString()}</ListSubheader>} */}
+
+            <em style={{color:'whitesmoke',fontSize:"10px",padding:'20px'}}>{item.date}</em>
+            <ListItem button>
+            
+              <ListItemAvatar>
+                {/* <Avatar src={item.email[0]} alt={item.email} /> */}
+                <Avatar src={item.email[0]}  />
+              </ListItemAvatar>
+              <ListItemText primary={item.email} secondary={item.comment} />
+            </ListItem>
+            {console.log('render')}
+          </div>
+        ))}
+
+        
+      </List>:<span style={{color:'tomato',padding:'20px'}}>please comment bellow</span> }
 
           
         
@@ -184,22 +195,9 @@ const submitComment=()=>{
           </Fab> */}
 
           
-
-
-          <div >
-            <Grid  container spacing={2} alignItems="center" flexwrap="nowrap" >
-              <Grid item lg={1} xs={1} >
-                {/* <AccountCircle className="comment_icon"/> */}
-                <Avatar alt="Profile Picture" className={userInfo?.userEmail? classes.active_avatar:classes.small} src={userInfo?.photo} >{userInfo?.userEmail[0]}</Avatar>
-              </Grid>
-              <Grid item className="inp" lg={9} xs={9}>
-                <TextField id="input-with-icon-grid" label="Write your comment" onChange={handleInput}/>  
-              </Grid>
-              <Grid item lg={1} xs={1}  className="comment_icon">
-                <SendIcon onClick={submitComment} className="comment_icon"/>
-              </Grid>
-            </Grid>
-        </div>
+          {/* //!replace comments sectuin */}
+          <CommentPass handleRating={handleRating}/>
+          
 
       
       {/* <AppBar position="fixed" color="primary" className={classes.appBar}>
@@ -228,6 +226,6 @@ const submitComment=()=>{
             foodId={foodId}
             /> */}
 
-    </React.Fragment>
+    </div>
   );
 }
