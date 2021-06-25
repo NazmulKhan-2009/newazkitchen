@@ -22,6 +22,7 @@ const submitComment=(e)=>{
   e.preventDefault()
  if(userInfo){
      console.log({...comments,email:userInfo.userEmail})
+     handleRating({foodId:foodId.id,rating_email:userInfo.userEmail,...comments})
  }else{
    // ratingReview({foodId:foodId.id,...comments})
    handleRating({foodId:foodId.id,...comments})

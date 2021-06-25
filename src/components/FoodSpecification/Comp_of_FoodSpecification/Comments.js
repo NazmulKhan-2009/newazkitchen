@@ -152,7 +152,7 @@ const submitComment=()=>{
   }
   console.log(comments)
 }
-
+const unknown="uk"
 
   return (
     <div>
@@ -175,8 +175,8 @@ const submitComment=()=>{
             <ListItem button>
             
               <ListItemAvatar>
-                {/* <Avatar src={item.email[0]} alt={item.email} /> */}
-                <Avatar src={item.email[0]}  />
+                <Avatar src={item.email!==null?item.email[0]:"https://images.clipartlogo.com/files/istock/previews/9420/94202953-male-unknown-user-social-icon-isolated-vector-image.jpg"} alt={item.email!==null && item.email[0]} />
+                {/* <Avatar src={item.email[0]}  /> */}
               </ListItemAvatar>
               <ListItemText primary={item.email} secondary={item.comment} />
             </ListItem>
