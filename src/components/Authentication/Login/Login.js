@@ -326,11 +326,11 @@ const handleSignOut=()=>{
          <div className="formBx">
             <form onSubmit={handleSubmit}>
                 <h2>Create an account</h2>
-                <input type="text" name="user_name" placeholder="Username"  onChange={handleInput} value={userInfo.user_name || ""}/>
-                <input type="email" name="user_email" placeholder="Email Address" onChange={handleInput} value={userInfo.user_email || ""}/>
-                <input type="text" name="user_phone" placeholder="Phone No" onChange={handleInput} value={userInfo.user_phone || ""}/>
-                <input type="password" name="user_password" placeholder="Create Password" onChange={handleInput} value={userInfo.user_password || ""}/>
-                <input type="password" name="confirm_password" placeholder="Confirm Password" onChange={handleInput} value={userInfo.confirm_password || ""}/>
+                <input required type="text" name="user_name" placeholder="Username"  onChange={handleInput} value={userInfo.user_name || ""}/>
+                <input required type="email" name="user_email" placeholder="Email Address" onChange={handleInput} value={userInfo.user_email || ""}/>
+                <input required type="text" name="user_phone" placeholder="Phone No" onChange={handleInput} value={userInfo.user_phone || ""}/>
+                <input required type="password" name="user_password" placeholder="Create Password" onChange={handleInput} value={userInfo.user_password || ""}/>
+                <input required type="password" name="confirm_password" placeholder="Confirm Password" onChange={handleInput} value={userInfo.confirm_password || ""}/>
 
 
                     {/* filebase-64 start of coding */}

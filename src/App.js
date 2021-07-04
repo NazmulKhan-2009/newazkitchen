@@ -25,6 +25,8 @@ import PracticeComp from './PracticeCom/PracticeComp';
 import './App.css';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import FoodSpecification from './components/FoodSpecification/FoodSpecification';
+import VerifiedUser from './components/Authentication/VerifiedUser/VerifiedUser'
+
 
 export const UserContext=createContext()
 
@@ -117,6 +119,10 @@ function App(){
 
           <Route exact path="/foodspecification/:id">
             <FoodSpecification/>
+          </Route>
+
+          <Route exact path="/verified/:user">
+            <VerifiedUser/>
           </Route>
 
 
