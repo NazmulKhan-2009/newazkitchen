@@ -171,3 +171,37 @@ try{
   } ;
 
 }  
+
+
+// dashboard management with database
+
+export const imageUpload=async(image,type)=>{
+
+  if(type==='profilePhoto'){
+    try{
+      const response=await axios.patch(
+        `http://localhost:5000/api/user/alluser`,image) 
+        return response
+      // console.log(response.data.success)
+      
+    }catch(e){
+     console.log(`add Food error ${e}`)
+    } ;
+
+  }
+  if(type==='getProfile'){
+    try{
+      const response=await axios.get(
+        `http://localhost:5000/api/user/alluser/${image}`) 
+        return response
+      // console.log(response.data.success)
+      
+    }catch(e){
+     console.log(`add Food error ${e}`)
+    } ;
+
+  }
+  
+
+  
+}

@@ -134,8 +134,8 @@ function Row({item}) {
 export default function OrderDataHistory({orderHistoryData}) {
  //todo console.log(orderHistoryData)
   return (
-   <Grid container justify='center' >
-   <Grid  item md={10} xs={11}>
+   <Grid container justify='space-around' >
+   <Grid  item md={11} xs={11} >
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table" >
         <TableHead>
@@ -144,7 +144,7 @@ export default function OrderDataHistory({orderHistoryData}) {
             <TableCell align="center" colSpan={2} className="table_cell" >Order Id</TableCell>
             <TableCell align="center" className="table_cell" >Total Price</TableCell>
             <TableCell align="center" className="table_cell" >Payment Method</TableCell>
-            <TableCell align="center" className="table_cell" >Contact</TableCell>
+            <TableCell align="center"  className="table_cell" >Contact</TableCell>
             <TableCell align="center" className="table_cell" >Status</TableCell>
           </TableRow>
         </TableHead>

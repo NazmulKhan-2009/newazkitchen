@@ -1,0 +1,30 @@
+.box_container_cus{
+ display:flex;
+ flex-wrap: wrap;
+ justify-content:space-around;
+ padding:40px;
+}
+
+.dash_box_cus{
+ width:300px;
+ display:flex;
+ flex-direction:column;
+ padding:35px;
+ margin:10px;
+ position:relative;
+ margin-top:30px;
+ border-radius:20px;
+ text-align:center;
+ color:whitesmoke;
+}
+
+.icon_custom{
+ position:absolute;
+ top:-22px;
+ left:42% ;
+ background:black ;
+ padding:5px ;
+ border-radius:20% ;
+ border:3px solid white ;
+}
+

@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import axios from 'axios';
-import React, { createContext, useState ,useMemo, useEffect} from 'react';
+import React, { createContext, useState ,useMemo, useEffect, useContext} from 'react';
+import { UserContext } from '../App';
 import { orderedData } from '../components/DataManagement';
 import ChildrenComp from './ChildrenComp/ChildrenComp';
 import ClassComPrac from './ClassComPrac/ClassCompPrac';
@@ -18,8 +19,10 @@ const fetchData=(use)=>{
 }
 const PracticeComp = () => {
  
-  // const[dist,setDist]=useState(<h2>Canada Usa</h2>)
-  const[dist,setDist]=useState(false)
+  const[dist,setDist]=useState(<h2>Canada Usa</h2>)
+  
+  const {count, setCount}=useContext(UserContext)
+
   const ele=<h1 key="2" style={{color:'red'}} className="do" >Welcome Cumilla</h1>
   // console.log(ele)
   // console.log(<PracticeProvider/>)
@@ -44,7 +47,7 @@ const PracticeComp = () => {
     }
 
   ]
-  const [count, setCount]=useState(0)
+  // const [count, setCount]=useState(0)
   const [orderInfo, setOrderInfo]=useState([])
   const [time, setTime]=useState(new Date().toLocaleTimeString())
   
@@ -124,6 +127,8 @@ const email="ustciiucbracbank@gmail.com";
   <PracticeProvider
   color={{color:"red"}}
   >
+
+  <h1 style={{color:'indigo'}}>Count context {}</h1>
 
   <h1>bye {MyCity()}</h1>
   <h1>hi <MyCity/></h1>

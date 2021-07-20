@@ -23,6 +23,8 @@ import { UserContext } from '../../../../App';
 import './AppNav.css';
 import logo2 from '../../../../images/logo/logo-2.png'
 import { Link as SmoothLink} from 'react-scroll'
+import Switchh from '@material-ui/core/Switch';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -112,7 +114,7 @@ const AppNav=({admin})=>{
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   // const [cartInfo, setCartInfo]=useState(0)
-  const {cartItem, setCartItem,loginInfo, setLoginInfo,isAdmin}=useContext(UserContext)
+  const {cartItem, setCartItem,loginInfo, setLoginInfo,isAdmin,darkMode,screenMode,current_screen_mode,cartOpen, setCartOpen}=useContext(UserContext)
   // const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
   // const [adminAccess, setAdminAccess]=useState(false)
   const history= useHistory()
@@ -124,7 +126,7 @@ const AppNav=({admin})=>{
 
   // let accessBy='user'
   const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
-  console.log(userInfo)
+  // console.log(userInfo)
 
 
   // if(!userInfo===null){
@@ -135,7 +137,7 @@ const AppNav=({admin})=>{
   // }
   
 
-  console.log(loginInfo)
+  // console.log(loginInfo)
   // let isAdmin=false
 
   // if(userInfo===null){
@@ -153,7 +155,7 @@ const AppNav=({admin})=>{
     
   //   setCartInfo(cartGet.length)
   // },cartInfo)
-console.log(admin)
+// console.log(admin)
  
 
   const handleLogout=()=>{
@@ -312,7 +314,7 @@ console.log(admin)
           <div className="brand">
             <h2>Newaz Kitchen</h2>
           </div>
-           <p>{loginInfo.data && loginInfo.data.user_name || !loginInfo.data && sessionStorage.getItem('userName')}</p>
+           {/* <p>{loginInfo.data && loginInfo.data.user_name || !loginInfo.data && sessionStorage.getItem('userName')}</p> */}
           <div className={classes.grow} />
          
           
@@ -343,19 +345,19 @@ console.log(admin)
               }
               
 
-              <Link to="/practicecomp" style={{textDecoration:"none",fontWeight:'bold'}}>
+              <Link to="/practicecomp" className='link_style'>
                 Practice
               </Link>
-              <Link to="/" style={{textDecoration:"none"}}>
+              <Link to="/" className='link_style'>
                 Home
               </Link>
-              <Link to="/gallery" style={{textDecoration:"none"}}>
+              <Link to="/gallery" className='link_style'>
                 Gallery
               </Link>
               
-              <SmoothLink  to="contact" smooth={true} duration={800}>Contact</SmoothLink>
+              <SmoothLink className='link_style' to="contact" smooth={true} duration={800}>Contact</SmoothLink>
               
-              <Link to="/dashboard" style={{textDecoration:"none"}}>
+              <Link to="/dashboard" className='link_style'>
                 Dashboard
               </Link>
 
@@ -363,11 +365,13 @@ console.log(admin)
                 Login
               </Link>
               :
-              <span style={{textDecoration:"none",cursor:"pointer"}} onClick={handleLogout}>
+              <span style={{textDecoration:"none",cursor:"pointer", color:'#FD5C63'}} onClick={handleLogout}>
                 Log Out
               </span>
               
               }
+{/* {console.log(darkMode)} */}
+              <Switchh checked={darkMode} onChange={()=>screenMode(!darkMode)}></Switchh>
 
 
             </Typography>
@@ -384,6 +388,12 @@ console.log(admin)
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={0} color="secondary">
                 <NotificationsIcon />
+              </Badge>
+            </IconButton>
+
+            <IconButton onClick={()=>setCartOpen(!cartOpen)} aria-label="show 17 new notifications" color="inherit">
+              <Badge badgeContent={cartItem && cartItem.length} color="secondary">
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
             

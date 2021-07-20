@@ -2,6 +2,7 @@ import { Grid } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../App';
 import WaitingOrder from '../../Cart/Cart/WaitingOrder';
+import Sidebar from '../../Dashboard/UserDashboard/DashboardComponents/Sidebar/Sidebar';
 import { orderHistory } from '../../DataManagement';
 import Loader from './Loader';
 import OrderDataHistory from './OrderedDataHistory/OrderDataHistory';
@@ -50,8 +51,10 @@ const token=sessionStorage.getItem('token')
  
 
  return (
-  <>
+  <Sidebar>
+  
    
+ 
 
    {orderHistoryData?.length>0 ?
    <Grid>
@@ -77,7 +80,7 @@ const token=sessionStorage.getItem('token')
    </>
    }
    
-  </>
+  </Sidebar>
  );
 };
 

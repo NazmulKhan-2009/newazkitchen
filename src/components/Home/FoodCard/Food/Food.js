@@ -29,7 +29,7 @@ const Food = () => {
   const [foodDetails, setFoodDetails]=useState([])
 
 
-  console.log(foodDetails.map(item=>item.reviews))
+  // console.log(foodDetails.map(item=>item.reviews))
   
 
   const classes = useStyles();

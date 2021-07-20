@@ -185,7 +185,7 @@ const handleSubmit=(e)=>{
 
 //sign in function
 
-const successSign=(loginData,token,loginByName,loginByEmail,who,img,bool)=>{
+const successSign=(loginData,token,loginByName,loginByEmail,photo,who,img,bool)=>{
     setLoginInfo(loginData)
     sessionStorage.setItem('token',token)
     bool ? sessionStorage.setItem('isAdmin',bool):sessionStorage.setItem(null,null)
@@ -218,6 +218,7 @@ const handleSignIn=(e)=>{
                         res.data.token,
                         res.data.data.user_name,
                         res.data.data.user_email,
+                        res.data.data.userImage,
                         res.data.status[0],
                         null
                         
@@ -234,6 +235,7 @@ const handleSignIn=(e)=>{
                 res.data.token,
                 res.data.data.admin_name,
                 res.data.data.admin_email,
+                res.data.data.admin_imageUrl,
                 res.data.status[0],
                 res.data.data.admin_imageUrl,
                 true

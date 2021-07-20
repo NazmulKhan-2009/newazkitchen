@@ -27,6 +27,14 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import FoodSpecification from './components/FoodSpecification/FoodSpecification';
 import VerifiedUser from './components/Authentication/VerifiedUser/VerifiedUser'
 
+import { Grid, Typography,Button,Paper } from "@material-ui/core";
+import {ThemeProvider,createMuiTheme} from "@material-ui/core/styles"
+import Switchh from '@material-ui/core/Switch';
+import { info } from './PracticeCom/CousinComp/CousinComp';
+import CartDrawer from './components/Cart/Cart/CartDrawer/CartDrawer';
+import MyFavorites from './components/Dashboard/UserDashboard/DashboardComponents/MyFavorites/MyFavorites';
+import MyOrder from './components/Dashboard/UserDashboard/DashboardComponents/MyOrder/MyOrder';
+import MyEvents from './components/Dashboard/UserDashboard/DashboardComponents/MyEvents/MyEvents';
 
 export const UserContext=createContext()
 
@@ -38,13 +46,60 @@ function App(){
   const [loginInfo, setLoginInfo]=useState({})
   const [admin, setAdmin]=useState("")
   const [isAdmin,setIsAdmin]=useState(false)
+  const [count, setCount]=useState(0)
   
+  
+  // const current_screen_mode=localStorage.getItem('dark_mode')
+  // console.log(current_screen_mode)
+
+  // ! DARK/LIGHT STORAGE NOT DONE YET 
+  const [darkMode,setDarkMode]=useState(false)
+
+  //! Cart Drawer
+  const [cartOpen, setCartOpen] = useState(false);
+
+  
+  // console.log(darkMode)
+
+  const theme=createMuiTheme({
+    palette:{
+     type: darkMode ? "dark":"light"
+    }
+   })
+
+
 
   useEffect(()=>{
+
     const cartGet=JSON.parse(localStorage.getItem('cartInfo'))
     setCartItem(cartGet)
     // console.log(cartGet)
   },[])
+
+
+  
+
+
+
+
+   
+  
+       
+       
+  
+    
+
+   
+  
+
+   const screenMode=(type)=>{
+    localStorage.setItem('dark_mode', type)
+      setDarkMode(type)
+    
+    
+   }
+
+   
 
   // const accessAdmin=JSON.parse(sessionStorage.getItem('userInfo'))
 
@@ -59,6 +114,11 @@ function App(){
   const cusInfo=true  
 
   return (
+
+
+    <ThemeProvider theme={theme}>
+  {/* <Switchh checked={darkMode} onChange={()=>setDarkMode(!darkMode)}></Switchh> */}
+  <Paper style={{minHeight:"100vh"}} >
     <UserContext.Provider
     value={{
       cartItem,
@@ -68,7 +128,13 @@ function App(){
       loginInfo,
       setLoginInfo,
       isAdmin,
-      setIsAdmin
+      setIsAdmin,
+      darkMode,
+      screenMode,
+      cartOpen, 
+      setCartOpen,
+      count, setCount
+      
 
       
     }}
@@ -78,8 +144,11 @@ function App(){
     >
     
     <Router>
-    
-     <AppNav />
+    {/* <CartDrawer>
+      <AppNav />
+    </CartDrawer> */}
+    {/* <AppNav /> */}
+     
          
       <Switch>
         <Route exact path="/" component={Home} />
@@ -113,7 +182,7 @@ function App(){
           </PrivateRoute> 
         
           {/* <Route exact path="/purchaseHistory" component={PurchaseHistory} />  */}
-          <PrivateRoute exact path="/purchasehistory">
+          <PrivateRoute exact path="/dashboard-purchasehistory">
             <PurchaseHistory/>
           </PrivateRoute> 
 
@@ -125,6 +194,19 @@ function App(){
             <VerifiedUser/>
           </Route>
 
+          <Route exact path="/dashboard-myfavorites">
+            <MyFavorites/>
+          </Route>
+
+          <Route exact path="/dashboard-myevents">
+            <MyEvents/>
+          </Route>
+
+          
+          {/* <Route exact path="/myorder">
+            <MyOrder/>
+          </Route> */}
+
 
         <Route exact path="*" component={NotFound} /> 
       </Switch>
@@ -132,6 +214,15 @@ function App(){
     </Router>
 
     </UserContext.Provider>
+
+    </Paper>
+
+
+  
+
+  
+
+</ThemeProvider>
     
   );
 }

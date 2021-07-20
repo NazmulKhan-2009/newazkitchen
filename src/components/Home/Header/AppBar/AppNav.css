@@ -12,3 +12,10 @@
  font-family: 'MuseoModerno', cursive;
  text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
 }
+.link_style{
+ color:#FD5C63;
+ font-family: 'MuseoModerno', cursive;
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ text-decoration:none;
+
+}

@@ -73,17 +73,20 @@ const FoodCard=({item,ind,foodDet,count,size,dispRating})=>{
 
  const [foodIdCount,setFoodIdCount]=useState({id:"",count:0})
 
+ //!Drawer Content
+ const {cartOpen, setCartOpen}=useContext(UserContext)
+
  let history=useHistory()
 
 
 //  console.log(item.reviews.reduce((pv,cv)=>pv.rate+cv.rate))
 // const review=foodDet.map(item=>item.reviews)
-console.log(item)
+// console.log(item)
 
 
 let avgRate=''
 const totalRatedLen=item.reviews.filter(mark=>mark.rate>0)
-console.log(totalRatedLen)
+// console.log(totalRatedLen)
 if(item.reviews.length>0){
   // console.log(item.reviews.map(mark=>mark.rate))
   const totRate=item.reviews.map(mark=>mark.rate)
@@ -158,6 +161,8 @@ if(item.reviews.length>0){
     setCartItem(JSON.parse(localStorage.getItem('cartInfo')))
   // setCartCount(0)
   setFoodIdCount({count:0})
+  //! drawer try
+  setCartOpen(!cartOpen)
   }
   }
 
