@@ -32,7 +32,7 @@ const {orderInfo}=useContext(UserContext)
           color="primary" 
           className="MuiButton-outlinedSizeSmall" 
           // onClick={()=>history.push("/dashboard/purchasehistory")}
-          onClick={()=>history.push("/purchasehistory")}
+          onClick={()=>history.push("/dashboard-purchasehistory")}
         >  
           Go to Purchase History
         </Button>

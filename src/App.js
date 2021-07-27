@@ -35,7 +35,8 @@ import CartDrawer from './components/Cart/Cart/CartDrawer/CartDrawer';
 import MyFavorites from './components/Dashboard/UserDashboard/DashboardComponents/MyFavorites/MyFavorites';
 import MyOrder from './components/Dashboard/UserDashboard/DashboardComponents/MyOrder/MyOrder';
 import MyEvents from './components/Dashboard/UserDashboard/DashboardComponents/MyEvents/MyEvents';
-
+import axios from 'axios';
+import { orderHistory } from './components/DataManagement';
 export const UserContext=createContext()
 
 // const cartGet=JSON.parse(localStorage.getItem('cartInfo'))
@@ -47,8 +48,16 @@ function App(){
   const [admin, setAdmin]=useState("")
   const [isAdmin,setIsAdmin]=useState(false)
   const [count, setCount]=useState(0)
+  const [profilePhoto, setProfilePhoto]=useState('https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png')
   
-  
+  const [foodDetails, setFoodDetails]=useState([])
+  const [itemWise, setItemWise]=useState([]) //!not in previous
+  const [foodSync, setFoodSync]=useState("") //!not in previous
+  //! sync order
+  const [rating, setRating]=useState(0)//!bring from food specification-28
+  const [dispRating, setDispRating]=useState(false)//!bring from food specification-29
+  const [orderHistoryData, setOrderHistoryData]=useState([])
+  const [orderSync, setOrderSync]=useState('') 
   // const current_screen_mode=localStorage.getItem('dark_mode')
   // console.log(current_screen_mode)
 
@@ -78,11 +87,46 @@ function App(){
 
 
   
+//! not in previous 
+  useEffect(()=>{
 
-
-
-
+    const serverFoodList=async()=>{
+       try{
+         const foods=await axios.get("http://localhost:5000/api/food/fooddetail")
+         // setItemWise(foods.data.slice(90,105))
+         setFoodDetails(foods.data)
+         setItemWise(foods.data.reverse())
+         
+         
+        }catch(e){
+          console.log(`error on getting Food List from server ${e}`)
+         } ;
+       
+     }
+     serverFoodList()
+ 
+     
    
+   },[foodSync])
+ 
+
+console.log(loginInfo)
+   //!REFACTOR FROM PURCHASE HISTORY
+console.log(orderHistoryData)   
+   useEffect(()=>{
+    const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+    const email=userInfo?.userEmail
+    const token=sessionStorage.getItem('token')
+
+    const orderDataHistory =async()=>{
+     const data=await orderHistory(email,token)
+     setOrderHistoryData(data)
+     console.log(data)
+     
+    }
+     orderDataHistory()
+   },[loginInfo,orderSync])
+
   
        
        
@@ -133,7 +177,14 @@ function App(){
       screenMode,
       cartOpen, 
       setCartOpen,
-      count, setCount
+      count, setCount,
+      profilePhoto, setProfilePhoto,
+      foodDetails, setFoodDetails,
+      itemWise, setItemWise,
+      foodSync, setFoodSync,rating, 
+      setRating,dispRating, setDispRating,
+      orderHistoryData, setOrderHistoryData,
+      setOrderSync
       
 
       

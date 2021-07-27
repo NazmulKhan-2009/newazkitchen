@@ -14,6 +14,9 @@ import LoadingCart from '../../../Common/NotFound/LoadingCard';
 import SearchIcon from '@material-ui/icons/Search';
 import { CustomizeLoader, SearchItem } from '../../../Utility';
 import { searchFood } from '../../../DataManagement';
+import { useContext } from 'react';
+import { UserContext } from '../../../../App';
+import { useMemo } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,12 +28,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Food = () => {
   const [sliceFood, setSliceFood]=useState(8)
-  const [itemWise, setItemWise]=useState([])
-  const [foodDetails, setFoodDetails]=useState([])
+  // const [itemWise, setItemWise]=useState([]) //!previous
 
 
+  //! without context
+  // const [foodDetails, setFoodDetails]=useState([])
+
+  //! with context
+  const {foodDetails, setFoodDetails,itemWise, setItemWise}=useContext(UserContext)
   // console.log(foodDetails.map(item=>item.reviews))
-  
+  // const [dataLoaded,setDataLoaded]=useState(true)
 
   const classes = useStyles();
 
@@ -43,25 +50,72 @@ const Food = () => {
 
   }
   
+ 
+
   // console.log(itemWise)
   //Food from Server
-  useEffect(()=>{
+  //!previous
+  // useEffect(()=>{
 
-    const serverFoodList=async()=>{
-      try{
-        const foods=await axios.get("http://localhost:5000/api/food/fooddetail")
-        // setItemWise(foods.data.slice(90,105))
-        setFoodDetails(foods.data)
-        setItemWise(foods.data)
+  //  const serverFoodList=async()=>{
+  //     try{
+  //       const foods=await axios.get("http://localhost:5000/api/food/fooddetail")
+  //       // setItemWise(foods.data.slice(90,105))
+  //       setFoodDetails(foods.data)
+  //       setItemWise(foods.data)
         
-       }catch(e){
-         console.log(`error on getting Food List from server ${e}`)
-        } ;
+        
+  //      }catch(e){
+  //        console.log(`error on getting Food List from server ${e}`)
+  //       } ;
       
-    }
-    serverFoodList()
+  //   }
+  //   serverFoodList()
+
+    
   
-  },[])
+  // },[])
+
+  //! try for data load once but not success
+  // useEffect(()=>{
+
+  //   if(dataLoaded===null){const serverFoodList=async()=>{
+  //     try{
+  //       const foods=await axios.get("http://localhost:5000/api/food/fooddetail")
+  //       // setItemWise(foods.data.slice(90,105))
+  //       setFoodDetails(foods.data)
+  //       setItemWise(foods.data)
+  //       sessionStorage.setItem('loaded', 'false');
+        
+  //      }catch(e){
+  //        console.log(`error on getting Food List from server ${e}`)
+  //       } ;
+      
+  //   }
+  //   serverFoodList()}
+
+    
+  
+  // },[])
+
+  // useMemo(()=>{
+
+  //   const serverFoodListing=async()=>{
+  //     try{
+  //       const foods=await axios.get("http://localhost:5000/api/food/fooddetail")
+  //       // setItemWise(foods.data.slice(90,105))
+  //       setFoodDetails(foods.data)
+  //       setItemWise(foods.data)
+        
+  //      }catch(e){
+  //        console.log(`error on getting Food List from server ${e}`)
+  //       } ;
+      
+  //   }
+  //   return serverFoodListing()
+  
+  // },[itemWise])
+
   const itemBtn=["all","baking",'frozen',"deshi","chineese"]
 
 //  const [btnColor,setBtnColor]= useState('primary')

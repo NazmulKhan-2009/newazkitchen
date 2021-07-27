@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Button, Fab, FormControl, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
@@ -17,6 +17,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Style from './DataUpdateForm.module.css'
 import OrderedInfo from '../OrderedInfo/OrderedInfo';
+import { UserContext } from '../../../../App';
 
 
 
@@ -54,6 +55,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
   const[fieldEnable,setFieldEnable]= useState({foodTitleField:true,descriptionField:true,priceField:true}) 
   const [changedOrderStatus,  setChangedOrderStatus]=useState('')
 
+  const {foodSync, setFoodSync}=useContext(UserContext)  //! not in previous
 
   console.log(formTitle)
   //!changing Oreder status 
@@ -100,6 +102,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
           if(response.data.data){
             setFoodInfo({})
             alert("Food successfully added")
+            setFoodSync(Math.random())
           }
        }catch(e){
          console.log(`add Food error ${e}`)

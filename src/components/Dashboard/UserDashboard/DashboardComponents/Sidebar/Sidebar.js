@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -24,6 +24,7 @@ import EventIcon from '@material-ui/icons/Event';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import YourProfile from '../YourProfile/YourProfile';
+import { UserContext } from '../../../../../App';
 
 
 const drawerWidth = 240;
@@ -71,12 +72,32 @@ const dashboardNav=[
 
 ]
 
+// console.log(window.location.pathname)
+
+
+
 
 export default function Sidebar(props) {
+
+
+
+
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const {setLoginInfo}=useContext(UserContext)
+
+  const history=useHistory()
+   //! log out expression
+   const logOut=()=>{
+    setLoginInfo({})
+    sessionStorage.removeItem('token')
+    // sessionStorage.removeItem('userName')
+    sessionStorage.removeItem('userInfo')
+    sessionStorage.removeItem('isAdmin')
+    history.push('/')
+  } 
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -85,7 +106,7 @@ export default function Sidebar(props) {
   const drawer = (
     <div style={{background:'indigo',height:'100vh'}}>
       <div className={classes.toolbar} />
-      <YourProfile/>
+      <YourProfile path={"/dashboard"}/>
       <Divider/>
       <List>
         {dashboardNav.map((item, index) => (
@@ -97,9 +118,9 @@ export default function Sidebar(props) {
           </ListItem>
         ))}
          <Divider/>
-         <ListItem  button>
-           <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-            <ListItemText primary="Log Out" />
+         <ListItem  button onClick={logOut} >
+           <ListItemIcon><ExitToAppIcon style={{color:'white'}}/></ListItemIcon>
+            <ListItemText primary="Log Out" style={{color:'white'}} />
 
             
           </ListItem>
@@ -109,6 +130,9 @@ export default function Sidebar(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
+
+
+ 
 
   return (
     <div className={classes.root}>

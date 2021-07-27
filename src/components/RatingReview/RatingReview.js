@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,10 +8,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { StarRated } from '../Utility';
 import { ratingReview } from '../DataManagement';
+import { UserContext } from '../../App';
 
 export default function RatingReview({display,handleClose,rating,foodId,rateChange,handleRating}) {
   // const [open, setOpen] = useState(false);
   const [inputValue, setInputValue]=useState({})
+  const {setRating,dispRating, setDispRating,setFoodSync}=useContext(UserContext)//!trying with context 
+ 
 
   
 console.log(rating, foodId)
@@ -41,6 +44,7 @@ handleRating(rateInfo)
  handleClose(false,1)
 //  rateChange(1)
 //  window.location.reload()
+setFoodSync(Math.random())
 
 }
   

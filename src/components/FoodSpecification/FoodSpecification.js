@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { foodDetails, ratingReview } from '../DataManagement';
 import FoodCard from '../Home/FoodCard/FoodCard';
@@ -14,16 +14,20 @@ import StarIcon from '@material-ui/icons/Star';
 import RatingReview from '../../components/RatingReview/RatingReview';
 import Comments from './Comp_of_FoodSpecification/Comments';
 import StarRatings from 'react-star-ratings';
+import { UserContext } from '../../App';
+import { NavLink } from 'react-router-dom';
 
 const FoodSpecification = () => {
 
+ const {rating, setRating,dispRating, setDispRating,setFoodSync}=useContext(UserContext)//!trying with context 
+    
  const foodId=useParams()
 
  const [foodInfo, setFoodInfo]=useState({})
 
  const [mark, setMark]=useState('')
- const [rating, setRating]=useState(0)
- const [dispRating, setDispRating]=useState(false)
+//  const [rating, setRating]=useState(0) //!move to context
+//  const [dispRating, setDispRating]=useState(false) //!move to context
 
 const [rateMark,setRateMark]=useState(1)
 
@@ -85,8 +89,9 @@ const changeRating=( newRating, name )=> {
     // this.setState({
     //   rating: newRating
     // });
-    setRating(newRating)
-    setDispRating(true)
+    setRating(newRating) 
+    setDispRating(true) 
+    setFoodSync(Math.random())
 
     
 
@@ -132,6 +137,7 @@ const changeRating=( newRating, name )=> {
 //   </Grid>
 
 <Grid container className="specific_food_cont">
+<NavLink to='/'>Home</NavLink>
         {
         foodInfo.reviews ? 
         <FoodCard item={foodInfo} size={{sm:6,lg:5}} dispRating={true}/>

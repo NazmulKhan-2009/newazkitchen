@@ -12,7 +12,8 @@ import OrderDataHistory from './OrderedDataHistory/OrderDataHistory';
 
 const PurchaseHistory = () => {
 
- const [orderHistoryData, setOrderHistoryData]=useState([])
+  const {orderHistoryData}=useContext(UserContext)
+//  const [orderHistoryData, setOrderHistoryData]=useState([]) //! REFACTOR TO APP.JS
  const {loginInfo}=useContext(UserContext)
  console.log(loginInfo)
 //  const [dataFound, setDataFound]=useState(false)
@@ -23,22 +24,24 @@ const PurchaseHistory = () => {
 //  const email="nazmulustc09@gmail.com"
 // const email=loginInfo.data.user_email
 
-const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
-const email=userInfo.userEmail
-const token=sessionStorage.getItem('token')
+
+//! REFACTOR TO APP.JS
+// const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+// const email=userInfo.userEmail
+// const token=sessionStorage.getItem('token')
 
 
   
 
-   useEffect(()=>{
-    const orderDataHistory =async()=>{
-     const data=await orderHistory(email,token)
-     setOrderHistoryData(data)
-     console.log(data)
+//    useEffect(()=>{
+//     const orderDataHistory =async()=>{
+//      const data=await orderHistory(email,token)
+//      setOrderHistoryData(data)
+//      console.log(data)
      
-    }
-     orderDataHistory()
-   },[])
+//     }
+//      orderDataHistory()
+//    },[])
 
    
   // if(orderHistoryData.length<1){

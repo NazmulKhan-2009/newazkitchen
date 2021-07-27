@@ -21,7 +21,7 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
 
   const [purchasedInfo,setPrchasedInfo]= useState({}) 
   //? const [orderInfo,setOrderInfo]= useState({}) 
-  const {orderInfo,setOrderInfo,loginInfo}=useContext(UserContext)
+  const {orderInfo,setOrderInfo,loginInfo,setFoodSync,setOrderSync}=useContext(UserContext)
 
   const [isDisable, setIsDisable]=useState(false)
 
@@ -79,9 +79,15 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
     // dbOrderedInfo(orderedDetails)
     setOrderInfo(orderedDetails)
      dialogInfo.purchaseDone(true)
+
+    //  setOrderSync(orderedDetails.length) //! bellow technique
+     setOrderSync(Math.random())
     }   
     setIsDisable(true)
     handleAgree(false,true)
+    // setOrderSync(Math.random())
+    
+
   
  }
 

@@ -83,7 +83,8 @@ const FoodCard=({item,ind,foodDet,count,size,dispRating})=>{
 // const review=foodDet.map(item=>item.reviews)
 // console.log(item)
 
-
+// console.log(item)
+// console.log("------>")
 let avgRate=''
 const totalRatedLen=item.reviews.filter(mark=>mark.rate>0)
 // console.log(totalRatedLen)
@@ -101,6 +102,9 @@ if(item.reviews.length>0){
   // avgRate=total/item.reviews.length
   // console.log(avgRate)
   // console.log(total)
+
+  //!avg rating DB
+
 }
 
 

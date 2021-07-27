@@ -44,11 +44,11 @@ export default function ContactUs() {
 						</ul>
 					</div>
 					<ul className="sci">
-						<li><Link><img src={facebook} alt=""/></Link></li>
-						<li><Link><img src={twitter} alt=""/></Link></li>
-						<li><Link><img src={instagram} alt="" /></Link></li>
-						<li><Link><img src={pinterest} alt="" /></Link></li>
-						<li><Link><img src={linkedIn} alt="" /></Link></li>
+						<li><Link to='#'><img src={facebook} alt=""/></Link></li>
+						<li><Link to='#'><img src={twitter} alt=""/></Link></li>
+						<li><Link to='#'><img src={instagram} alt="" /></Link></li>
+						<li><Link to='#'><img src={pinterest} alt="" /></Link></li>
+						<li><Link to='#'><img src={linkedIn} alt="" /></Link></li>
 					</ul>
 				</div>
 				<div className="contactForm">

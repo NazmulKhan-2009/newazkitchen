@@ -8,6 +8,8 @@ import FileBase64 from 'react-file-base64';
 import cus_style from './YourProfile.module.css'
 import { imageUpload } from '../../../../DataManagement';
 import { useEffect } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../../../../../App';
 // import Tooltip from '@material-ui/core/Tooltip';
 
 
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function YourProfile() {
+export default function YourProfile({path}) {
   const {upload_Button,file_base,img_conrol}=cus_style
 
   // const[file,setFile]= useState(null) //for file base64
@@ -38,13 +40,16 @@ export default function YourProfile() {
   // const [userInfo, setUserInfo]=useState(userData)
   const [userInfo, setUserInfo]=useState(userData)
   // const [dataLoad, setDataLoad]=useState(false)
-  const [profilePhoto, setProfilePhoto]=useState('https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png')
+  // const [profilePhoto, setProfilePhoto]=useState('https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png')
 
+  const {profilePhoto, setProfilePhoto}= useContext(UserContext)
 
   useEffect(() => {
     // setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')))
+   
     imageUpload(userInfo.userEmail,"getProfile")
     .then(res=>setProfilePhoto(res?.data.userImage))
+    
   }, [])
   
 

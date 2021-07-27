@@ -6,12 +6,13 @@ import axios from "axios"
 // import { CountUp } from 'use-count-up'
 import Sidebar from "./UserDashboard/DashboardComponents/Sidebar/Sidebar"
 import DashboardRoot from './UserDashboard/DashboardComponents/DashboardRoot/DashboardRoot';
+import { useEffect } from 'react';
 // import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 
 const Dashboard = () => {
-  const {loginInfo, setLoginInfo,setIsAdmin}=useContext(UserContext)
-  console.log(loginInfo)
+  const {loginInfo, setLoginInfo,setIsAdmin,orderHistoryData}=useContext(UserContext)
+  console.log(loginInfo.data?.order)
   const history=useHistory()
 
 const handleSignOut=()=>{
@@ -136,6 +137,13 @@ const {userName,accessAs}=JSON.parse(sessionStorage.getItem('userInfo'))
    
 // ]
 
+// useEffect(()=>{
+//   (async()=>{
+//     const response=await axios('')
+//   })()
+
+// },[])
+
  return (
 
   
@@ -156,7 +164,7 @@ const {userName,accessAs}=JSON.parse(sessionStorage.getItem('userInfo'))
          }
           </Grid> */}
 
-          <DashboardRoot/>
+          <DashboardRoot />
        
      </Sidebar>
   
