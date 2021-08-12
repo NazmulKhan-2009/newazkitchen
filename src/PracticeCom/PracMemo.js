@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // const PracMemo =  React.memo(props => {
 // const [value, setValue]=useState(props.value)
-//  console.log('PracMemo Rendering')
+//  //console.log('PracMemo Rendering')
 
 //  const handleClick=()=>{
 //    setValue('dhkka')
@@ -21,7 +21,7 @@ import React, { useState } from 'react';
 
 
 // const PracMemo = (props) => {
-//  console.log('PracMemo Rendering')
+//  //console.log('PracMemo Rendering')
 //  return (
 //   <div>
 //     <h4>That is memo rerender page {props.value}</h4>
@@ -36,7 +36,7 @@ const PracMemo = (props) => {
 
 
  
- console.log('PracMemo Rendering')
+ //console.log('PracMemo Rendering')
  return (
   <div>
     <h4>That is memo rerender page {props.value}</h4>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { Badge, Grid, TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,12 +6,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import { useHistory } from 'react-router-dom';
-import { Badge, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { orderedData } from '../../DataManagement';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../../App';
+import { orderedData } from '../../DataManagement';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
@@ -25,7 +24,7 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
 
   const [isDisable, setIsDisable]=useState(false)
 
-  // console.log(orderInfo)
+  // //console.log(orderInfo)
   // let history = useHistory();
 
   // const handleDisagree = (bool) => {
@@ -73,7 +72,7 @@ const Dialogs=({dial,handleAgree,dialogInfo,handleDisagree,dbOrderedInfo})=>{
     // const email=loginInfo.data.user_email
     const userInfo=JSON.parse(sessionStorage.getItem("userInfo"))
     const email=userInfo.userEmail
-    console.log(email)
+    //console.log(email)
     const order_status='processing'
     const orderedDetails=await orderedData(email,dialogInfo.title,order_status,purchasedInfo)
     // dbOrderedInfo(orderedDetails)

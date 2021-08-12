@@ -1,14 +1,12 @@
 import { Grid, TextField } from '@material-ui/core';
-import React from 'react';
-import SendIcon from '@material-ui/icons/Send';
-import { useState } from 'react';
-import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import AddCommentIcon from '@material-ui/icons/AddComment';
-import { ratingReview } from '../../DataManagement';
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import SendIcon from '@material-ui/icons/Send';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 const CommentPass = ({handleRating}) => {
  const foodId=useParams()
- console.log(foodId)
+ //console.log(foodId)
  
  const [comments, setComments]=useState({})
 
@@ -21,13 +19,13 @@ const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
 const submitComment=(e)=>{
   e.preventDefault()
  if(userInfo){
-     console.log({...comments,email:userInfo.userEmail})
+     //console.log({...comments,email:userInfo.userEmail})
      handleRating({foodId:foodId.id,rating_email:userInfo.userEmail,...comments})
  }else{
    // ratingReview({foodId:foodId.id,...comments})
    handleRating({foodId:foodId.id,...comments})
  }
- // console.log(comments)
+ // //console.log(comments)
  setComments({})
 }
 

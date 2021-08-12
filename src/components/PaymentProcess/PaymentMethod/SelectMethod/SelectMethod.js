@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { FormControlLabel } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
-import {FormControlLabel, Tooltip} from '@material-ui/core';
+import React from 'react';
 
 const SelectMethod = ({handlePayment,handleDialog,purchaseDone,purchaseNotify}) => {
 
@@ -11,7 +11,7 @@ const SelectMethod = ({handlePayment,handleDialog,purchaseDone,purchaseNotify}) 
   setSelectedValue(e.target.value);
   // setSelect(true)
   handlePayment(e.target.value,true)
-  // console.log(e.target.value)
+  // //console.log(e.target.value)
   if(e.target.value==='Cash On Delivery'){
     handleDialog(true,{
       title:'Cash on Delivery....',

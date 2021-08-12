@@ -1,21 +1,16 @@
 import { Grid } from '@material-ui/core';
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { foodDetails, ratingReview } from '../DataManagement';
-import FoodCard from '../Home/FoodCard/FoodCard';
-// import LoadingCart from '../../../Common/NotFound/LoadingCard';
-import LoadingCart from '../Common/NotFound/LoadingCard';
-import { CustomizeLoader, StarMarking, StarRated } from '../Utility';
-import './specifyFood.css';
-// import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarIcon from '@material-ui/icons/Star';
-
-import RatingReview from '../../components/RatingReview/RatingReview';
-import Comments from './Comp_of_FoodSpecification/Comments';
+import { NavLink } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import { UserContext } from '../../App';
-import { NavLink } from 'react-router-dom';
+import RatingReview from '../../components/RatingReview/RatingReview';
+import { foodDetails, ratingReview } from '../DataManagement';
+import FoodCard from '../Home/FoodCard/FoodCard';
+import { CustomizeLoader, StarMarking } from '../Utility';
+import Comments from './Comp_of_FoodSpecification/Comments';
+import './specifyFood.css';
+
 
 const FoodSpecification = () => {
 
@@ -33,11 +28,11 @@ const [rateMark,setRateMark]=useState(1)
 
 // const [isReviewed,setIsReviewed]=useState({})
 
-// console.log(rate)
+// //console.log(rate)
  const [infoData,setInfoData]=useState({})
 
 // const {foodTitle,foodType,price,imageUrl,}=foodInfo[0]
- console.log(foodInfo)
+ //console.log(foodInfo)
 
  const handleClose = (bool,starFixed,booll) => {
     setDispRating(bool)
@@ -50,7 +45,7 @@ const [rateMark,setRateMark]=useState(1)
 
 const handleRating=(info)=>{
     ratingReview(info).then(res=>setFoodInfo(res))
-    console.log('okay')
+    //console.log('okay')
 }
 
 
@@ -61,7 +56,7 @@ useEffect(()=>{
  .then(res=>setFoodInfo(res))
 
 
-//  console.log(foodInfo)
+//  //console.log(foodInfo)
 
 //  if(rateMark){
 //     alert('Thank for rating')
@@ -102,7 +97,7 @@ const changeRating=( newRating, name )=> {
 
    const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
    const isReviewed=foodInfo.reviews?.find(user=>user?.email===userInfo?.userEmail)
-   console.log(isReviewed)
+   //console.log(isReviewed)
 
 
 //   const rateChange=(bool)=>{

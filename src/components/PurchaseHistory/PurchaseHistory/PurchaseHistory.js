@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../../../App';
 import WaitingOrder from '../../Cart/Cart/WaitingOrder';
+import DashBoardTitle from '../../Dashboard/UserDashboard/DashboardComponents/DashBoardTitle';
 import Sidebar from '../../Dashboard/UserDashboard/DashboardComponents/Sidebar/Sidebar';
-import { orderHistory } from '../../DataManagement';
 import Loader from './Loader';
 import OrderDataHistory from './OrderedDataHistory/OrderDataHistory';
 
@@ -15,9 +15,9 @@ const PurchaseHistory = () => {
   const {orderHistoryData}=useContext(UserContext)
 //  const [orderHistoryData, setOrderHistoryData]=useState([]) //! REFACTOR TO APP.JS
  const {loginInfo}=useContext(UserContext)
- console.log(loginInfo)
+ //console.log(loginInfo)
 //  const [dataFound, setDataFound]=useState(false)
- //todo console.log(orderHistoryData)
+ //todo //console.log(orderHistoryData)
 //  const email="nazmulustc09@yahoo.com"
 //  const email="ustciiucbracbank@gmail.com"
 //  const email="ustciiucbracbank@outlook.com"
@@ -37,7 +37,7 @@ const PurchaseHistory = () => {
 //     const orderDataHistory =async()=>{
 //      const data=await orderHistory(email,token)
 //      setOrderHistoryData(data)
-//      console.log(data)
+//      //console.log(data)
      
 //     }
 //      orderDataHistory()
@@ -56,7 +56,7 @@ const PurchaseHistory = () => {
  return (
   <Sidebar>
   
-   
+  <DashBoardTitle dashTitle="Order"/>
  
 
    {orderHistoryData?.length>0 ?

@@ -117,6 +117,7 @@ section .login_container .user .formBx form .signup
 	color: #555;
 	text-transform: uppercase;
 	font-weight: 300;
+	/* cursor:	pointer; */
 }
 .login_style .login_container .user .formBx form .signup a
 {

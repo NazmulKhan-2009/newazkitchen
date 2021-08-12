@@ -1,14 +1,8 @@
-import React, {useEffect, useState } from 'react';
+import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { Button, Fab, FormControl, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Alert from '@material-ui/lab/Alert';
-import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
-import "./FormForUpload.css"
-import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import FileBase64 from 'react-file-base64';
+import React, { useEffect, useState } from 'react';
+import "./FormForUpload.css";
 
 
 
@@ -39,15 +33,15 @@ const FormForUpload=()=> {
   const [image2,setImage2]=useState([])
   
 
-  console.log(image2.img)
-  console.log(image)
-  // console.log(foodInfo)
-  console.log(infoFile)
+  //console.log(image2.img)
+  //console.log(image)
+  // //console.log(foodInfo)
+  //console.log(infoFile)
   // const handleInput=e=>{   
   //   setFoodInfo({...foodInfo,[e.target.name]:e.target.value})
   // }
- console.log(file)
-  // console.log(foodInfo)
+ //console.log(file)
+  // //console.log(foodInfo)
   const handleSubmit=(e)=>{
      e.preventDefault()
     const formData=new FormData()
@@ -64,13 +58,13 @@ const FormForUpload=()=> {
       .then(res=>res.json())
       .then(infos=>setImage(infos.data))
       .catch(err=>console.error(err))
-    console.log(file)
+    //console.log(file)
 
     // if(typeof image.foodImg==="string"){
     //   alert(image.foodImg)
     // }
     
-    // console.log(file)
+    // //console.log(file)
     // sessionStorage.setItem("deliveryInfo", JSON.stringify(deliveryInfo))
     // localStorage.removeItem('cartInfo')
     // setFoodInfo({})
@@ -187,7 +181,7 @@ const FormForUpload=()=> {
             </label>
 
             {/* <FileBase64 multiple={false} onDone={image =>  setFile(image.base64)}  /> */}
-            {/* <FileBase64 multiple={false} onDone={image => console.log(image.type.slice(0,6))}/> */}
+            {/* <FileBase64 multiple={false} onDone={image => //console.log(image.type.slice(0,6))}/> */}
               <input
                 id="fileInput" 
                 name="img"

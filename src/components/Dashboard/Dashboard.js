@@ -1,18 +1,16 @@
-import { Button, Grid } from '@material-ui/core';
+import axios from "axios";
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { UserContext } from '../../App';
-import axios from "axios"
-// import { CountUp } from 'use-count-up'
-import Sidebar from "./UserDashboard/DashboardComponents/Sidebar/Sidebar"
 import DashboardRoot from './UserDashboard/DashboardComponents/DashboardRoot/DashboardRoot';
-import { useEffect } from 'react';
+// import { CountUp } from 'use-count-up'
+import Sidebar from "./UserDashboard/DashboardComponents/Sidebar/Sidebar";
 // import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 
 const Dashboard = () => {
   const {loginInfo, setLoginInfo,setIsAdmin,orderHistoryData}=useContext(UserContext)
-  console.log(loginInfo.data?.order)
+  //console.log(loginInfo.data?.order)
   const history=useHistory()
 
 const handleSignOut=()=>{
@@ -31,7 +29,7 @@ const handlePurchase=()=>{
   
   const userInfo=JSON.parse(sessionStorage.getItem('userInfo')) 
   const token=sessionStorage.getItem('token')
-  console.log(userInfo)
+  //console.log(userInfo)
 
   const orderData=async()=>{
 
@@ -45,7 +43,7 @@ const handlePurchase=()=>{
     //   // },
     //   headers: {'Authorization': 'Bearer '+ token}
     // });
-    // console.log(data)
+    // //console.log(data)
 
     // try{
     //   const data=await axios({
@@ -58,12 +56,12 @@ const handlePurchase=()=>{
     //     // },
     //     headers: {'Authorization': 'Bearer '+ token}
     //   });
-    //   // console.log(data.data.session)
+    //   // //console.log(data.data.session)
     //   // const data=await axios.get("http://localhost:5000/api/order/previousorders")
-    //   // console.log(data)
+    //   // //console.log(data)
       
     //   if(data.data.session){
-    //     console.log(data)  
+    //     //console.log(data)  
     //   }else{
     //     sessionStorage.removeItem('token')
     //     sessionStorage.removeItem('userInfo')
@@ -71,13 +69,13 @@ const handlePurchase=()=>{
     //     history.push('/login')
     //   }
     // }catch(e){
-    //   console.log(`error here ${e}`)
+    //   //console.log(`error here ${e}`)
     //  } ;
 
     //! try with populate relation data base
     try{
         // const data=await axios.get('http://localhost:5000/api/order/orderdetail')
-        // console.log(data)
+        // //console.log(data)
 
         const data=await axios({
           method:'get',
@@ -86,7 +84,7 @@ const handlePurchase=()=>{
 
         })
 
-        console.log(data)
+        //console.log(data)
 
         history.push('/PurchaseHistory')
 

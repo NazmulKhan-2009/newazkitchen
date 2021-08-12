@@ -1,15 +1,11 @@
-import React, {useEffect, useState } from 'react';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Button, Fab, FormControl, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Alert from '@material-ui/lab/Alert';
-import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
-import "./FormForUpload.css"
-import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import FileBase64 from 'react-file-base64';
 import axios from 'axios';
+import React, { useState } from 'react';
+import FileBase64 from 'react-file-base64';
+import "./FormForUpload.css";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,9 +33,9 @@ const FormForUpload=()=> {
   
   // #### CONSOLE ZONE START POINT ####
 
-  // console.log(foodInfo)
-  // console.log(file)
-  // console.log(foodsInfo.imageUrl)
+  // //console.log(foodInfo)
+  // //console.log(file)
+  // //console.log(foodsInfo.imageUrl)
   
  // #### CONSOLE ZONE END POINT ####
 
@@ -85,7 +81,7 @@ const FormForUpload=()=> {
           const response=await axios.post("http://localhost:5000/api/food/fooddetail",formData) 
           setFoodsInfo(response.data.data)
        }catch(e){
-         console.log(`add Food error ${e}`)
+         //console.log(`add Food error ${e}`)
         } ;
     }    
     addFood()
@@ -214,7 +210,7 @@ const FormForUpload=()=> {
             <PhotoCamera  style={{position:"absolute",width:"35px",height:"30px",cursor:'pointer',paddingTop:"5px"}} color="secondary"/>
             </label>
 
-            {/* <FileBase64 multiple={false} onDone={image => console.log(typeof image.base64)}/> 
+            {/* <FileBase64 multiple={false} onDone={image => //console.log(typeof image.base64)}/> 
                                    */}
             {/* && image.size<"5000 kB"  */}
             <FileBase64 required={true} multiple={false} onDone={image =>image.type.slice(0,5)==="image" ? setFile(image.base64) : alert("Please Upload an Image within 5MB")}/>                       

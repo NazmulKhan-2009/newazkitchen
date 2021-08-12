@@ -1,0 +1,27 @@
+.form-control {
+ border-radius: 25px;
+}
+/* .MuiDialog-container .MuiDialog-paperWidthSm {
+ max-width: 324px !important;
+} */
+/* .MuiDialog-scrollPaper .MuiDialog-paperWidthSm {
+ max-width: 324px !important;
+} */
+
+.MuiPickersModal-dialogRoot{
+ max-width:310px !important;
+ background-color:tomato !important;
+ color:white !important;
+}
+
+/* .contract_stroke{
+ -webkit-text-stroke: 1px #dee2e6;
+} */
+.display-1{
+ font-size: 80px;
+
+
+ font-weight: 1000;
+ -webkit-text-stroke: 1.5px #dee2e6;
+ 
+}

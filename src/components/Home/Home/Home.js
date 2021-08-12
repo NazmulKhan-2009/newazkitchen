@@ -1,6 +1,7 @@
 
 //! original Home components
 import React from 'react';
+// import { handleFacebookSignIn, initializeLoginFramework } from '../../Authentication/firebase/loginManager';
 import ContactUs from '../../ContactUs/ContactUs';
 import Food from '../FoodCard/Food/Food';
 import AppNav from '../Header/AppBar/AppNav';
@@ -9,9 +10,16 @@ import OurService from '../OurService/OurService';
 
 
 const Home = () => {
+
+//  initializeLoginFramework()
+//  const faceBookSignIn=()=>{
+//   handleFacebookSignIn()
+// }
+
  return (
   <>
   <AppNav/>
+  {/* <button onClick={faceBookSignIn}>face book</button> */}
   <Header/>
   <Food/>
   <OurService/>
@@ -158,7 +166,7 @@ export default Home;
 
 
 //   const cartInfo=JSON.parse(localStorage.getItem("cartInfo"))
-//   console.log(cartInfo)
+//   //console.log(cartInfo)
 
 //   const handleDrawerClose = () => {
 //    setCartOpen(false);

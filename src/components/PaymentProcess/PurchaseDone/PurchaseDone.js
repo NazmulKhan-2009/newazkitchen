@@ -1,14 +1,14 @@
 import { Grid } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import { UserContext } from '../../../App';
 import OrderDetailsDB from '../OrderDetailsDB/OrderDetailsDB';
 import PurchaseDoneNotification from './PurchaseDoneNotification';
 const PurchaseDone = ({successInfo}) => {
 
 const {orderInfo}=useContext(UserContext)
-  // console.log(orderInfo.orderId)
+  // //console.log(orderInfo.orderId)
  const history = useHistory();
  return (
   <>

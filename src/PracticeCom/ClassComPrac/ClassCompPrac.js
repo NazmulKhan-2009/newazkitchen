@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 
 
@@ -40,7 +40,7 @@ dhaka(){
 
 
  render() {
-  // console.log('class com prac rendering ')
+  // //console.log('class com prac rendering ')
    return (
     <>
    <h1>{this.cityDis} Hello, {this.props.greet} & {this.dhaka()} & {this.city}</h1>

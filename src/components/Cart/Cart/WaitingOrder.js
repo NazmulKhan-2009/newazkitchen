@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 
 const WaitingOrder = ({confirmCart,paymentMethod,text,info}) => {
-// console.log(paymentMethod)
+// //console.log(paymentMethod)
   const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
 
  return (

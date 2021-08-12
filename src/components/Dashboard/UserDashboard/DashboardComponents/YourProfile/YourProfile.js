@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import { Grid } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import React, { useContext, useEffect, useState } from 'react';
 import FileBase64 from 'react-file-base64';
-// import './YourProfile.css'
-import cus_style from './YourProfile.module.css'
-import { imageUpload } from '../../../../DataManagement';
-import { useEffect } from 'react';
-import { useContext } from 'react';
 import { UserContext } from '../../../../../App';
+import { imageUpload } from '../../../../DataManagement';
+// import './YourProfile.css'
+import cus_style from './YourProfile.module.css';
 // import Tooltip from '@material-ui/core/Tooltip';
 
 
@@ -54,7 +52,7 @@ export default function YourProfile({path}) {
   
 
   
-  // console.log(file)
+  // //console.log(file)
  const classes = useStyles();
  
 
@@ -69,7 +67,7 @@ const handleUpload=(image)=>{
         //   sessionStorage.setItem('userInfo',JSON.stringify({...userData,photo:res.data.userImage}));
         //   setDataLoad(!dataLoad)
         // }
-        // console.log(res)
+        // //console.log(res)
         
       
       
@@ -94,7 +92,7 @@ const handleUpload=(image)=>{
             <PhotoCamera  style={{position:"absolute",width:"35px",height:"30px",cursor:'pointer',paddingTop:"5px"}} color="secondary"/>
             </label>
       
-            {/* <FileBase64 multiple={false} onDone={image => console.log(typeof image.base64)}/> 
+            {/* <FileBase64 multiple={false} onDone={image => //console.log(typeof image.base64)}/> 
                                    */}
             {/* && image.size<"5000 kB"  */}
             {/* <FileBase64 required={true} multiple={false} onDone={image =>image.type.slice(0,5)==="image" ? setFile(image.base64) : alert("Please Upload an Image within 5MB")}/>     */}

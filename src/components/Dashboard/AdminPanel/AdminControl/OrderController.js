@@ -15,7 +15,7 @@
 //    setSelectedValue(e.target.value);
 //    // setSelect(true)
 //    // handlePayment(e.target.value,true)
-//    // console.log(e.target.value)
+//    // //console.log(e.target.value)
 //   //  if(e.target.value==='Cash On Delivery'){
 //   //    handleDialog(true,{
 //   //      title:'Cash on Delivery....',
@@ -89,7 +89,7 @@
 // export default OrderController
 
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { AdminForm } from '../commonClass/CommonClass';
 import ControlDialog from '../ControlDialog/ControlDialog';
 

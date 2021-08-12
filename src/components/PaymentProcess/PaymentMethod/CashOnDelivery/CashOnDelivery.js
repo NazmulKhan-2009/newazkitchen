@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
+import { UserContext } from '../../../../App';
 import WaitingOrder from '../../../Cart/Cart/WaitingOrder';
 import PurchaseDone from '../../PurchaseDone/PurchaseDone';
-import { UserContext } from '../../../../App';
 
 
 const CashOnDelivery = ({purchaseNotify}) => {
 
   const {orderInfo}=useContext(UserContext)
-  // console.log(orderInfo.delivery_Info.totalPrice)
+  // //console.log(orderInfo.delivery_Info.totalPrice)
  return (
     <>
     {

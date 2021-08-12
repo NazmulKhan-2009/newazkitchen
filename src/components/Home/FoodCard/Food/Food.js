@@ -1,22 +1,15 @@
 import { Fab, Grid } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { cuisine } from '../../../FakeData/FakeData';
-import FoodCard from '../FoodCard';
-import NavigationIcon from '@material-ui/icons/Navigation'
-import "./Food.css"
-import FoodType from './FoodType/FoodType';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
-
-import CircularProgress from '@material-ui/core/CircularProgress';
-import LoadingCart from '../../../Common/NotFound/LoadingCard';
-import SearchIcon from '@material-ui/icons/Search';
-import { CustomizeLoader, SearchItem } from '../../../Utility';
-import { searchFood } from '../../../DataManagement';
-import { useContext } from 'react';
+import NavigationIcon from '@material-ui/icons/Navigation';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../../../App';
-import { useMemo } from 'react';
+import { searchFood } from '../../../DataManagement';
+import { CustomizeLoader, SearchItem } from '../../../Utility';
+import FoodCard from '../FoodCard';
+import "./Food.css";
+import FoodType from './FoodType/FoodType';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +29,7 @@ const Food = () => {
 
   //! with context
   const {foodDetails, setFoodDetails,itemWise, setItemWise}=useContext(UserContext)
-  // console.log(foodDetails.map(item=>item.reviews))
+  // //console.log(foodDetails.map(item=>item.reviews))
   // const [dataLoaded,setDataLoaded]=useState(true)
 
   const classes = useStyles();
@@ -44,7 +37,7 @@ const Food = () => {
   //SEARCH FOOD HANDLE
 
   const searchingFood=(food)=>{
-    console.log(food)
+    //console.log(food)
     searchFood(food)
     .then(res=>setItemWise(res.data.data))
 
@@ -52,7 +45,7 @@ const Food = () => {
   
  
 
-  // console.log(itemWise)
+  // //console.log(itemWise)
   //Food from Server
   //!previous
   // useEffect(()=>{
@@ -66,7 +59,7 @@ const Food = () => {
         
         
   //      }catch(e){
-  //        console.log(`error on getting Food List from server ${e}`)
+  //        //console.log(`error on getting Food List from server ${e}`)
   //       } ;
       
   //   }
@@ -88,7 +81,7 @@ const Food = () => {
   //       sessionStorage.setItem('loaded', 'false');
         
   //      }catch(e){
-  //        console.log(`error on getting Food List from server ${e}`)
+  //        //console.log(`error on getting Food List from server ${e}`)
   //       } ;
       
   //   }
@@ -108,7 +101,7 @@ const Food = () => {
   //       setItemWise(foods.data)
         
   //      }catch(e){
-  //        console.log(`error on getting Food List from server ${e}`)
+  //        //console.log(`error on getting Food List from server ${e}`)
   //       } ;
       
   //   }
@@ -132,10 +125,10 @@ const handleFood=(item,color)=>{
     //  const foodTypeWise=itemWise.filter(foods=>item!=="all" ? foods.foodType===item:itemWise)
      const foodTypeWise=foodDetails.filter(foods=>item!=="all" ? foods.foodType===item:foodDetails)
     //  const foodTypeWise=foodDetails.filter(foods=>item===foods.foodType)
-    //  console.log(foodTypeWise)
+    //  //console.log(foodTypeWise)
     //  setItemWise(foodTypeWise)
     setItemWise(foodTypeWise)
-    // console.log(itemWise)
+    // //console.log(itemWise)
   }
 
   
@@ -208,6 +201,7 @@ const handleFood=(item,color)=>{
        item={item}
        ind={ind}
        foodDet={foodDetails}
+       foodId={item._id}
        />
      )
 

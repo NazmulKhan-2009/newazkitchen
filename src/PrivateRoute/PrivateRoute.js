@@ -1,13 +1,13 @@
 // import jwtDecode from 'jwt-decode';
 import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { UserContext } from '../App';
 const PrivateRoute = ({children, ...rest}) => {
 
   
  const {loginInfo}= useContext(UserContext)
 
-console.log(loginInfo.user_email)
+//console.log(loginInfo.user_email)
  // const tokenVerify=()=>{
  //   const token=sessionStorage.getItem('token')
  //   // if(!token || signIn.onlySignOut){
@@ -15,8 +15,8 @@ console.log(loginInfo.user_email)
  //   // }
  //   // const decodeToken= jwtDecode(token)
  //   const currentTime=new Date().getTime()/1000
- //   console.log(`de-time ${decodeToken.exp}\n cur-time ${currentTime}`)
- //   console.log(decodeToken.exp > currentTime)
+ //   //console.log(`de-time ${decodeToken.exp}\n cur-time ${currentTime}`)
+ //   //console.log(decodeToken.exp > currentTime)
  //   return decodeToken.exp > currentTime
  // }
 

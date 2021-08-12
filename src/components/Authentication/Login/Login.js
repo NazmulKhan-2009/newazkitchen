@@ -101,23 +101,22 @@
 
 
 // <------------------==========slider login ==========--------------->
-import { Grid } from '@material-ui/core';
-import { PhotoCamera } from '@material-ui/icons';
-import React, { useContext, useState } from 'react';
-import FileBase64 from 'react-file-base64';
-import { userSignIn, userSignUp } from '../../DataManagement';
+import HomeIcon from '@material-ui/icons/Home';
 import Alert from '@material-ui/lab/Alert';
+import React, { useContext, useState } from 'react';
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { UserContext } from '../../../App';
+import { CustomizeLoader } from '../../../components/Utility';
+import { userSignIn, userSignUp } from '../../DataManagement';
+import { handleFacebookSignIn, handleGoogleSignIn, initializeLoginFramework } from '../firebase/loginManager';
 // import img1 from '../../../img/img1.jpg'
 // import img2 from '../../../img/img2.jpg'
-import "./login.css"
-import { UserContext } from '../../../App';
-import { useHistory, useLocation } from "react-router-dom";
-import { CustomizeLoader } from '../../../components/Utility';
+import "./login.css";
 const Login = () => {
 
-const {loginInfo,setLoginInfo,setIsAdmin}=useContext(UserContext)  
+const {loginInfo,setLoginInfo,setIsAdmin,setProfileSync,setUserData}=useContext(UserContext)  
 
-// console.log(loginInfo)
+// //console.log(loginInfo)
 
 const [signUpFlip, setSignUpFlip]=useState(false)
 const [userInfo, setUserInfo]=useState({})
@@ -126,16 +125,45 @@ const [isSignIn, setIsSignIn]=useState(false)
 const [isSignOut, setIsSignOut]=useState(true)
 const [signOutNotify, setSignOutNotify]=useState(true)
 const [loading, setLoading]=useState({loginZone:'',loader_disp:'none'})
+const [googleInfo,setGoogleInfo]=useState({})
 // const [loading, setLoading]=useState('block')
 
 const history = useHistory();
  const location = useLocation();
  const { from } = location.state || { from: { pathname: "/" } };
-// console.log(signIn)
+// //console.log(signIn)
 // const [file, setFile]=useState('')
 // const [userData, setUserData]=useState({})
 
-// console.log(userInfo)
+// //console.log(userInfo)
+
+//!GOOGLE AUTH START
+
+//SEND TO LOGIN ROUTE
+initializeLoginFramework()
+//GOOGLE AUTH
+ const handlegooglesignIn=()=>{
+  handleGoogleSignIn().then(
+      res=>{
+          console.log(res)
+        setGoogleInfo(res)
+        setSignUpFlip(true)}
+      )
+}
+
+
+//!GOOGLE AUTH END
+
+//! FACE BOOK START
+
+const faceBookSignIn=()=>{
+    handleFacebookSignIn()
+}
+
+
+//! FACE BOOK END
+
+
 
 const handleOfFlip=()=>{
     setSignUpFlip(!signUpFlip)
@@ -152,12 +180,12 @@ const handleInput=e=>{
 const handleSubmit=(e)=>{
      e.preventDefault()
      userInfo.user_password===userInfo.confirm_password ? 
-     userSignUp(userInfo)
+     userSignUp({...userInfo,user_name:googleInfo.name,user_email:googleInfo.email})
      .then(res=>{
-        // console.log(res)
+        // //console.log(res)
         alert(`${res.data.response}`)
         
-        // console.log(res)
+        // //console.log(res)
         setSignUpFlip(false)
         setUserInfo({})
         
@@ -178,7 +206,7 @@ const handleSubmit=(e)=>{
     // formData.append('imageUrl', file);
 
 
-     console.log(userInfo)
+     //console.log(userInfo)
      
      
 }
@@ -205,7 +233,7 @@ const handleSignIn=(e)=>{
      setLoading({loginZone:"none",loader_disp:'block'})
      userSignIn(userInfo)
      .then(res=>{
-        //  console.log(res)
+        //  //console.log(res)
         
         if(res.data.status[0]==='success'){
             // setLoginInfo(res.data)
@@ -225,7 +253,7 @@ const handleSignIn=(e)=>{
                         
                         )
 
-
+                        setProfileSync(Math.random())
              
         
 
@@ -283,7 +311,7 @@ const handleSignOut=()=>{
                 {!isSignOut && signOutNotify && <Alert severity="warning">Succesfully loged out</Alert>}
 
                 
-
+               <Link to='/'><HomeIcon color="primary"/></Link> 
                 
 
                 <img src="http://irtrd.com/wp-content/uploads/2018/08/login.gif" alt=""/>
@@ -307,15 +335,16 @@ const handleSignOut=()=>{
 
                     <input type="submit" name="" value="Login"/>
                     
-                    <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p>
+                    {/* <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p> */}
+                    <p className="signup">don't have an account? <span style={{cursor:"pointer"}} onClick={handlegooglesignIn}>Sign up google</span></p>
                 </form>
     {/* //!SOCIAL LOGiN */}
                                 
                 <div className="google-btn">
-                    <img src="https://i.imgur.com/P9ZVhek.png" alt="" width="40" />
+                    <img onClick={handlegooglesignIn} src="https://i.imgur.com/P9ZVhek.png" alt="" width="40" />
                     <span style={{fontSize:"20px"}}>Continue</span>
                     {/* <img src="https://i.imgur.com/oozxCkP.png" alt="" width="40"/> */}
-                    <img src="https://i.imgur.com/oozxCkP.png" alt="" width="40" />
+                    <img onClick={faceBookSignIn} src="https://i.imgur.com/oozxCkP.png" alt="" width="40" />
                 </div>
     {/* //! // TOASTIFY */}
                 {notify && 
@@ -328,8 +357,11 @@ const handleSignOut=()=>{
          <div className="formBx">
             <form onSubmit={handleSubmit}>
                 <h2>Create an account</h2>
-                <input required type="text" name="user_name" placeholder="Username"  onChange={handleInput} value={userInfo.user_name || ""}/>
-                <input required type="email" name="user_email" placeholder="Email Address" onChange={handleInput} value={userInfo.user_email || ""}/>
+                {/* <input required type="text" name="user_name" placeholder="Username"  onChange={handleInput} value={userInfo.user_name || ""}/>
+                <input required type="email" name="user_email" placeholder="Email Address" onChange={handleInput} value={userInfo.user_email || ""}/> */}
+
+                <input required type="text" name="user_name" placeholder="Username"   value={ googleInfo.name|| ""}/>
+                <input required type="email" name="user_email" placeholder="Email Address"  value={googleInfo.email || ""}/>
                 <input required type="text" name="user_phone" placeholder="Phone No" onChange={handleInput} value={userInfo.user_phone || ""}/>
                 <input required type="password" name="user_password" placeholder="Create Password" onChange={handleInput} value={userInfo.user_password || ""}/>
                 <input required type="password" name="confirm_password" placeholder="Confirm Password" onChange={handleInput} value={userInfo.confirm_password || ""}/>

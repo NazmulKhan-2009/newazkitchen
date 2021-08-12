@@ -1,42 +1,34 @@
+import { Paper } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import {
-  BrowserRouter as Router,
+    BrowserRouter as Router,
 
-  Route, Switch
+    Route, Switch
 } from "react-router-dom";
-
+import './App.css';
 import Login from './components/Authentication/Login/Login';
-
-
+import VerifiedUser from './components/Authentication/VerifiedUser/VerifiedUser';
 import Cart from './components/Cart/Cart/Cart';
 import CartEmpty from './components/Cart/Cart/CartEmpty';
 import NotFound from './components/Common/NotFound/NotFound';
 import ContactUs from './components/ContactUs/ContactUs';
 import AdminPanel from './components/Dashboard/AdminPanel/AdminPanel';
-import FormForUpload from './components/Dashboard/AdminPanel/UploadFood/FormForUpload/FormForUpload';
-import UploadFoods from './components/Dashboard/AdminPanel/UploadFood/UploadFoods/UploadFoods';
 import Dashboard from './components/Dashboard/Dashboard';
+import MyEvents from './components/Dashboard/UserDashboard/DashboardComponents/MyEvents/MyEvents';
+import MyFavorites from './components/Dashboard/UserDashboard/DashboardComponents/MyFavorites/MyFavorites';
+import { orderHistory } from './components/DataManagement';
+import FoodSpecification from './components/FoodSpecification/FoodSpecification';
 import Gallery from './components/Gallery/Gallery';
-import AppNav from './components/Home/Header/AppBar/AppNav';
 import Home from './components/Home/Home/Home';
 import PaymentProcess from './components/PaymentProcess/PaymentProcess';
 import PurchaseHistory from './components/PurchaseHistory/PurchaseHistory/PurchaseHistory';
-import PracticeComp from './PracticeCom/PracticeComp';
-import './App.css';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
-import FoodSpecification from './components/FoodSpecification/FoodSpecification';
-import VerifiedUser from './components/Authentication/VerifiedUser/VerifiedUser'
 
-import { Grid, Typography,Button,Paper } from "@material-ui/core";
-import {ThemeProvider,createMuiTheme} from "@material-ui/core/styles"
-import Switchh from '@material-ui/core/Switch';
-import { info } from './PracticeCom/CousinComp/CousinComp';
-import CartDrawer from './components/Cart/Cart/CartDrawer/CartDrawer';
-import MyFavorites from './components/Dashboard/UserDashboard/DashboardComponents/MyFavorites/MyFavorites';
-import MyOrder from './components/Dashboard/UserDashboard/DashboardComponents/MyOrder/MyOrder';
-import MyEvents from './components/Dashboard/UserDashboard/DashboardComponents/MyEvents/MyEvents';
-import axios from 'axios';
-import { orderHistory } from './components/DataManagement';
+
+
+
 export const UserContext=createContext()
 
 // const cartGet=JSON.parse(localStorage.getItem('cartInfo'))
@@ -45,21 +37,27 @@ function App(){
   const [cartItem, setCartItem]=useState([])
   const [orderInfo, setOrderInfo]=useState([])
   const [loginInfo, setLoginInfo]=useState({})
+  //console.log(loginInfo)
   const [admin, setAdmin]=useState("")
   const [isAdmin,setIsAdmin]=useState(false)
   const [count, setCount]=useState(0)
   const [profilePhoto, setProfilePhoto]=useState('https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png')
   
   const [foodDetails, setFoodDetails]=useState([])
+  // //console.log(foodDetails)
   const [itemWise, setItemWise]=useState([]) //!not in previous
   const [foodSync, setFoodSync]=useState("") //!not in previous
   //! sync order
+  const [profileSync,setProfileSync]=useState("")
   const [rating, setRating]=useState(0)//!bring from food specification-28
   const [dispRating, setDispRating]=useState(false)//!bring from food specification-29
   const [orderHistoryData, setOrderHistoryData]=useState([])
+  //console.log(orderHistoryData)
   const [orderSync, setOrderSync]=useState('') 
+  const [userData, setUserData]=useState({})
+  //console.log(userData) 
   // const current_screen_mode=localStorage.getItem('dark_mode')
-  // console.log(current_screen_mode)
+  // //console.log(current_screen_mode)
 
   // ! DARK/LIGHT STORAGE NOT DONE YET 
   const [darkMode,setDarkMode]=useState(false)
@@ -68,7 +66,7 @@ function App(){
   const [cartOpen, setCartOpen] = useState(false);
 
   
-  // console.log(darkMode)
+  // //console.log(darkMode)
 
   const theme=createMuiTheme({
     palette:{
@@ -82,7 +80,7 @@ function App(){
 
     const cartGet=JSON.parse(localStorage.getItem('cartInfo'))
     setCartItem(cartGet)
-    // console.log(cartGet)
+    // //console.log(cartGet)
   },[])
 
 
@@ -99,7 +97,7 @@ function App(){
          
          
         }catch(e){
-          console.log(`error on getting Food List from server ${e}`)
+          //console.log(`error on getting Food List from server ${e}`)
          } ;
        
      }
@@ -110,9 +108,27 @@ function App(){
    },[foodSync])
  
 
-console.log(loginInfo)
+   //imp use effect for user data
+   useEffect(()=>{
+     (async()=>{
+      const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+
+      try{
+          const userData=await axios(`http://localhost:5000/api/user/alluser/${userInfo.userEmail}`)
+
+          setUserData(userData.data)
+       }catch(e){
+         
+        } ;
+
+       
+     })()
+   
+   },[profileSync])
+
+//console.log(loginInfo)
    //!REFACTOR FROM PURCHASE HISTORY
-console.log(orderHistoryData)   
+//console.log(orderHistoryData)   
    useEffect(()=>{
     const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
     const email=userInfo?.userEmail
@@ -121,11 +137,20 @@ console.log(orderHistoryData)
     const orderDataHistory =async()=>{
      const data=await orderHistory(email,token)
      setOrderHistoryData(data)
-     console.log(data)
+     //console.log(data)
      
     }
      orderDataHistory()
    },[loginInfo,orderSync])
+
+
+
+  //  useEffect(()=>{
+  //   const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+  //   const email=userInfo?.userEmail
+
+
+  //  },[])
 
   
        
@@ -184,7 +209,7 @@ console.log(orderHistoryData)
       foodSync, setFoodSync,rating, 
       setRating,dispRating, setDispRating,
       orderHistoryData, setOrderHistoryData,
-      setOrderSync
+      setOrderSync,userData, setUserData,setProfileSync
       
 
       
@@ -245,13 +270,13 @@ console.log(orderHistoryData)
             <VerifiedUser/>
           </Route>
 
-          <Route exact path="/dashboard-myfavorites">
+          <PrivateRoute exact path="/dashboard-myfavorites">
             <MyFavorites/>
-          </Route>
+          </PrivateRoute>
 
-          <Route exact path="/dashboard-myevents">
+          <PrivateRoute exact path="/dashboard-myevents">
             <MyEvents/>
-          </Route>
+          </PrivateRoute>
 
           
           {/* <Route exact path="/myorder">

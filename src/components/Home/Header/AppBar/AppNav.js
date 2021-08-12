@@ -1,11 +1,10 @@
-import { Fab } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import Switchh from '@material-ui/core/Switch';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -14,17 +13,15 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import MailIcon from '@material-ui/icons/Mail';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import Alert from '@material-ui/lab/Alert';
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { UserContext } from '../../../../App';
-import './AppNav.css';
-import logo2 from '../../../../images/logo/logo-2.png'
-import { Link as SmoothLink} from 'react-scroll'
-import Switchh from '@material-ui/core/Switch';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Alert from '@material-ui/lab/Alert';
+import React, { useContext, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { Link as SmoothLink } from 'react-scroll';
+import { UserContext } from '../../../../App';
+import logo2 from '../../../../images/logo/logo-2.png';
+import './AppNav.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -114,7 +111,7 @@ const AppNav=({admin})=>{
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   // const [cartInfo, setCartInfo]=useState(0)
-  const {cartItem, setCartItem,loginInfo, setLoginInfo,isAdmin,darkMode,screenMode,current_screen_mode,cartOpen, setCartOpen}=useContext(UserContext)
+  const {cartItem, setCartItem,loginInfo, setLoginInfo,isAdmin,darkMode,screenMode,current_screen_mode,cartOpen, setCartOpen,setUserData}=useContext(UserContext)
   // const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
   // const [adminAccess, setAdminAccess]=useState(false)
   const history= useHistory()
@@ -126,7 +123,7 @@ const AppNav=({admin})=>{
 
   // let accessBy='user'
   const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
-  // console.log(userInfo)
+  // //console.log(userInfo)
 
 
   // if(!userInfo===null){
@@ -137,7 +134,7 @@ const AppNav=({admin})=>{
   // }
   
 
-  // console.log(loginInfo)
+  // //console.log(loginInfo)
   // let isAdmin=false
 
   // if(userInfo===null){
@@ -155,7 +152,7 @@ const AppNav=({admin})=>{
     
   //   setCartInfo(cartGet.length)
   // },cartInfo)
-// console.log(admin)
+// //console.log(admin)
  
 
   const handleLogout=()=>{
@@ -165,6 +162,7 @@ const AppNav=({admin})=>{
     sessionStorage.removeItem('userInfo')
     sessionStorage.removeItem('isAdmin')
     history.push('/')
+    setUserData({})
 
 
   }
@@ -181,12 +179,12 @@ const AppNav=({admin})=>{
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    console.log('Its Dashboard In')
+    //console.log('Its Dashboard In')
   };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
-    console.log(event.currentTarget)
+    //console.log(event.currentTarget)
   };
 
   const menuId = 'primary-search-account-menu';
@@ -370,7 +368,7 @@ const AppNav=({admin})=>{
               </span>
               
               }
-{/* {console.log(darkMode)} */}
+{/* {//console.log(darkMode)} */}
               <Switchh checked={darkMode} onChange={()=>screenMode(!darkMode)}></Switchh>
 
 

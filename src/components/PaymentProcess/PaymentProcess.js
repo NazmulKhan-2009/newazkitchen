@@ -1,29 +1,26 @@
 import { Grid } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../App';
 import WaitingOrder from '../Cart/Cart/WaitingOrder';
 import Dialogs from '../Cart/Dialog/Dialogs';
-
 import DeliveryConfirmation from './DeliveryConfirmation/DeliveryConfirmation';
-import OrderDetailsDB from './OrderDetailsDB/OrderDetailsDB';
 import PaymentMethod from './PaymentMethod/PaymentMethod';
-import PurchaseDone from './PurchaseDone/PurchaseDone';
+
 
 const PaymentProcess = () => {
    const [paymentData, setPaymentData] = useState({});
-   //!console.log(paymentData)
+   //!//console.log(paymentData)
    const [paymentType, setPaymentType] = useState({});
    const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
    const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
-   // console.log(paymentData)
+   // //console.log(paymentData)
    const [open, setOpen] = React.useState(false);
    const [purchaseNotify, setPurchaseNotify] = React.useState(false);
    //! const [orderInfo,setOrderInfo]= useState({})
    const {orderInfo, setOrderInfo,loginInfo,setLoginInfo}=useContext(UserContext)
    
 
-  //!console.log(orderInfo)
+  //!//console.log(orderInfo)
 
    const handleDialog=(bool,dialogInfo)=>{
       setOpen(bool)
@@ -52,7 +49,7 @@ const PaymentProcess = () => {
    //    setOrderInfo(db_order)
    //   }
      
-// console.log(purchaseNotify) //?????
+// //console.log(purchaseNotify) //?????
 
  return (
     
@@ -121,7 +118,7 @@ const PaymentProcess = () => {
       // inputField:paymentType.inputField,
       }}
   />
-  {/* {console.log(paymentType.inputField)} */}
+  {/* {//console.log(paymentType.inputField)} */}
   </Grid>
  );
 };

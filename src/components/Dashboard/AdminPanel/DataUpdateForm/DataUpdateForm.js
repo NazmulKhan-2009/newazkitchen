@@ -1,23 +1,17 @@
-import React, {useContext, useEffect, useState } from 'react';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Button, Fab, FormControl, Grid, InputLabel, MenuItem, Select } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Alert from '@material-ui/lab/Alert';
-import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined';
-//! import "./FormForUpload.css"
-import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import FileBase64 from 'react-file-base64';
-import axios from 'axios';
-import EditIcon from '@material-ui/icons/Edit';
-import ListIcon from '@material-ui/icons/List';
-import YoutubeSearchedForIcon from '@material-ui/icons/YoutubeSearchedFor';
 import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import Style from './DataUpdateForm.module.css'
-import OrderedInfo from '../OrderedInfo/OrderedInfo';
+import EditIcon from '@material-ui/icons/Edit';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import YoutubeSearchedForIcon from '@material-ui/icons/YoutubeSearchedFor';
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
+import FileBase64 from 'react-file-base64';
 import { UserContext } from '../../../../App';
+import OrderedInfo from '../OrderedInfo/OrderedInfo';
+import Style from './DataUpdateForm.module.css';
 
 
 
@@ -38,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,newUser,handleSignUp})=> {
-//!console.log(adminForm)
+//!//console.log(adminForm)
 // const {field1, field2, field3}=adminForm
-//!console.log(field2,field3)
-  //!console.log("create food rendered")
+//!//console.log(field2,field3)
+  //!//console.log("create food rendered")
   const classes = useStyles();
   const [foodInfo,setFoodInfo]=useState({})
   const[file,setFile]= useState(null) //for file base64
@@ -57,9 +51,9 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
 
   const {foodSync, setFoodSync}=useContext(UserContext)  //! not in previous
 
-  console.log(formTitle)
+  //console.log(formTitle)
   //!changing Oreder status 
-  console.log(changedOrderStatus)
+  //console.log(changedOrderStatus)
   const handleOrderStatus=(status)=>{
     setChangedOrderStatus(status)
   }
@@ -67,9 +61,9 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
   
   // #### CONSOLE ZONE START POINT ####
 
-  console.log(foodInfo)
-  // console.log(file)
-  // console.log(foodsInfo.imageUrl)
+  //console.log(foodInfo)
+  // //console.log(file)
+  // //console.log(foodsInfo.imageUrl)
   
  // #### CONSOLE ZONE END POINT ####
 
@@ -83,7 +77,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
      }
 
      const {foodTitle, foodType,description,price}=foodInfo
-      console.log(foodInfo.foodId)
+      //console.log(foodInfo.foodId)
     //  New Form Constructor
     const formData=new FormData()
 
@@ -93,7 +87,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
     formData.append('price',price)
     formData.append('imageUrl', file); //file base64
    
-    console.log(formData)
+    //console.log(formData)
      //****AXIOS ASYNC AWAIT WAY XXXX ASTAGFIRULLAH XXXXXX
     const addFood= async()=>{
       try{
@@ -105,7 +99,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
             setFoodSync(Math.random())
           }
        }catch(e){
-         console.log(`add Food error ${e}`)
+         //console.log(`add Food error ${e}`)
         } ;
     }    
     addFood()
@@ -113,7 +107,7 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
     
 
   }else if(formTitle ==="delete_Food"){
-    console.log('submitted '+foodInfo.foodId)
+    //console.log('submitted '+foodInfo.foodId)
     const deleteFood= async()=>{
       try{
           const response=await axios.delete(
@@ -122,9 +116,9 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
             //// { params: { id: foodInfo.foodId } }
 
              ) 
-          console.log(response.data.success)
+          //console.log(response.data.success)
        }catch(e){
-         console.log(`add Food error ${e}`)
+         //console.log(`add Food error ${e}`)
         } ;
     } 
 
@@ -136,7 +130,7 @@ else if(formTitle ==="update_Food"){
 
 
       const {foodTitle, foodType,description,price}=foodInfo
-      console.log(foodInfo.foodId)
+      //console.log(foodInfo.foodId)
     //  New Form Constructor
     const formData=new FormData()
 
@@ -161,7 +155,7 @@ else if(formTitle ==="update_Food"){
             `http://localhost:5000/api/food/${foodInfo.foodId}`,
             
             formData) 
-          console.log(response.data.success)
+          //console.log(response.data.success)
           if(response.data.success){
             setSearchFood({})
             setFoodInfo({foodId:""})
@@ -169,7 +163,7 @@ else if(formTitle ==="update_Food"){
             alert("Successfully updated")
           }
        }catch(e){
-         console.log(`add Food error ${e}`)
+         //console.log(`add Food error ${e}`)
         } ;
     } 
 
@@ -181,10 +175,10 @@ else if(formTitle ==="update_Food"){
 
       try{
         const response=await axios.patch(`http://localhost:5000/api/order/${foodInfo.orderId}`,{order_status:changedOrderStatus})
-        console.log(response.data.sms)
+        //console.log(response.data.sms)
 
       }catch(e){
-          console.log(`error in pathcing order status ${e}`)
+          //console.log(`error in pathcing order status ${e}`)
       }
 
         
@@ -203,7 +197,7 @@ else if(formTitle ==="update_Food"){
      }
     
      const {admin_email,admin_name,admin_mobile,admin_password,confirm_password}=foodInfo
-    //   console.log(foodInfo.foodId)
+    //   //console.log(foodInfo.foodId)
     // //  New Form Constructor
 if(admin_password!==confirm_password){
   alert("password mismatch")
@@ -222,7 +216,7 @@ if(admin_password!==confirm_password){
     const createAdmin= async()=>{
       try{
           const res=await axios.post("http://localhost:5000/api/admin/createadmin",formData) 
-          console.log(res)
+          //console.log(res)
           alert(res.data.response)
           // setFoodsInfo(response.data.data)
           // if(response.data.data){
@@ -230,15 +224,15 @@ if(admin_password!==confirm_password){
           //   alert("Admin successfully added")
           // }
        }catch(e){
-         console.log(`Admin Create error ${e}`)
+         //console.log(`Admin Create error ${e}`)
         } ;
     }    
     createAdmin()
     setFile(null)
 
-    console.log('admin create pattern click')
-    console.log(foodInfo)
-    console.log(formData)
+    //console.log('admin create pattern click')
+    //console.log(foodInfo)
+    //console.log(formData)
 }  
 
   }
@@ -268,13 +262,13 @@ if(admin_password!==confirm_password){
 
     if(formType==="update_Food"){
 
-      console.log('search done')
+      //console.log('search done')
 
     const searchFood=async()=>{
 
       try{
         const response=await axios.get(`http://localhost:5000/api/food/${foodInfo.foodId}`)
-        //!console.log(response.data.data)
+        //!//console.log(response.data.data)
         setSearchFood(response.data.data)
         if(response.data.data){
           setEditBtn(true)
@@ -282,7 +276,7 @@ if(admin_password!==confirm_password){
         // setEditBtn(true)
         setDisplayed(false)
        }catch(e){
-        // console.log(`search Food error ${e}`)
+        // //console.log(`search Food error ${e}`)
         alert("Nothing Found ")
         } ;
         
@@ -295,9 +289,9 @@ if(admin_password!==confirm_password){
 
         try{
           const response=await axios.get(`http://localhost:5000/api/order/${foodInfo.orderId}`)
-          //!console.log(response.data.data)
+          //!//console.log(response.data.data)
           setSearchFood(response.data.data)
-          console.log(response.data.data)
+          //console.log(response.data.data)
           if(response.data.data){
             setEditBtn(true)
           }
@@ -305,7 +299,7 @@ if(admin_password!==confirm_password){
           // setDisplayed(false)
           setOrderedInfo(true)
          }catch(e){
-          // console.log(`search Food error ${e}`)
+          // //console.log(`search Food error ${e}`)
           alert("Nothing Found ")
           } ;
           
@@ -320,7 +314,7 @@ if(admin_password!==confirm_password){
 
     
   }
-console.log(searchFood)
+//console.log(searchFood)
 
 const handleRefresh=()=>{
   setSearchFood({});
@@ -381,7 +375,7 @@ const handleDel=()=>{
   const deleteFood= async()=>{
     try{
         const response=await axios.delete(`http://localhost:5000/api/food/${foodInfo.foodId}`) 
-        console.log(response.data.success)
+        //console.log(response.data.success)
         if(response.data.success){
           setSearchFood({});
           setEditBtn(false)
@@ -393,7 +387,7 @@ const handleDel=()=>{
         }
        
      }catch(e){
-       console.log(`add Food error ${e}`)
+       //console.log(`add Food error ${e}`)
       } ;
   } 
 
@@ -656,7 +650,7 @@ const handleDel=()=>{
             <PhotoCamera  style={{position:"absolute",width:"35px",height:"30px",cursor:'pointer',paddingTop:"5px"}} color="secondary"/>
             </label>
 
-            {/* <FileBase64 multiple={false} onDone={image => console.log(typeof image.base64)}/> 
+            {/* <FileBase64 multiple={false} onDone={image => //console.log(typeof image.base64)}/> 
                                    */}
             {/* && image.size<"5000 kB"  */}
             <FileBase64 required={true} multiple={false} onDone={image =>image.type.slice(0,5)==="image" ? setFile(image.base64) : alert("Please Upload an Image within 5MB")}/>                       

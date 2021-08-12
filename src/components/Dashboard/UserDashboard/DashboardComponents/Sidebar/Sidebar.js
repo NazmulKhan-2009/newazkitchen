@@ -1,30 +1,25 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Link, useHistory } from 'react-router-dom';
-import HomeIcon from '@material-ui/icons/Home';
-import ViewListIcon from '@material-ui/icons/ViewList';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Toolbar from '@material-ui/core/Toolbar';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import EventIcon from '@material-ui/icons/Event';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import YourProfile from '../YourProfile/YourProfile';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../../../../App';
+import YourProfile from '../YourProfile/YourProfile';
 
 
 const drawerWidth = 240;
@@ -72,7 +67,7 @@ const dashboardNav=[
 
 ]
 
-// console.log(window.location.pathname)
+// //console.log(window.location.pathname)
 
 
 
@@ -154,7 +149,7 @@ export default function Sidebar(props) {
         </Toolbar>
       </AppBar> */}
 
-{console.log('that is sidebar')}
+{/* {console.log('that is sidebar')} */}
       
         <Toolbar style={{position:'absolute',left:0,top:0}}>
           <IconButton

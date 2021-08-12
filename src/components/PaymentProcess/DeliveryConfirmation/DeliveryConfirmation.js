@@ -1,7 +1,6 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import WaitingOrder from '../../Cart/Cart/WaitingOrder';
-import classes from './DeliveryConfirmation.module.css'
+import classes from './DeliveryConfirmation.module.css';
 
 const DeliveryConfirmation = ({handleDialog}) => {
  // const [open, setOpen] = React.useState(false);
@@ -17,7 +16,7 @@ const DeliveryConfirmation = ({handleDialog}) => {
  //  const {address,contact,instruction,name,totalPrice,gender}=deliveryInfo
  // }
  
-//  console.log(deliveryInfo)
+//  //console.log(deliveryInfo)
 
 
  return (

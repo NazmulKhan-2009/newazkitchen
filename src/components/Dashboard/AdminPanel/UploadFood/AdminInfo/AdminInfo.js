@@ -5,7 +5,7 @@
 
 // const [foodsList,setFoodsList ]=useState([])  
 
-// // console.log(foodsList)
+// // //console.log(foodsList)
 // useEffect(()=>{
 
 //   const serverFoodList=async()=>{
@@ -14,7 +14,7 @@
 //       setFoodsList(foods.data.slice(90,103))
       
 //      }catch(e){
-//        console.log(`error on getting Food List from server ${e}`)
+//        //console.log(`error on getting Food List from server ${e}`)
 //       } ;
     
 //   }
@@ -48,7 +48,7 @@
 
 // export default AdminInfo;
 
-import React , {Component} from 'react'
+import React, { Component } from 'react'
 
 class AdminInfo extends Component{
 

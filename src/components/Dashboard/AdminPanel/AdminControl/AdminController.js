@@ -1,9 +1,8 @@
-import React from 'react';
 import { Grid } from "@material-ui/core";
-import { useState } from "react";
+import React, { useState } from 'react';
+import { AdminForm } from '../commonClass/CommonClass';
 // import {AdminForm} from "../../../commonClass/commonClass";
 import SelectMethod from '../SelectMethod/SelectMethod';
-import { AdminForm } from '../commonClass/CommonClass';
 // import SelectMethod from "./AdminNav/SelectMethod/SelectMethod";
 
 const AdminController = () => {
@@ -24,7 +23,7 @@ const AdminController = () => {
   //  setSelectedValue(e.target.value);
    // setSelect(true)
    // handlePayment(e.target.value,true)
-   // console.log(e.target.value)
+   // //console.log(e.target.value)
   //  if(e.target.value==='Cash On Delivery'){
   //    handleDialog(true,{
   //      title:'Cash on Delivery....',

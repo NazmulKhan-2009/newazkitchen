@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import { Button, FormControlLabel, Grid } from '@material-ui/core';
+import Radio from '@material-ui/core/Radio';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Button, Grid } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Alert from '@material-ui/lab/Alert';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import './DeliveryDetails.css';
 
-import { withStyles } from '@material-ui/core/styles';
-import { green, red } from '@material-ui/core/colors';
-import Radio from '@material-ui/core/Radio';
-import { Fab, FormControlLabel} from '@material-ui/core';
-import './DeliveryDetails.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,12 +27,12 @@ const DeliveryDetails=()=> {
   
   
   
-  // console.log(deliveryInfo)
+  // //console.log(deliveryInfo)
 
   const handleSubmit=(e)=>{
      e.preventDefault()
-    console.log(deliveryInfo)
-  // console.log(totalPrice)
+    //console.log(deliveryInfo)
+  // //console.log(totalPrice)
   sessionStorage.setItem("deliveryInfo", JSON.stringify({...deliveryInfo,totalPrice}))
     // localStorage.removeItem('cartInfo')
     SetDeliveryInfo({})
@@ -51,7 +46,7 @@ const DeliveryDetails=()=> {
   }
 
   const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
-  console.log(totalPrice)
+  //console.log(totalPrice)
 
   const [selectedValue, setSelectedValue] = React.useState('');
 

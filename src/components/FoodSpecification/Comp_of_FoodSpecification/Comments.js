@@ -1,31 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import Fab from '@material-ui/core/Fab';
+import Avatar from '@material-ui/core/Avatar';
+import { deepOrange } from '@material-ui/core/colors';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Avatar from '@material-ui/core/Avatar';
-import MenuIcon from '@material-ui/icons/Menu';
-import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import { Grid } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import SendIcon from '@material-ui/icons/Send';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import { useState } from 'react';
-import { SettingsInputCompositeOutlined } from '@material-ui/icons';
-import { deepOrange} from '@material-ui/core/colors'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React, { useState } from 'react';
 import CommentPass from './CommentPass';
 
 const messages = [
@@ -132,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Comments({comment,handleRating}) {
-  console.log(comment?.filter(item=>item.comment!==null?item.comment:null).map(item=>item.comment))
+  //console.log(comment?.filter(item=>item.comment!==null?item.comment:null).map(item=>item.comment))
   const classes = useStyles();
 
   const [comments, setComments]=useState({})
@@ -146,11 +128,11 @@ const handleInput=(e)=>{
 
 const submitComment=()=>{
   if(userInfo){
-      console.log('user has logged in')
+      //console.log('user has logged in')
   }else{
     
   }
-  console.log(comments)
+  //console.log(comments)
 }
 const unknown="uk"
 
@@ -180,7 +162,7 @@ const unknown="uk"
               </ListItemAvatar>
               <ListItemText primary={item.email} secondary={item.comment} />
             </ListItem>
-            {console.log('render')}
+            {/* {console.log('render')} */}
           </div>
         ))}
 

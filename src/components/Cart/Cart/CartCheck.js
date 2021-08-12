@@ -1,16 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import { useContext } from 'react';
-import { UserContext } from '../../../App';
-import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
-import { useState } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Dialogs from '../Dialog/Dialogs';
+import React, { useContext } from 'react';
+import { UserContext } from '../../../App';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,7 +46,7 @@ const CartCheck = ({handlePlaceOrder,confirmCart,setConfirmCart,handleDialog}) =
  const classes = useStyles();
 
 //  const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
-//  console.log(deliveryInfo)
+//  //console.log(deliveryInfo)
 
  const handleRemove=(foodTitle,index,id)=>{
   let cartInfo=JSON.parse(localStorage.getItem('cartInfo'))

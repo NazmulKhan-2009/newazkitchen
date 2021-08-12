@@ -12,12 +12,17 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
+import UIfx from 'uifx';
 import { UserContext } from '../../../App';
+// import bellAudio from './my-sounds/bell.mp3'
+import favTone from '../../../mySounds/favtone.mp3';
+import { addFavFood } from '../../DataManagement';
 import { StarRated } from '../../Utility';
 
 const useStyles = makeStyles((theme) => ({
@@ -64,35 +69,56 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FoodCard=({item,ind,foodDet,count,size,dispRating})=>{
+const FoodCard=({item,ind,foodDet,count,size,dispRating,foodId})=>{
+  // const history=useHistory()
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [cartCount, setCartCount] = useState(0)
   // const [cart,setCart]=useState([])
  const {cartItem, setCartItem}=useContext(UserContext)
 
+ //console.log(foodId)
  const [foodIdCount,setFoodIdCount]=useState({id:"",count:0})
+ const [isFav,setIsFav]=useState(false)
 
  //!Drawer Content
- const {cartOpen, setCartOpen}=useContext(UserContext)
+ const {cartOpen, setCartOpen,loginInfo,setProfileSync,userData}=useContext(UserContext)
 
+ //console.log(userData)
+
+const isfavoriteMarked=userData.favorite?.some(food=>food._id===item._id)
+//console.log(isfavoriteMarked)
+
+ //console.log(loginInfo)
  let history=useHistory()
 
 
-//  console.log(item.reviews.reduce((pv,cv)=>pv.rate+cv.rate))
-// const review=foodDet.map(item=>item.reviews)
-// console.log(item)
+ const bell = new UIfx(
+  // bellAudio,
+  favTone,
+  {
+    volume: 0.4, // number between 0.0 ~ 1.0
+    throttleMs: 100
+  }
+)
 
-// console.log(item)
-// console.log("------>")
+// const userInfo=sessionStorage.getItem(JSON.parse('userInfo'))
+const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+// //console.log(userInfo.userEmail)
+//  //console.log(item.reviews.reduce((pv,cv)=>pv.rate+cv.rate))
+// const review=foodDet.map(item=>item.reviews)
+// //console.log(item)
+
+// //console.log(item)
+// //console.log("------>")
 let avgRate=''
 const totalRatedLen=item.reviews.filter(mark=>mark.rate>0)
-// console.log(totalRatedLen)
+// //console.log(totalRatedLen)
 if(item.reviews.length>0){
-  // console.log(item.reviews.map(mark=>mark.rate))
+  // //console.log(item.reviews.map(mark=>mark.rate))
   const totRate=item.reviews.map(mark=>mark.rate)
   const tot=totRate.reduce((p,c)=>p+c)
-  // console.log(tot/item.reviews.length)
+  // //console.log(tot/item.reviews.length)
   // avgRate=tot/item.reviews.length
   avgRate=tot/totalRatedLen.length
 
@@ -100,8 +126,8 @@ if(item.reviews.length>0){
   
   // const total=item.reviews.reduce((pv,cv)=>pv.rate+cv.rate)
   // avgRate=total/item.reviews.length
-  // console.log(avgRate)
-  // console.log(total)
+  // //console.log(avgRate)
+  // //console.log(total)
 
   //!avg rating DB
 
@@ -110,11 +136,11 @@ if(item.reviews.length>0){
 
  
 //  const avgRate=item.reviews.reduce((pv,cv)=>pv.rate+cv.rate)
-// console.log(item)
-// console.log(`for ${item._id} count is ${cartCount}`)
-// console.log(`special id ${foodId}`)
+// //console.log(item)
+// //console.log(`for ${item._id} count is ${cartCount}`)
+// //console.log(`special id ${foodId}`)
 
-//  console.log(item._id)
+//  //console.log(item._id)
   // const handleExpandClick = () => {
   //   setExpanded(!expanded);
   // };
@@ -190,6 +216,30 @@ if(item.reviews.length>0){
 
   }    
 
+  const favClick=(foodId)=>{
+    // const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+    if(userInfo){
+      // bell.play()
+      setIsFav(true)
+      //console.log(foodId)
+      //console.log(userInfo.userEmail)
+  
+      addFavFood({foodId,email:userInfo.userEmail})
+      
+      setProfileSync(Math.random())
+        
+
+    }else{
+      // alert('you have login first')
+      history.push('/login')
+    }
+
+    
+    
+
+
+  }
+
   return (
    
     <Grid  item={true} xs={10}  sm={size?.sm||4} md={size?.sm||4}  lg={size?.lg||3} className={classes.cardStyle}>
@@ -207,7 +257,19 @@ if(item.reviews.length>0){
           <IconButton aria-label="settings">
           
       
-            <MoreVertIcon />
+            {/* <MoreVertIcon /> */}
+            <Badge title={isfavoriteMarked ? "Already in fav" : "Add to Fav"}>
+            {
+              
+
+              isfavoriteMarked ?<FavoriteIcon color='secondary'/>:<FavoriteBorderIcon color='primary' onClick={()=>favClick(foodId)}/>
+              
+            }
+            {/* isFav?<FavoriteIcon color='secondary'/>:<FavoriteBorderIcon color='primary' onClick={()=>favClick(foodId)}/> */}
+            
+
+            </Badge>
+            
           </IconButton>
         }
      

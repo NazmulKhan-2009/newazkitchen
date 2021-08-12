@@ -1,14 +1,13 @@
-import React, { useContext, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { StarRated } from '../Utility';
-import { ratingReview } from '../DataManagement';
+import TextField from '@material-ui/core/TextField';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../App';
+import { StarRated } from '../Utility';
 
 export default function RatingReview({display,handleClose,rating,foodId,rateChange,handleRating}) {
   // const [open, setOpen] = useState(false);
@@ -17,7 +16,7 @@ export default function RatingReview({display,handleClose,rating,foodId,rateChan
  
 
   
-console.log(rating, foodId)
+//console.log(rating, foodId)
 
 const handleInput=(e)=>{
 setInputValue({...inputValue,[e.target.name]:e.target.value})
@@ -36,9 +35,9 @@ const rateInfo={
   comment:inputValue.comment
 }
 
-// ratingReview(rateInfo).then(res=>console.log(res))
+// ratingReview(rateInfo).then(res=>//console.log(res))
 
-//  console.log(rateInfo)
+//  //console.log(rateInfo)
 handleRating(rateInfo)
   
  handleClose(false,1)

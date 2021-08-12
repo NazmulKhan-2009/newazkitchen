@@ -23,7 +23,7 @@ const adminVerify=JSON.parse(sessionStorage.getItem('userInfo'))
        return response.data.data
        
      }catch(e){
-      console.log(`add Order error ${e}`)
+      //console.log(`add Order error ${e}`)
      } ;
  }  
  
@@ -43,7 +43,7 @@ const adminVerify=JSON.parse(sessionStorage.getItem('userInfo'))
 
 //    return response.data.data
 //   } catch (e) {
-//     console.log(`error to get order history ${e}`)
+//     //console.log(`error to get order history ${e}`)
 //   }
 
 // }
@@ -56,7 +56,7 @@ const orderData=async()=>{
  
   //   return response.data.data
   //  } catch (e) {
-  //    console.log(`error to get order history ${e}`)
+  //    //console.log(`error to get order history ${e}`)
   //  }
 
   try{
@@ -79,7 +79,7 @@ return orderData()
 //!USER INFO CONNECTION WITH DATA BASE
 
 export const userDataDb=(db)=>{
-  console.log(`data base is connected with ${db}`)
+  //console.log(`data base is connected with ${db}`)
 }
 
 
@@ -90,10 +90,10 @@ export const userDataDb=(db)=>{
 
 //     try {
 //       const responsedData=await axios.post("http://localhost:5000/api/user/signup", userData)
-//       console.log(responsedData)
+//       //console.log(responsedData)
       
 //     } catch (error) {
-//       console.log(`something problem in sign up`)
+//       //console.log(`something problem in sign up`)
 //     }
 
 //   }
@@ -106,11 +106,11 @@ export const userDataDb=(db)=>{
 export const userSignUp=async(userData)=>{
   try {
     const resData=await axios.post('http://localhost:5000/api/user/signup' , userData)
-    // console.log(resData)
+    // //console.log(resData)
     return resData
     
   } catch(e){
-  //  console.log(e)
+  //  //console.log(e)
   // return 
   }
     
@@ -125,7 +125,7 @@ export const userSignIn=async(userData)=>{
 
     return resData
   }catch{
-    console.log()
+    //console.log()
    } ;
 
 }
@@ -136,9 +136,9 @@ export const searchFood=async(keyWord)=>{
 try{
     const resData=await axios.post('http://localhost:5000/api/food/searchfood',{keyWord})
       return resData
-    // console.log(resData)
+    // //console.log(resData)
  }catch(e){
-   console.log(e)
+   //console.log(e)
   } ;
 }
 
@@ -150,10 +150,10 @@ export const foodDetails=async(id)=>{
   try{
     const resData=await axios.get(`http://localhost:5000/api/food/${id}`) 
     return resData.data.data[0]
-    // console.log(resData.data.data)
+    // //console.log(resData.data.data)
  
     }catch(e){
-      console.log(e)
+      //console.log(e)
     } ;
  
   }
@@ -164,7 +164,7 @@ export const ratingReview=async(reviewData)=>{
 try{
     const resData=await axios.post('http://localhost:5000/api/food/review',reviewData)
 
-    // console.log(resData)
+    // //console.log(resData)
     return resData.data.data
  }catch(e){
    
@@ -182,10 +182,10 @@ export const imageUpload=async(image,type)=>{
       const response=await axios.patch(
         `http://localhost:5000/api/user/alluser`,image) 
         return response
-      // console.log(response.data.success)
+      // //console.log(response.data.success)
       
     }catch(e){
-     console.log(`add Food error ${e}`)
+     //console.log(`add Food error ${e}`)
     } ;
 
   }
@@ -194,14 +194,28 @@ export const imageUpload=async(image,type)=>{
       const response=await axios.get(
         `http://localhost:5000/api/user/alluser/${image}`) 
         return response
-      // console.log(response.data.success)
+      // //console.log(response.data.success)
       
     }catch(e){
-     console.log(`add Food error ${e}`)
+     //console.log(`add Food error ${e}`)
     } ;
 
   }
   
 
   
+}
+
+
+export const addFavFood=async(info)=>{
+ const data=await axios.patch(`http://localhost:5000/api/user/favfood/${info.foodId}/${info.email}`)
+ //console.log(data)
+}
+
+
+//! ADD EVENTS
+
+export const addEvents=async(data)=>{
+  const resData=await axios.post('http://localhost:5000/api/user/addevent/',data)
+  console.log(resData)
 }

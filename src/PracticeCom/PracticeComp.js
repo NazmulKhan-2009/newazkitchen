@@ -1,12 +1,10 @@
 import { Button } from '@material-ui/core';
-import axios from 'axios';
-import React, { createContext, useState ,useMemo, useEffect, useContext} from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { UserContext } from '../App';
 import { orderedData } from '../components/DataManagement';
-import ChildrenComp from './ChildrenComp/ChildrenComp';
 import ClassComPrac from './ClassComPrac/ClassCompPrac';
-import CousinComp,{info} from './CousinComp/CousinComp';
-import  {MyCity} from './myCity';
+import CousinComp from './CousinComp/CousinComp';
+import { MyCity } from './myCity';
 import ParentCom from './ParentCom/ParentCom';
 import PracMemo from './PracMemo';
 import { PracticeProvider } from './PracticePro';
@@ -15,7 +13,7 @@ import { PracticeProvider } from './PracticePro';
 const fetchData=(use)=>{
   fetch(`https://jsonplaceholder.typicode.com/${use}`)
   .then(response => response.json())
-  .then(json => console.log(json))
+  .then(json => //console.log(json))
 }
 const PracticeComp = () => {
  
@@ -24,10 +22,10 @@ const PracticeComp = () => {
   const {count, setCount}=useContext(UserContext)
 
   const ele=<h1 key="2" style={{color:'red'}} className="do" >Welcome Cumilla</h1>
-  // console.log(ele)
-  // console.log(<PracticeProvider/>)
-  // console.log(<CousinComp do/>)
-  // console.log(<ParentCom do/>)
+  // //console.log(ele)
+  // //console.log(<PracticeProvider/>)
+  // //console.log(<CousinComp do/>)
+  // //console.log(<ParentCom do/>)
 
   const info=[
     {
@@ -51,7 +49,7 @@ const PracticeComp = () => {
   const [orderInfo, setOrderInfo]=useState([])
   const [time, setTime]=useState(new Date().toLocaleTimeString())
   
-  //?console.log(orderInfo)
+  //?//console.log(orderInfo)
 
   setInterval(()=>{setTime(new Date().toLocaleTimeString())},1000)
 
@@ -74,7 +72,7 @@ const PracticeComp = () => {
 //! /* ##### Depricated way but tested okay--1
 //     const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
 //     const purchasedInfo=JSON.parse(sessionStorage.getItem('purchasedInfo'))
-//     console.log(cartInfo[0])
+//     //console.log(cartInfo[0])
 //     const cartData={
 //     email:'nazmulustc09@yahoo.com',
 //     cart:cartInfo,
@@ -83,15 +81,15 @@ const PracticeComp = () => {
 //     {price:cartInfo[1].price,quantity:cartInfo[2].imageUrl}
 //     ]
 //     }
-//     console.log(cartData)
+//     //console.log(cartData)
 
 //     const orderFood= async()=>{
 //       try{
 //           const response=await axios.post("http://localhost:5000/api/order/orderdetail", cartData) 
 //           setOrderInfo(response.data.data)
-//           console.log(response)
+//           //console.log(response)
 //        }catch(e){
-//          console.log(`add Order error ${e}`)
+//          //console.log(`add Order error ${e}`)
 //         } ;
 //     }  
 //     orderFood() */

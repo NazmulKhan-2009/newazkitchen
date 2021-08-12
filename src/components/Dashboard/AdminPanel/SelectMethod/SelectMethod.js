@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { FormControlLabel } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
-import {FormControlLabel, Grid, Tooltip} from '@material-ui/core';
+import React, { useState } from 'react';
 // import ControlDialog2 from '../../../ControlDialog/ControlDialog2';
 import ControlDialog from '../ControlDialog/ControlDialog';
 // import ControlDialog from '../../../ControlDialog/ControlDialog';
 
 const SelectMethod = ({value,name,handleInput,label,checked,adminForm}) => {
-//!console.log("SelectMethod renedred")
+//!//console.log("SelectMethod renedred")
  const [selectedValue, setSelectedValue] = React.useState('');
  const [dial, setDial]=useState(false)
 
@@ -19,7 +19,7 @@ const SelectMethod = ({value,name,handleInput,label,checked,adminForm}) => {
 //   setSelectedValue(e.target.value);
 //   // setSelect(true)
 //   handlePayment(e.target.value,true)
-//   // console.log(e.target.value)
+//   // //console.log(e.target.value)
 //   if(e.target.value==='Cash On Delivery'){
 //     handleDialog(true,{
 //       title:'Cash on Delivery....',

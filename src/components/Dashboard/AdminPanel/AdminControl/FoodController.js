@@ -1,16 +1,12 @@
 
-import React from 'react';
 import { Grid } from "@material-ui/core";
-import { useState } from "react";
-// import {AdminForm} from "../../../commonClass/commonClass";
-// import ControlDialog2 from "../ControlDialog/ControlDialog2";
-import ControlDialog from "../ControlDialog/ControlDialog";
-import SelectMethod from '../SelectMethod/SelectMethod';
+import React, { useState } from 'react';
 import { AdminForm } from '../commonClass/CommonClass';
+import SelectMethod from '../SelectMethod/SelectMethod';
 // import SelectMethod from "./AdminNav/SelectMethod/SelectMethod";
 
 const FoodController = () => {
-//!console.log('FoodController rendered')
+//!//console.log('FoodController rendered')
 
 const [dial, setDial]=useState()
  const [selectedValue, setSelectedValue] = useState('');
@@ -24,7 +20,7 @@ const [dial, setDial]=useState()
    setSelectedValue(value);
    // setSelect(true)
    // handlePayment(e.target.value,true)
-   // console.log(e.target.value)
+   // //console.log(e.target.value)
    // if(e.target.value==='Cash On Delivery'){
    //   handleDialog(true,{
    //     title:'Cash on Delivery....',

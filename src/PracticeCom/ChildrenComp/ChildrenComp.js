@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { myContext } from '../PracticePro';
 
 const ChildrenComp = (props) => {
 const priceInfo=useContext(myContext)
 
-console.log('children copm rendering')
+//console.log('children copm rendering')
  return (
   <div>
    {`props as attribute property ${props.value}`}
