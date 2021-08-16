@@ -127,6 +127,7 @@ const [signOutNotify, setSignOutNotify]=useState(true)
 const [loading, setLoading]=useState({loginZone:'',loader_disp:'none'})
 const [googleInfo,setGoogleInfo]=useState({})
 // const [loading, setLoading]=useState('block')
+const [resetForm,setResetForm]=useState(false)
 
 const history = useHistory();
  const location = useLocation();
@@ -296,6 +297,17 @@ const handleSignOut=()=>{
     setSignOutNotify(true)
 }
 
+
+const resetPassword=()=>{
+
+    setResetForm(true)
+}
+
+
+const loginBack=()=>{
+    setResetForm(false)
+}
+
  return (
      <>
  <div className="login_style" style={{display:loading.loginZone}}>    
@@ -322,7 +334,7 @@ const handleSignOut=()=>{
 
             <div className="formBx">
             
-                <form onSubmit={handleSignIn}>
+               {!resetForm ?  <form onSubmit={handleSignIn}>
                
                     <h2>Sign In</h2>
                     
@@ -334,10 +346,35 @@ const handleSignOut=()=>{
                 
 
                     <input type="submit" name="" value="Login"/>
+                    <span style={{margin:"10px",cursor:'pointer'}} onClick={resetPassword}>Reset Password</span>
                     
                     {/* <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p> */}
-                    <p className="signup">don't have an account? <span style={{cursor:"pointer"}} onClick={handlegooglesignIn}>Sign up google</span></p>
-                </form>
+                    <p className="signup">don't have an account? <span style={{cursor:"pointer",color:'tomato'}} onClick={handlegooglesignIn}>Sign up google</span></p>
+                </form> :
+                
+                
+                <form onSubmit={handleSignIn}>
+               
+               <h2>Reset Password</h2>
+               
+              
+               <input type="email" name="user_email" placeholder="email" onChange={handleInput} required/>
+               <input type="password" name="user_password" placeholder="Password" onChange={handleInput}/>
+               <input type="password" name="reset_password" placeholder="Reset Password" onChange={handleInput}/>
+
+               {/* admin access through email */}
+           
+
+               <input type="submit" name="" value="Reset"/>
+               <span style={{margin:"10px",cursor:'pointer'}} onClick={loginBack}>Login back</span>
+               
+               {/* <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p> */}
+               <p className="signup">don't have an account? <span style={{cursor:"pointer",color:'tomato'}} onClick={handlegooglesignIn}>Sign up google</span></p>
+           </form> 
+                
+                
+                }
+                
     {/* //!SOCIAL LOGiN */}
                                 
                 <div className="google-btn">

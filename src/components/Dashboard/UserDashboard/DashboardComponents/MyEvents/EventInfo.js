@@ -70,7 +70,7 @@ const submitForm=(e)=>{
             addEvents(eventDatas)
             setProfileSync(Math.random())
             setNewEvent('none')
-            setEventData({})
+            setEventData({phone:'',email:'',message:''})
             setCheckEvent('block')
 
             // console.log(eventDatas)
@@ -128,12 +128,12 @@ const newEventOpen=()=>{
                             <div className="form-row">
                                 <div className="control-group col-sm-6">
                                     <input type="text" className="form-control p-4" id="name" placeholder="Your Phone"
-                                        required data-validation-required-message="Please enter your phone" name="phone" onChange={inputData}/>
+                                        required data-validation-required-message="Please enter your phone" name="phone" value={eventData.phone} onChange={inputData}/>
                                     <p className="help-block text-danger"></p>
                                 </div>
                                 <div className="control-group col-sm-6">
                                     <input type="email" className="form-control p-4" id="email" placeholder="Your Email"
-                                        required="required" data-validation-required-message="Please enter your email" name="email"  value="khan20@gmail.com"/>
+                                        required="required" data-validation-required-message="Please enter your email" name="email"  value={userInfo.userEmail}/>
                                     <p className="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -144,8 +144,8 @@ const newEventOpen=()=>{
                             </div> */}
                             <div className="control-group">
                                 <textarea className="form-control py-3 px-4" rows="5" id="message" placeholder="Message"
-                                    required="required"
-                                    data-validation-required-message="Please enter your message" name="message" onChange={inputData}></textarea>
+                                    required="required" value={eventData.message} onChange={inputData}
+                                    data-validation-required-message="Please enter your message" name="message"></textarea>
                                 <p className="help-block text-danger"></p>
                             </div>
                             <div>

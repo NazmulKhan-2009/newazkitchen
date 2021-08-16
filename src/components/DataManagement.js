@@ -219,3 +219,7 @@ export const addEvents=async(data)=>{
   const resData=await axios.post('http://localhost:5000/api/user/addevent/',data)
   console.log(resData)
 }
+
+export const eventCancel=async(eventId)=>{
+await axios.patch(`http://localhost:5000/api/user/event/${eventId}`)
+}
