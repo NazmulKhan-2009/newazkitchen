@@ -1,5 +1,6 @@
 import axios from "axios";
-
+// import React, { useContext } from 'react';
+// import { UserContext } from "../App";
 export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
 
 const adminVerify=JSON.parse(sessionStorage.getItem('userInfo'))
@@ -221,5 +222,15 @@ export const addEvents=async(data)=>{
 }
 
 export const eventCancel=async(eventId)=>{
-await axios.patch(`http://localhost:5000/api/user/event/${eventId}`)
+ 
+const result=await axios.patch(`http://localhost:5000/api/user/event/${eventId}`)
+return result
+}
+
+
+//!RESET PASSWORD
+
+export const resetUserPassword=async(dataToChange)=>{
+  const response=await axios.patch('http://localhost:5000/api/user/resetpassword',dataToChange)
+  return response
 }

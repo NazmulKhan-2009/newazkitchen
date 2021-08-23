@@ -85,16 +85,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventCancelDialog({open,dialogClose,eventData,loading}) {
   const classes = useStyles();
- const {setUserData, setProfileSync}= useContext(UserContext)
+ const {setUserData, setProfileSync,setLoader,setCanceledEvent}= useContext(UserContext)
   
 console.log(eventData)
 
 const handleEventCancel=()=>{
-  eventCancel(eventData)
+  setLoader(true)
+  eventCancel(eventData).then((res)=> console.log(res))
   setProfileSync(Math.random())
   dialogClose(false)
   loading(true)
 }
+
 
   
 

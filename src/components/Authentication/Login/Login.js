@@ -107,7 +107,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { UserContext } from '../../../App';
 import { CustomizeLoader } from '../../../components/Utility';
-import { userSignIn, userSignUp } from '../../DataManagement';
+import { resetUserPassword, userSignIn, userSignUp } from '../../DataManagement';
 import { handleFacebookSignIn, handleGoogleSignIn, initializeLoginFramework } from '../firebase/loginManager';
 // import img1 from '../../../img/img1.jpg'
 // import img2 from '../../../img/img2.jpg'
@@ -136,7 +136,7 @@ const history = useHistory();
 // const [file, setFile]=useState('')
 // const [userData, setUserData]=useState({})
 
-// //console.log(userInfo)
+console.log(userInfo)
 
 //!GOOGLE AUTH START
 
@@ -301,12 +301,44 @@ const handleSignOut=()=>{
 const resetPassword=()=>{
 
     setResetForm(true)
+    setUserInfo({
+        // user_name:'',
+        // user_email:'',
+        // user_password:''
+    })
 }
 
 
 const loginBack=()=>{
     setResetForm(false)
+    setUserInfo({
+        
+        // user_email:'',
+        // user_password:'',
+        // retype_password:''
+    })
 }
+
+
+const handlePasswordReset=(e)=>{
+ e.preventDefault()
+ if(userInfo.user_password===userInfo.retype_password){
+    console.log(userInfo)
+    const data={
+        user_email:userInfo.user_email,
+        user_password:userInfo.user_password
+    }
+    resetUserPassword(data)
+    .then(res=>console.log(res))
+
+
+ }else{
+     alert('password is not matching')
+ }
+
+}
+
+
 
  return (
      <>
@@ -338,9 +370,9 @@ const loginBack=()=>{
                
                     <h2>Sign In</h2>
                     
-                    <input type="text" name="user_name" placeholder="Username" onChange={handleInput} required/>
-                    <input type="email" name="user_email" placeholder="email" onChange={handleInput} required/>
-                    <input type="password" name="user_password" placeholder="Password" onChange={handleInput}/>
+                    <input value={userInfo.user_name||""} type="text" name="user_name" placeholder="Username" onChange={handleInput} required />
+                    <input value={userInfo.user_email || ""} type="email" name="user_email" placeholder="email" onChange={handleInput} required/>
+                    <input value={userInfo.user_password || ""} type="password" name="user_password" placeholder="Password" onChange={handleInput}/>
 
                     {/* admin access through email */}
                 
@@ -349,18 +381,18 @@ const loginBack=()=>{
                     <span style={{margin:"10px",cursor:'pointer'}} onClick={resetPassword}>Reset Password</span>
                     
                     {/* <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p> */}
-                    <p className="signup">don't have an account? <span style={{cursor:"pointer",color:'tomato'}} onClick={handlegooglesignIn}>Sign up google</span></p>
+                    <p className="signup">dont have an account  <span style={{cursor:"pointer",color:'tomato'}} onClick={handlegooglesignIn}>Sign up google</span></p>
                 </form> :
                 
                 
-                <form onSubmit={handleSignIn}>
+            <form onSubmit={handlePasswordReset}>
                
                <h2>Reset Password</h2>
                
               
-               <input type="email" name="user_email" placeholder="email" onChange={handleInput} required/>
-               <input type="password" name="user_password" placeholder="Password" onChange={handleInput}/>
-               <input type="password" name="reset_password" placeholder="Reset Password" onChange={handleInput}/>
+               <input value={userInfo.user_email || ''} type="email" name="user_email" placeholder="email" onChange={handleInput} required/>
+               <input value={userInfo.user_password || ''} type="password" name="user_password" placeholder="Password" onChange={handleInput}/>
+               <input value={userInfo.retype_password ||''} type="password" name="retype_password" placeholder="Retype Password" onChange={handleInput}/>
 
                {/* admin access through email */}
            
@@ -369,7 +401,7 @@ const loginBack=()=>{
                <span style={{margin:"10px",cursor:'pointer'}} onClick={loginBack}>Login back</span>
                
                {/* <p className="signup">don't have an account? <span onClick={handleOfFlip}>Sign up.</span></p> */}
-               <p className="signup">don't have an account? <span style={{cursor:"pointer",color:'tomato'}} onClick={handlegooglesignIn}>Sign up google</span></p>
+               <p className="signup">dont have an account <span style={{cursor:"pointer",color:'tomato'}} onClick={handlegooglesignIn}>Sign up google</span></p>
            </form> 
                 
                 

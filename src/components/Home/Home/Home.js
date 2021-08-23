@@ -2,12 +2,15 @@
 //! original Home components
 import React from 'react';
 // import { handleFacebookSignIn, initializeLoginFramework } from '../../Authentication/firebase/loginManager';
-import ContactUs from '../../ContactUs/ContactUs';
+// import ContactUs from '../../ContactUs/ContactUs';
 import Food from '../FoodCard/Food/Food';
 import AppNav from '../Header/AppBar/AppNav';
 import Header from '../Header/Header';
 import OurService from '../OurService/OurService';
-
+import { Link as SmoothLink } from 'react-scroll';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ContactUs from '../ContactUs/ContactUs';
+import Blog from '../Blog/Blog';
 
 const Home = () => {
 
@@ -23,7 +26,12 @@ const Home = () => {
   <Header/>
   <Food/>
   <OurService/>
+  {/* <ContactUs/> */}
+  <Blog/>
   <ContactUs/>
+
+
+  <SmoothLink className='link_style' to="upper" smooth={true} duration={800}><ArrowUpwardIcon className="back-to-top"/></SmoothLink>
   
  
   </>

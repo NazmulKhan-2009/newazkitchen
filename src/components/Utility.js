@@ -11,6 +11,9 @@ import logo2 from '../images/logo/logo-2.png'
 import Loader_style from './Utility.module.css'
 // import StarsRating from 'stars-rating'
 import StarRatings from 'react-star-ratings';
+import './Utility.module.css'
+
+
 const useStyles = makeStyles((theme) => ({
   
   search: {

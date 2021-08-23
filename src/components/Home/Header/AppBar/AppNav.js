@@ -267,7 +267,7 @@ const AppNav=({admin})=>{
   
 
   return (
-    <div>
+    <div id='upper'>
     {notify && 
     <Alert severity="success" style={{position:"absolute",left:"30%"}}>The Feature under Construction!</Alert>}
       <AppBar position="static" className="null" color='transparent'  elevation={0}>
@@ -353,7 +353,8 @@ const AppNav=({admin})=>{
                 Gallery
               </Link>
               
-              <SmoothLink className='link_style' to="contact" smooth={true} duration={800}>Contact</SmoothLink>
+              <SmoothLink className='link_style' to="service" smooth={true} duration={800}>Service</SmoothLink>
+              <SmoothLink className='link_style' to="order" smooth={true} duration={800}>Order</SmoothLink>
               
               <Link to="/dashboard" className='link_style'>
                 Dashboard

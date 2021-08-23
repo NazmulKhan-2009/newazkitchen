@@ -25,3 +25,7 @@ max-width:100px;
  }
 }
 
+
+.my_search .MuiAppBar-colorPrimary{
+  border-radius: 20px;
+}

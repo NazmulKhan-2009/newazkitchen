@@ -7,27 +7,27 @@ export default function MyFavorites() {
 const {loginInfo,userData,setUserData}=useContext(UserContext)
 
 //console.log(userData)
- useEffect(()=>{
+//  useEffect(()=>{
 
-  (async()=>{
+//   (async()=>{
 
-   const data=await axios.get('https://mysql.newazkitchenbdapi.com/mens')
-   //console.log(data)
-  })()
+//    const data=await axios.get('https://mysql.newazkitchenbdapi.com/mens')
+//    //console.log(data)
+//   })()
 
- },[])
+//  },[])
  
 
- const postSubmit=()=>{
+//  const postSubmit=()=>{
 
-  (async()=>{
+//   (async()=>{
 
-   const data=await axios.post('https://mysql.newazkitchenbdapi.com/mens',{ ranking:4444,
-   name:"computer fair", dist:"jugnidaha"})
-   //console.log(data)
-  })()
+//    const data=await axios.post('https://mysql.newazkitchenbdapi.com/mens',{ ranking:4444,
+//    name:"computer fair", dist:"jugnidaha"})
+//    //console.log(data)
+//   })()
 
- }
+//  }
 
 
  return (

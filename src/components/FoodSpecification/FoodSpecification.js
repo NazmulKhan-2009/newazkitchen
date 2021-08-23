@@ -150,7 +150,7 @@ const changeRating=( newRating, name )=> {
 
 
         <Grid item md={10} lg={6} className="review_section">
-            {/* <h3 className="look" >Customer Ineraction</h3> */}
+            <i style={{color:'red'}}>Commects should descending order from DB?????</i>
             <div className="review">
                 <h5>{isReviewed? "Your Rating":"Rate the Food"}</h5> 
                 {/* <StarRated ratingChanged={ratingChanged} /> */}

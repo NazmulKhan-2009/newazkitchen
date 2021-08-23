@@ -135,7 +135,7 @@ const handleFood=(item,color)=>{
 
 
  return (
-  <Grid className="Food_style_device">
+  <Grid className="Food_style_device" id='order'>
     <h1>Cart your Favourite Cuisine <FoodType/>  </h1>
 
     <div className={classes.root} style={{textAlign:'center'}}>
@@ -202,6 +202,7 @@ const handleFood=(item,color)=>{
        ind={ind}
        foodDet={foodDetails}
        foodId={item._id}
+      //  className="card"
        />
      )
 

@@ -55,6 +55,8 @@ function App(){
   //console.log(orderHistoryData)
   const [orderSync, setOrderSync]=useState('') 
   const [userData, setUserData]=useState({})
+  const [loader, setLoader]=useState(false)
+  const [canceledEvent, setCanceledEvent]=useState({})
   //console.log(userData) 
   // const current_screen_mode=localStorage.getItem('dark_mode')
   // //console.log(current_screen_mode)
@@ -187,7 +189,7 @@ function App(){
 
     <ThemeProvider theme={theme}>
   {/* <Switchh checked={darkMode} onChange={()=>setDarkMode(!darkMode)}></Switchh> */}
-  <Paper style={{minHeight:"100vh"}} >
+  <Paper style={{minHeight:"100vh",borderRadius:'0px'}} >
     <UserContext.Provider
     value={{
       cartItem,
@@ -209,7 +211,8 @@ function App(){
       foodSync, setFoodSync,rating, 
       setRating,dispRating, setDispRating,
       orderHistoryData, setOrderHistoryData,
-      setOrderSync,userData, setUserData,setProfileSync
+      setOrderSync,userData, setUserData,setProfileSync,loader, setLoader,
+      canceledEvent, setCanceledEvent
       
 
       

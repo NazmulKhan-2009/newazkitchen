@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,6 +18,9 @@ import {withStyles} from '@material-ui/core/styles';
 import { green, purple, red, yellow , orange , lightBlue} from '@material-ui/core/colors';
 import { useEffect } from 'react';
 import EventCancelDialog from './EventCancelDialog';
+import { UserContext } from '../../../../../App';
+import loaderImg from '../../../../../images/loader/loader.gif'
+
 
 const useStyles = makeStyles({
   table: {
@@ -87,6 +90,8 @@ const CancelButton = withStyles((theme) => ({
 // ];
 
 export default function EventTable({event}) {
+
+  const {loader,setLoader,canceledEvent}= useContext(UserContext)
   // console.log(event)
   const classes = useStyles();
   // const classesBtn = useStylesBtn();
@@ -109,18 +114,26 @@ const [change, setChange]=useState(false)
 
 
 
-  useEffect(()=>{
-    setDispEvent(true)
-  },[])
+  // useEffect(()=>{
+  //   setDispEvent(true)
+  // },[event.length])
 
 
   const loading=(bool)=>{
     setChange(true)
   }
 
+  // useEffect(()=>{
+  //   if(canceledEvent){
+  //     setLoader(false)
+  //   }
+    
+  // },[])
   // const handleClickOpen = (open) => {
   //   setOpen(open);
   // };
+
+  
  
 
   return (
@@ -167,10 +180,26 @@ const [change, setChange]=useState(false)
               </TableCell>
 
               {/* <TableCell>{change && "Loading...."}</TableCell> */}
-              <TableCell>{change &&  "Loading...."}</TableCell>
-              
-             
 
+              {/* <TableCell>{item.status!=="cancel" && canceledEvent._id!==item._id && loader ?
+              <img src={loaderImg} alt=""/>:""
+              }</TableCell>  */}
+
+              {
+                item.status!=="cancel" && item._id===eventData  && loader ?   <TableCell><img src={loaderImg} alt=""/> </TableCell>:
+                <TableCell></TableCell>
+              }
+             
+              {
+                console.log('item==> '+item._id)
+                
+              }
+             
+              {
+                console.log('event==> '+eventData)
+                
+              }
+             
 
             </TableRow>
           ))}

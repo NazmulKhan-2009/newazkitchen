@@ -1,0 +1,275 @@
+.contact_row  {
+ width: 96%;
+ max-width: 1020px;
+ margin: 0 auto;
+}
+
+.ie .contact_row { width: 1000px ; }
+
+.narrow .contact_row { max-width: 980px; }
+
+.row .contact_row { width: auto; max-width: none; margin: 0 -20px; }
+
+/* row clearing */
+.contact_row:before,
+.contact_row:after {
+    content: " ";
+    display: table;
+}
+.contact_row:after {
+    clear: both;
+}
+
+.column, .columns {
+   position: relative;
+   padding: 0 20px;
+   min-height: 1px;
+   float: left;
+}
+.column.centered, .columns.centered  {
+    float: none;
+    margin: 0 auto;
+}
+
+
+
+
+
+.contact_row .eight       { width: 96.66667%; }
+.contact_row .two         { width: 16.66667%; }
+.contact_row .ten         { width: 83.33333%; }
+.contact_row .four        { width: 33.33333%; }
+
+
+ /* Forms  ---------------------------------------------------------  */
+
+ .contact_row form { margin-bottom: 24px; }
+ .contact_row fieldset { margin-bottom: 24px; }
+
+ .contact_row input[type="text"],
+ .contact_row input[type="password"],
+ .contact_row input[type="email"],
+ .contact_row textarea,
+ .contact_row select {
+   display: block;
+   padding: 18px 15px;
+   margin: 0 0 24px 0;
+   border: 0;
+   outline: none;
+   vertical-align: middle;
+   min-width: 225px;
+	max-width: 100%;
+   font-size: 15px;
+   line-height: 24px;
+	color: #647373;
+	background: #D3D9D9;
+
+}
+
+/* select { padding: 0;
+   width: 220px;
+   } */
+
+   .contact_row input[type="text"]:focus,
+   .contact_row input[type="password"]:focus,
+   .contact_row input[type="email"]:focus,
+   .contact_row textarea:focus {
+      color: #B3B7BC;
+    background-color: #3d4145;
+   }
+   
+   .contact_row textarea { min-height: 120px; }
+   
+   .contact_row label,
+   .contact_row legend {
+      font: 16px/24px 'opensans-bold', sans-serif;
+    margin: 12px 0;
+      color: #3d4145;
+      display: block;
+   }
+   .contact_row label span,
+   .contact_row legend span {
+    color: #8B9798;
+      font: 14px/24px 'opensans-regular', sans-serif;
+   }
+   
+   .contact_row input[type="checkbox"],
+   .contact_row input[type="radio"] {
+       font-size: 15px;
+       color: #737373;
+   }
+   
+   .contact_row input[type="checkbox"] { display: inline; }
+
+/* form end___________________________________ */
+
+
+
+#contact_custom {
+ background: url(../../../images/img5.jpg) no-repeat;
+ background-size: cover;
+ /* padding: 100px 0; */
+ background-attachment: fixed;
+ background-position: center center;
+ /* position: relative;
+ height:70vh;
+ overflow: hidden; */
+ clip-path: polygon(0 0, 50% 10%, 100% 0%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 0, 50% 10%, 100% 0%, 100% 100%, 0 100%);
+
+
+
+
+ /* background: #191919; */
+ padding-top: 96px;
+ /* padding-bottom: 102px; */
+ color: #636363;
+}
+#contact_custom .section-head { margin-bottom: 42px; }
+
+#contact_custom a, #contact_custom a:visited  { color: #11ABB0; }
+#contact_custom a:hover, #contact_custom a:focus { color: #fff; }
+
+#contact_custom h1 {
+ font: 18px/24px 'opensans-bold', sans-serif;
+ text-transform: uppercase;
+ letter-spacing: 3px;
+ color: #EBEEEE;
+ margin-bottom: 6px;
+}
+#contact_custom h1 span { display: none; }
+#contact_custom h1:before {
+ font-family: 'FontAwesome';
+ content: "\f0e0";
+padding-right: 10px;
+font-size: 72px;
+ line-height: 72px;
+ text-align: left;
+ float: left;
+ color: #ebeeee;
+}
+
+#contact_custom h4 {
+ font: 16px/24px 'opensans-bold', sans-serif;
+ color: #EBEEEE;
+ margin-bottom: 6px;
+}
+#contact_custom p.lead {
+ font: 18px/36px 'opensans-light', sans-serif;
+ padding-right: 3%;
+}
+#contact_custom .header-col { padding-top: 6px; }
+
+
+/* contact_custom form */
+#contact_custom form { margin-bottom: 30px; }
+#contact_custom label {
+ font: 20px/44px 'opensans-bold', sans-serif;
+ margin: 12px 0;
+ /* color: #EBEEEE; */
+ color:tomato;
+display: inline-block;
+float: left;
+ width: 20%;
+}
+#contact_custom input,
+#contact_custom textarea,
+#contact_custom select {
+ padding: 18px 20px;
+color: #eee;
+/* background: #373233; */
+background: transparent;
+
+margin-bottom: 42px;
+border: 3px solid #11ABB0;
+outline: none;
+ font-size: 18px;
+ line-height: 24px;
+ width: 65%;
+ border-radius: 20px;
+ 
+}
+#contact_custom input:focus,
+#contact_custom textarea:focus,
+#contact_custom select:focus {
+color: #fff;
+/* background-color: #11ABB0; */
+}
+#contact_custom button.submit {
+text-transform: uppercase;
+letter-spacing: 3px;
+color:#fff;
+ background: #0D0D0D;
+border: none;
+ cursor: pointer;
+ height: auto;
+ display: inline-block;
+border-radius: 3px;
+ margin-left: 26%;
+ padding:15px 15px;
+ transition:.5s;
+}
+#contact_custom button.submit:hover {
+color: #0D0D0D;
+background: #fff;
+}
+#contact_custom span.required {
+color: #11ABB0;
+font-size: 13px;
+}
+
+
+
+
+@media only screen and (max-width: 900px) {
+
+
+#contact_custom .section-head { margin-bottom: 30px; }
+#contact_custom .header-col h1:before {
+   font-size: 66px;
+   line-height: 66px;
+}
+#contact_custom .section-head p.lead { font: 17px/33px opensans-light, sans-serif; }
+
+
+}
+
+
+
+
+@media only screen and (max-width: 767px) {
+
+/* contact Section
+   ----------------------------------------------------------------------- */
+   #contact_custom { padding-bottom: 66px; }
+   #contact_custom .section-head { margin-bottom: 12px; }
+   #contact_custom .section-head h1 {
+      font: 16px/24px 'opensans-bold', sans-serif;            
+      text-align: center;   
+      margin-bottom: 30px;
+      text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
+   }  
+   #contact_custom h1 span { display: block; }
+   #contact_custom .header-col { padding-top: 0; }
+   #contact_custom .header-col h1:before { content: none;	}
+   #contact_custom .section-head p.lead { text-align: center;}
+
+   /* form */
+   #contact_custom label {
+      float: none;
+      width: 100%;
+   }
+   #contact_custom input,
+   #contact_custom textarea,
+   #contact_custom select {
+     	margin-bottom: 6px;    	
+      width: 100%;
+   }
+   #contact_custom button.submit { margin: 30px 0 24px 0; }
+   #message-warning, #message-success {
+      width: 100%;
+      margin-left: 0;
+   }
+
+}
+

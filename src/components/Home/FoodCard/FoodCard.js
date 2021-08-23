@@ -24,6 +24,8 @@ import { UserContext } from '../../../App';
 import favTone from '../../../mySounds/favtone.mp3';
 import { addFavFood } from '../../DataManagement';
 import { StarRated } from '../../Utility';
+import './Food/Food.css'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,7 +58,13 @@ const useStyles = makeStyles((theme) => ({
   },
   cardStyle:{
     margin:"auto",
-    padding:"1rem"
+    padding:"1rem",
+    '&:hover':{
+      // border:"1px solid rgb(173, 173, 173) !important",
+        cursor: "pointer",
+        boxShadow: "0px 0px 17px 8px rgba(194,194,194,0.98)",
+        transition: ".5s ease-in-out"
+    }
     
   },
   fabButton: {
@@ -242,7 +250,7 @@ if(item.reviews.length>0){
 
   return (
    
-    <Grid  item={true} xs={10}  sm={size?.sm||4} md={size?.sm||4}  lg={size?.lg||3} className={classes.cardStyle}>
+    <Grid  item={true} xs={10}  sm={size?.sm||4} md={size?.sm||4}  lg={size?.lg||3} className={`${classes.cardStyle}`}>
     <Card className={classes.root}>
     <StarRated rating={avgRate} />
       <CardHeader

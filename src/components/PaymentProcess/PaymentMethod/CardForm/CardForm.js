@@ -248,7 +248,7 @@ const CheckoutForm = ({setPaymentData,purchaseDone,dbOrderedInfo}) => {
     phone: '',
     name: '',
   });
-  const [orderInfo, setOrderInfo]=useContext(UserContext)
+  const {orderInfo, setOrderInfo}=useContext(UserContext)
 
   const cardDataBase=(payload)=>{
     const deliveryInfo=JSON.parse(sessionStorage.getItem('deliveryInfo'))
