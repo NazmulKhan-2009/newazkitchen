@@ -1,0 +1,19 @@
+.newsletter button.submit {
+ /* text-transform: uppercase; */
+ /* width:8rem; */
+ letter-spacing: 1px;
+ color:#fff;
+  background: #0D0D0D;
+ border: none;
+  cursor: pointer;
+  height: auto;
+  display: inline-block;
+ border-radius: 3px;
+  margin-left: 5%;
+  padding:5px 5px;
+  transition:.5s;
+ }
+ .newsletter button.submit:hover {
+ color: #0D0D0D;
+ background: #fff;
+ }

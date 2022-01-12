@@ -1,0 +1,42 @@
+.column-30{
+	width: 100%;
+ margin: auto;
+ padding-left:50px;
+}
+.footer-gallery li{
+	list-style: none;
+}
+.footer-gallery li img{
+	height: 70px;
+	width: 80%;
+	margin-bottom: 15px;
+} 
+.column-33{
+ float: left;
+	min-height: 1px;
+}
+
+@media screen and (min-width: 0px) and (max-width:680px){
+ .column-30{
+  width: 100%;
+ }
+ .footer-gallery li{
+  float: left;
+ }
+ 
+ .footer-gallery li img{
+  height: 70px;
+  width: 80%;
+  margin-bottom: 15px;
+  float: left;
+  
+ } 
+ .column-33{
+  float: none;
+  width:50%;
+  
+ }
+
+ 
+
+}

@@ -16,16 +16,22 @@ const [openStatus, setOpenStatus]=useState('')
   handleOrderStatus(e.target.value)
  }
 
- const {orderStatus,email,foodName}=searchFood
+ const {orderStatus,email,foodName,paymentStatus}=searchFood
  return (
   <div style={style}>
   <ul>
    {foodName && foodName.map(item=><li key={Math.random()}><h4>{item}</h4></li>)}
   </ul>
-  <p>{`email : ${email}`}</p>  
+  <p>{`email : ${email}`}</p> 
+
+  <FormControlLabel value='verified' control={<Radio required={true} size="small" name="paymentStatus" disabled={paymentStatus==='verified'} checked={checked==="verified"} onChange={handleChange}  color="primary" value='verified'/> } label='payment verified' />
+
+ <FormControlLabel value="unverified" control={<Radio required={true} size="small" name="paymentStatus" disabled={paymentStatus==='unverified'} checked={checked==="unverified"} onChange={handleChange}   color="primary" value='unverified'/>} label='payment unverified' />
+
   <p>{`Orderstatus : ${orderStatus}`} <span
   style={{cursor:"pointer"}} onClick={()=>setOpenStatus(true)}
   ><EditIcon/></span></p> 
+  
   
 
   

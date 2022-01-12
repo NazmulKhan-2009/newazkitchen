@@ -1,118 +1,85 @@
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Notable&family=Parisienne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
-.service_card_wrapper_1{
-/* position:relative; */
-/* min-width:300px; */
-background: url('https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/master/pass/Smashburger-recipe-120219.jpg') no-repeat;
-background-size: cover;
- 
+/* .service_card_wrapper_1{
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(82,150,231,1) 100%);
 }
-/* .custom_stroke{
-  font-family: 'Notable', sans-serif;
-} */
-.service_card_wrapper_1 span{
+
+.service_card_wrapper_1 span,
+.service_card_wrapper_2 span,
+.service_card_wrapper_3 span
+{
   position: absolute;
   margin-top:-30px;
-  color:tomato;
-}
-.service_card_wrapper_1 span:hover{
-  color:white;
+  color:red;
   font-weight: bold;
+  transition:.5s;
+}
+.service_card_wrapper_1 span:hover,
+.service_card_wrapper_2 span:hover,
+.service_card_wrapper_3 span:hover
+{
+  color:#A569BD;
+  font-weight: bold;
+  transition:.5s;
 }
 .service_card_wrapper_2{
-  /* position:relative; */
-  /* min-width:300px; */
-  background: url('https://st2.depositphotos.com/4043853/8170/v/950/depositphotos_81706162-stock-illustration-home-delivery-service.jpg') no-repeat;
-  background-size: cover;
-   
-  }
-  .service_card_wrapper_2 span{
-    position: absolute;
-    margin-top:-30px;
-    color:tomato;
-  }
-  .service_card_wrapper_2 span:hover{
-    color:white;
-    font-weight: bold;
-  }
-  .service_card_wrapper_3{
-    /* position:relative; */
-    /* min-width:300px; */
-    background: url('https://www.weshare.net/wp-content/uploads/2020/09/1-10.jpeg') no-repeat;
-    background-size: cover;
-     
-    }
-    .service_card_wrapper_3 span{
-      position: absolute;
-      margin-top:-30px;
-      color:tomato;
-    }
-    .service_card_wrapper_3 span:hover{
-      color:white;
-      font-weight: bold;
-    }
-
-
-.service_title_1{
-background:black;
-width:100%;
-height:250px;
-background: url('https://thumbs.dreamstime.com/z/beautifully-decorated-catering-banquet-table-different-food-snacks-appetizers-corporate-christmas-birthday-party-event-121613690.jpg') no-repeat;
-background-size: cover;
-color:indigo;
-/* position:absolute; */
-clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
--webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(82,150,231,1) 100%);
+}
+ 
+.service_card_wrapper_3{
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(82,150,231,1) 100%);
 }
 
-.service_title_2{
+.service_title_1,
+.service_title_2,
+.service_title_3{
   background:black;
   width:100%;
   height:250px;
+
+}
+   
+.service_title_1{
+  
+  background: url('https://thumbs.dreamstime.com/z/beautifully-decorated-catering-banquet-table-different-food-snacks-appetizers-corporate-christmas-birthday-party-event-121613690.jpg') no-repeat;
+  background-size: cover;
+  color:indigo;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
+}
+
+.service_title_2{
+  
   background: url('https://cdn5.vectorstock.com/i/1000x1000/52/74/home-delivery-services-online-delivery-concept-of-vector-30605274.jpg') no-repeat;
   background-size: cover;
   color:indigo;
-  /* position:absolute; */
   clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
   }
-  .service_title_3{
-    background:black;
-    width:100%;
-    height:250px;
-    background: url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-online-cooking-classes-1588014476.jpg') no-repeat;
-    background-size: cover;
-    color:indigo;
-    /* position:absolute; */
-    clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
-    }
 
-.service_details{
- /* margin-top:-30px */
- /* margin-top:-118px;
- clip-path: polygon(0 0,50% 28%, 100% 0, 100% 50%, 50% 80%, 0 50%); */
+.service_title_3{
+  
+  background: url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-online-cooking-classes-1588014476.jpg') no-repeat;
+  background-size: cover;
+  color:indigo;
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 90%, 0 50%);
+  }
 
-}
 .service_details p{
   padding-bottom: 100px;
- /* height:250px; */
- /* background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRioPk3KcvwZqdEfLr5VVp5v0b4k8vNRiBN8Q&usqp=CAU') no-repeat;
- background-size: cover; */
- /* clip-path: polygon(0 0,50% 25%, 100% 0, 100% 50%, 50% 70%, 0 50%); */
- /* line-height: 100px; */
   text-align: center;
   color:white;
- 
- 
 }
+
 .service_details span{
   bottom:25%;
   left:40%;
 }
-.service_details .check_in{
 
+.service_details .check_in{
 color:tomato;
 text-decoration: none;
 font-weight: bold;
@@ -123,116 +90,73 @@ transition:.5s;
   transition:.5s;
 }
 
-/* .service_details{
- display:none;
- height:0;
- 
- transition: height .4s ease;
- overflow: scroll;
- background: url('https://ichef.bbci.co.uk/news/976/cpsprodpb/67CF/production/_108857562_mediaitem108857561.jpg') no-repeat;
- background-size: cover;
- margin-top: -50px;
- background-position: center center;
-
- 
-} */
-/* .service_details p{
- padding-bottom: 30px;
- margin-top: 35px;
- 
-} */
-
 .service_card_bottom{
- /* background:yellow; */
  width:100%;
- /* height:400px; */
- /* height:auto; */
  margin-top:-128px;
- /* height:min-content; */
- /* position:absolute; */
- /* clip-path: polygon(0 3%, 50% 80%, 100% 3%, 100% 100%, 0 100%); */
- 
- 
  transition: margin-top .5s ease;
-/* 
- background: url('https://www.australiascoralcoast.com/sites/cc/files/styles/full_width_slider/public/jumbotron-simple/Long%20Table%20Lunch_1.jpg?itok=npEgZuxr') no-repeat;
- background-size: cover; */
  color:black;
- 
- 
 }
 .service_card_bottom img{
   width: 100%;
   height: 200px;
   clip-path: polygon(0 3%, 50% 53%, 100% 3%, 100% 100%, 0 100%);
-  -webkit-clip-path: polygon(0 3%, 50% 53%, 100% 3%, 100% 100%, 0 100%);
-}
-
-
-/* .service_con:hover > .service_details{
- height:200px;
- transition:.5s;
-} */
-/* .service_con:hover > .service_summery{
- 
- margin-top:-50px;
- transition:.5s; 
-}  */
-
-
-
-
-
-
-
-
-
-
-
-/* 
-.qt-background {
- background: url(../../../../images/img5.jpg) no-repeat;
- background-size: cover;
- padding: 100px 0;
- background-attachment: fixed;
- background-position: center center;
- position: relative;
- height:70vh;
- overflow: hidden;
- 
+  -webkit-clip-path: polygon(0 3%, 50% 53%, 100% 3%, 100% 100%, 0 100%); 
 } */
 
-/* 
- .service_con:hover > .service_details{
- display: block;
- transition:.10s;
+
+
+
+/* OUR SERVICE 2 */
+
+.service_section_wrapper{
+  border-top:1.5px solid #E2E2E3;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+}
+.service_section_wrapper h3{
+  font-family: 'Dancing Script', cursive;
+  font-weight: bold;
+  font-size:40px;
+}
+.service_img img{
+  padding:20px 0;
+}
+
+.service_style_one{
+  border-right:1.5px solid #E2E2E3;
+}
+
+.service_aside{
+  background-image: url(../../../images/our_service/sidebar_img_2.JPG);
+  color:whitesmoke;
+  padding:20px 20px;
+  text-align: center;
+}
+.service_aside h4{
+  color:crimson;
+  font-family: 'Dancing Script', cursive;
+  padding-bottom:10px;
+}
+.service_style_one span{
+  font-size: 15px;
+}
+.service_aside span{
+  font-size: 12px;
 }
 
 
-.service_con > .service_summery{
- animation: .3s forwards no-hover-v linear;
-
+@media only screen and (max-width: 800px) {
+  .display-1 {
+    display: none;   
 }
-
-@keyframes no-hover-v {
- 0% {
-     top:105px
+.service_style_one{  
+  border-right:none;
+}
+.service_section_wrapper{
+  border-top:none;
+}
+}
  
-}
- 100% {
-  top:55px
-    }
-}
-
-.service_con:hover > .service_summery{
- animation: .3s forwards hover-v linear;
-}
-@keyframes hover-v {
- 0% {
-     top:55px;
-    }
+@media screen and (min-width: 600px) and (max-width:967px){}
  
- 100% {
-  top:105px;
-    }
-}  */
+@media screen and (min-width: 967px) and (max-width:1260px){}

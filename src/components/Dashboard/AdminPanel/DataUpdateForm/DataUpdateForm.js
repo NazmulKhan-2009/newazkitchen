@@ -32,10 +32,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,newUser,handleSignUp})=> {
-//!//console.log(adminForm)
-// const {field1, field2, field3}=adminForm
-//!//console.log(field2,field3)
-  //!//console.log("create food rendered")
+  // const db='https://quiet-cove-17146.herokuapp.com'
+  const db='http://localhost:5000'
   const classes = useStyles();
   const [foodInfo,setFoodInfo]=useState({})
   const[file,setFile]= useState(null) //for file base64
@@ -48,24 +46,13 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
   const[orderInfo,setOrderedInfo]= useState(false) 
   const[fieldEnable,setFieldEnable]= useState({foodTitleField:true,descriptionField:true,priceField:true}) 
   const [changedOrderStatus,  setChangedOrderStatus]=useState('')
-
   const {foodSync, setFoodSync}=useContext(UserContext)  //! not in previous
 
-  //console.log(formTitle)
+
   //!changing Oreder status 
-  //console.log(changedOrderStatus)
   const handleOrderStatus=(status)=>{
     setChangedOrderStatus(status)
   }
-
-  
-  // #### CONSOLE ZONE START POINT ####
-
-  //console.log(foodInfo)
-  // //console.log(file)
-  // //console.log(foodsInfo.imageUrl)
-  
- // #### CONSOLE ZONE END POINT ####
 
  
   const handleSubmit=(e)=>{
@@ -76,10 +63,8 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
       alert("Plaese select an Image")
      }
 
-     const {foodTitle, foodType,description,price}=foodInfo
-      //console.log(foodInfo.foodId)
-    //  New Form Constructor
-    const formData=new FormData()
+     const {foodTitle, foodType,description,price}=foodInfo     
+     const formData=new FormData()
 
     formData.append('foodTitle',foodTitle)
     formData.append('foodType',foodType)
@@ -87,11 +72,10 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
     formData.append('price',price)
     formData.append('imageUrl', file); //file base64
    
-    //console.log(formData)
-     //****AXIOS ASYNC AWAIT WAY XXXX ASTAGFIRULLAH XXXXXX
     const addFood= async()=>{
       try{
-          const response=await axios.post("http://localhost:5000/api/food/fooddetail",formData) 
+          // const response=await axios.post("https://quiet-cove-17146.herokuapp.com/api/food/fooddetail",formData) 
+          const response=await axios.post(`${db}/api/food/fooddetail`,formData) 
           setFoodsInfo(response.data.data)
           if(response.data.data){
             setFoodInfo({})
@@ -111,12 +95,10 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
     const deleteFood= async()=>{
       try{
           const response=await axios.delete(
-            `http://localhost:5000/api/food/${foodInfo.foodId}`
-
-            //// { params: { id: foodInfo.foodId } }
-
+            // `https://quiet-cove-17146.herokuapp.com/api/food/${foodInfo.foodId}`
+            `${db}/api/food/${foodInfo.foodId}`
              ) 
-          //console.log(response.data.success)
+        
        }catch(e){
          //console.log(`add Food error ${e}`)
         } ;
@@ -125,41 +107,29 @@ const CreateFood=({formTitle,adminForm,cancel,handleDialog,closeDialog,userForm,
     deleteFood()
   }
     //patching
-else if(formTitle ==="update_Food"){
-    const updateFood= async()=>{
-
-
-      const {foodTitle, foodType,description,price}=foodInfo
-      //console.log(foodInfo.foodId)
-    //  New Form Constructor
-    const formData=new FormData()
-
-    if(foodTitle!==undefined){
-      formData.append('foodTitle',foodTitle)
-    }if(foodType!==undefined){
-      formData.append('foodType',foodType)
-    }if(description!==undefined){
-      formData.append('description',description)
-    }if(price!==undefined){
-      formData.append('price',price)
-    }
-
-    // formData.append('foodTitle',foodTitle)
-    // formData.append('foodType',foodType)
-    // formData.append('description',description)
-    // formData.append('price',price)
-    // formData.append('imageUrl', file);
+    else if(formTitle ==="update_Food"){
+      const updateFood= async()=>{
+      const {foodTitle, foodType,description,price}=foodInfo     
+      const formData=new FormData()
+        if(foodTitle!==undefined){
+          formData.append('foodTitle',foodTitle)
+        }if(foodType!==undefined){
+          formData.append('foodType',foodType)
+        }if(description!==undefined){
+          formData.append('description',description)
+        }if(price!==undefined){
+          formData.append('price',price)
+        }
 
       try{
           const response=await axios.patch(
-            `http://localhost:5000/api/food/${foodInfo.foodId}`,
-            
+            // `https://quiet-cove-17146.herokuapp.com/api/food/${foodInfo.foodId}`,
+            `${db}/api/food/${foodInfo.foodId}`,
             formData) 
-          //console.log(response.data.success)
+         
           if(response.data.success){
             setSearchFood({})
             setFoodInfo({foodId:""})
-
             alert("Successfully updated")
           }
        }catch(e){
@@ -174,18 +144,12 @@ else if(formTitle ==="update_Food"){
     const updateOrderStatus=async()=>{
 
       try{
-        const response=await axios.patch(`http://localhost:5000/api/order/${foodInfo.orderId}`,{order_status:changedOrderStatus})
-        //console.log(response.data.sms)
-
+        const response=await axios.patch(`${db}/api/order/${foodInfo.orderId}`,{order_status:changedOrderStatus})
       }catch(e){
           //console.log(`error in pathcing order status ${e}`)
-      }
-
-        
+      }   
     }
-
-    updateOrderStatus()
-
+       updateOrderStatus()
   }
 
   //START ADMIN MANAGEMENT
@@ -195,187 +159,119 @@ else if(formTitle ==="update_Food"){
     if(file===null){
       alert("Plaese select an Image")
      }
-    
-     const {admin_email,admin_name,admin_mobile,admin_password,confirm_password}=foodInfo
-    //   //console.log(foodInfo.foodId)
-    // //  New Form Constructor
-if(admin_password!==confirm_password){
-  alert("password mismatch")
-}else{
-
-
-
-    const formData=new FormData()
-
-    formData.append('admin_name',admin_name)
-    formData.append('admin_email',admin_email)
-    formData.append('admin_mobile',admin_mobile)
-    formData.append('admin_imageUrl', file); //file base64
-    formData.append('admin_password',admin_password)
-    //  //****AXIOS ASYNC AWAIT WAY XXXX ASTAGFIRULLAH XXXXXX
+      const {admin_email,admin_name,admin_mobile,admin_password,confirm_password}=foodInfo
+   
+    if(admin_password!==confirm_password){
+      alert("password mismatch")
+    }else{
+      const formData=new FormData()
+      formData.append('admin_name',admin_name)
+      formData.append('admin_email',admin_email)
+      formData.append('admin_mobile',admin_mobile)
+      formData.append('admin_imageUrl', file); //file base64
+      formData.append('admin_password',admin_password)
+  
     const createAdmin= async()=>{
       try{
-          const res=await axios.post("http://localhost:5000/api/admin/createadmin",formData) 
-          //console.log(res)
+          // const res=await axios.post("https://quiet-cove-17146.herokuapp.com/api/admin/createadmin",formData) 
+          const res=await axios.post(`${db}/api/admin/createadmin`,formData) 
           alert(res.data.response)
-          // setFoodsInfo(response.data.data)
-          // if(response.data.data){
-          //   setFoodInfo({})
-          //   alert("Admin successfully added")
-          // }
        }catch(e){
          //console.log(`Admin Create error ${e}`)
         } ;
     }    
-    createAdmin()
-    setFile(null)
-
-    //console.log('admin create pattern click')
-    //console.log(foodInfo)
-    //console.log(formData)
+        createAdmin()
+        setFile(null)
 }  
-
-  }
-
+}
   //END CREATE ADMIN
-
   //END ADMIN MANAGEMENT
- 
   }
   
   const handleInput=e=>{   
     setFoodInfo({...foodInfo,[e.target.name]:e.target.value})
-   
     setSearchBtn(true)
-  //// formTitle ==="update_Food"? handleSearch() : null
   }
-
   const handleFindFood=(e)=>{
    setFoodInfo({...foodInfo,[e.target.name]:e.target.value}) 
    handleSearch(e.target.value)
    setFoodInfo({...foodInfo,[e.target.name]:e.target.value})
-    
-    
   }
-
   const handleSearch=(formType)=>{
-
     if(formType==="update_Food"){
-
-      //console.log('search done')
-
     const searchFood=async()=>{
-
       try{
-        const response=await axios.get(`http://localhost:5000/api/food/${foodInfo.foodId}`)
-        //!//console.log(response.data.data)
+        // const response=await axios.get(`https://quiet-cove-17146.herokuapp.com/api/food/${foodInfo.foodId}`)
+        const response=await axios.get(`${db}/api/food/${foodInfo.foodId}`)
         setSearchFood(response.data.data)
         if(response.data.data){
           setEditBtn(true)
         }
-        // setEditBtn(true)
         setDisplayed(false)
        }catch(e){
-        // //console.log(`search Food error ${e}`)
         alert("Nothing Found ")
         } ;
-        
-
     }
       searchFood()
-
     }else if(formType==="orderControl"){
       const getOrderedItem=async()=>{
-
         try{
-          const response=await axios.get(`http://localhost:5000/api/order/${foodInfo.orderId}`)
-          //!//console.log(response.data.data)
+          // const response=await axios.get(`https://quiet-cove-17146.herokuapp.com/api/order/${foodInfo.orderId}`)
+          const response=await axios.get(`${db}/api/order/${foodInfo.orderId}`)
           setSearchFood(response.data.data)
-          //console.log(response.data.data)
           if(response.data.data){
             setEditBtn(true)
           }
-          // setEditBtn(true)
-          // setDisplayed(false)
           setOrderedInfo(true)
          }catch(e){
-          // //console.log(`search Food error ${e}`)
           alert("Nothing Found ")
           } ;
-          
-  
       }
-      getOrderedItem()
+      getOrderedItem()  
+    }
+  }
 
-// api/order/orderStatusX
-
-      
+    const handleRefresh=()=>{
+      setSearchFood({});
+      setEditBtn(false)
+      setFoodInfo({foodId:""})
+      setSearchBtn(false)
+      setFieldEnable({foodTitleField:true,descriptionField:true,priceField:true})
+      setEditBtn(false)
+      setOrderedInfo(false)
     }
 
-    
-  }
-//console.log(searchFood)
-
-const handleRefresh=()=>{
-  setSearchFood({});
- 
-  setEditBtn(false)
-
-  setFoodInfo({foodId:""})
-  setSearchBtn(false)
-  setFieldEnable({foodTitleField:true,descriptionField:true,priceField:true})
-  setEditBtn(false)
-  setOrderedInfo(false)
-  // setFoodInfo({})
-  // window.location.reload()
-}
-
-const handleCancel=()=>{
+    const handleCancel=()=>{ 
+      setSearchFood({});
+      setFoodInfo({foodId:""})
+      handleDialog(false)
+      setSearchBtn(false)
+      setFieldEnable({foodTitleField:true,descriptionField:true,priceField:true}) 
+      setEditBtn(false)
+    }
+    const editFoodInfo=(field)=>{
   
-  setSearchFood({});
-  setFoodInfo({foodId:""})
-  handleDialog(false)
-  setSearchBtn(false)
-  setFieldEnable({foodTitleField:true,descriptionField:true,priceField:true}) 
-  setEditBtn(false)
-  
-}
+      if(field==="foodTitle"){
+        setSearchFood({...searchFood,foodTitle:""});
+        setFieldEnable({...fieldEnable,foodTitleField:false})
+      }
+      if(field==="descriptionField"){
+        setSearchFood({...searchFood,description:""});
+        setFieldEnable({...fieldEnable,descriptionField:false})
+      }
+      if(field==="priceField"){
+        setSearchFood({...searchFood,price:""});
+        setFieldEnable({...fieldEnable,priceField:false})
+      }
 
-// const handleEdit=()=>{
-//   // {formTitle ==="update_Food" && editBtn===true && <span style={{cursor:"pointer"}} onClick={()=>{setSearchFood({...searchFood,foodTitle:""}); setEditBtn(false);setDisplayed(true)}}>edit</span>}
-
-  
-//     // setSearchFood({...searchFood,[fieldName]:""});
-//     // setEditBtn(false);
-//     // setDisplayed(true)
-
-//     handleSearch()
-  
-  
-// }
-const editFoodInfo=(field)=>{
-  
-  if(field==="foodTitle"){
-    setSearchFood({...searchFood,foodTitle:""});
-    setFieldEnable({...fieldEnable,foodTitleField:false})
-  }
-  if(field==="descriptionField"){
-    setSearchFood({...searchFood,description:""});
-    setFieldEnable({...fieldEnable,descriptionField:false})
-  }
-  if(field==="priceField"){
-    setSearchFood({...searchFood,price:""});
-    setFieldEnable({...fieldEnable,priceField:false})
-  }
-
-}
+    }
 
 
 const handleDel=()=>{
   const deleteFood= async()=>{
     try{
-        const response=await axios.delete(`http://localhost:5000/api/food/${foodInfo.foodId}`) 
-        //console.log(response.data.success)
+        // const response=await axios.delete(`https://quiet-cove-17146.herokuapp.com/api/food/${foodInfo.foodId}`) 
+        const response=await axios.delete(`${db}/api/food/${foodInfo.foodId}`) 
         if(response.data.success){
           setSearchFood({});
           setEditBtn(false)
@@ -390,146 +286,93 @@ const handleDel=()=>{
        //console.log(`add Food error ${e}`)
       } ;
   } 
-
   deleteFood()
 }
 
 
   return (
-  <Grid item md={formTitle==="Log In" ? 6:10} xs={10} >
-     
-     
+      <Grid item md={formTitle==="Log In" ? 6:10} xs={10} sm={10}>  
         <h3
           style={{
             textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
-            color:"#fd5c63",
-            // marginBottom:"3rem",
-            
+            color:"#fd5c63",           
             }}
         > </h3>
-        
-        {/* <img src={`http://localhost:5000/${foodsInfo.imageUrl}`}  alt="" /> */}
-
         {foodsInfo.imageUrl &&
           <img src={foodsInfo.imageUrl} alt="" width="30%"/>
         }
-       
-       
-
         <form  className={classes.root} autoComplete="on" onSubmit={handleSubmit}>
-
-        { 
-            
-          formTitle ==="delete_Food" | formTitle ==="search_Food" | formTitle ==="update_Food" | formTitle==="update_Admin" | formTitle==="orderControl" ? 
-            
-            
+        {      
+          formTitle ==="delete_Food" | formTitle ==="search_Food" | formTitle ==="update_Food" | formTitle==="update_Admin" | formTitle==="orderControl" ?     
           <>
+          
             <TextField
-            // id={formTitle}
-            // label={formTitle ==="update_Food"? "Food Id":"Admin Id"} 
-            // variant="outlined" 
-            // name={formTitle ==="update_Food"? "foodId":"adminId"} 
-            // type="text" 
-            // // inputProps={{ minLength: 2,maxLength: 4 }}
-            // onChange={handleInput} 
-            // // onBlur={handleInput}
-            // // onBlur={handleFindFood}
-            // required={true}
-            // value={foodInfo.foodId} 
-
             id={adminForm.field0.id}
             label={adminForm.field0.label} 
             variant={adminForm.field0.variant}
             name={adminForm.field0.name} 
             type="text" 
-            // inputProps={{ minLength: 2,maxLength: 4 }}
             onChange={handleInput} 
-            // onBlur={handleInput}
-            // onBlur={handleFindFood}
             required={true}
-            value={foodInfo.foodId || foodInfo.orderId || foodInfo.adminId ||""} 
+            value={foodInfo.foodId || foodInfo.orderId || foodInfo.adminId ||""}
+            
           /> 
-
-{formTitle ==="update_Food" | formTitle==="orderControl" && searchBtn && <span style={{cursor:"pointer"}} onClick={()=>handleSearch(formTitle)}><YoutubeSearchedForIcon/></span>}
-          
-          </>
-          
-          :""
-          
+        
+        {formTitle ==="update_Food" | formTitle==="orderControl" && searchBtn && <span style={{cursor:"pointer"}} onClick={()=>handleSearch(formTitle)}><YoutubeSearchedForIcon/></span>
+        }        
+          </>        
+          :""        
           }
-{/*//! ======-------->Order Status Check and edit<---------====== */}
          {orderInfo && <OrderedInfo searchFood={searchFood} handleOrderStatus={handleOrderStatus}/>}
 
         {adminForm &&
           formTitle ==="create_Food" | formTitle=== "create_Admin" | formTitle ==="update_Food" | formTitle==="update_Admin" | formTitle==="Log In" ?
         <>
-           {/* Food Title */}
          <TextField
-            // id="food-title"
             id={adminForm.field1.id}
-            // label="Food Title" 
             label={adminForm.field1.label}
             variant={adminForm.field1.variant} 
-            // name="foodTitle"
             name={adminForm.field1.name}  
             type="text" 
             inputProps={{ minLength: 2,maxLength: 50 }}
             onChange={handleInput} 
             required={true}
-           
-            // disabled={formTitle ==="update_Food" && !displayed}
             disabled={formTitle ==="update_Food" && fieldEnable.foodTitleField}
             value={foodInfo.foodTitle || searchFood.foodTitle|| foodInfo.admin_name||""}  
-            
-            
-          />
+        />
           
-          {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('foodTitle')}><EditIcon/></span>}
-          
-
-
-          {/* Food Type */}
-
-          
-            {
-              formTitle ==="create_Food" | changeType ? 
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label"> Food Type</InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              onChange={handleInput}
-              label= "Food Type"               
-              name="foodType"
-              required={true}
-              // value={foodInfo.foodType}
-              value={foodInfo.foodType}      
-            >
-              <MenuItem value="">
-                <em style={{color:'red'}}> "Select Food Type"</em>
-              </MenuItem>
-              <MenuItem value={"Baking"}>Baking</MenuItem>
-              <MenuItem value={"Frozen"} >Frozen</MenuItem>
-              <MenuItem value={"Deshi"} >Deshi</MenuItem>
-              <MenuItem value={"Chineese"}>Chineese</MenuItem>
-              <MenuItem value={"Others"}>Others</MenuItem>
-            </Select>
-          </FormControl>:''
+          {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('foodTitle')}><EditIcon/></span>} 
+          {formTitle ==="create_Food" | changeType ? 
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label"> Food Type</InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                onChange={handleInput}
+                label= "Food Type"               
+                name="foodType"
+                required={true}
+                // value={foodInfo.foodType}
+                value={foodInfo.foodType}      
+              >
+                <MenuItem value="">
+                  <em style={{color:'red'}}> "Select Food Type"</em>
+                </MenuItem>
+                <MenuItem value={"Baking"}>Baking</MenuItem>
+                <MenuItem value={"Frozen"} >Frozen</MenuItem>
+                <MenuItem value={"Deshi"} >Deshi</MenuItem>
+                <MenuItem value={"Chineese"}>Chineese</MenuItem>
+                <MenuItem value={"Others"}>Others</MenuItem>
+              </Select>
+            </FormControl>:''
           }
           
-        {/* {formTitle ==="update_Food" && <span style={{cursor:"pointer"}} onClick={()=>{setChangeType(!changeType)}}><ListIcon/></span>} */}
-         
-
           {/* Food Description */}
-          <TextField
-            // id="insInput"
-            id={adminForm.field2.id}
-            // label="Food Description" 
+          <TextField            
+            id={adminForm.field2.id}           
             label={adminForm.field2.label} 
-            variant={adminForm.field2.variant} 
-            // name="description"
-            name={adminForm.field2.name}
-            // type="text" 
+            variant={adminForm.field2.variant}           
+            name={adminForm.field2.name}         
             type={formTitle=== "create_Admin" ? "email" : "text"}
             inputProps={{ minLength: 3,maxLength: 200 }}
             onChange={handleInput} 
@@ -539,17 +382,13 @@ const handleDel=()=>{
           />
           {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('descriptionField')}><EditIcon/></span>}
 
-          {/* {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>{setSearchFood({...searchFood,description:""});setEditBtn(false);
-    setDisplayed(true)}}><EditIcon/></span>} */}
+          
 
           {/* Price */}
-         <TextField
-            // id="priceInput"
-            id={adminForm.field3.id}
-            // label="Price" 
+         <TextField           
+            id={adminForm.field3.id}           
             label={adminForm.field3.label}  
-            variant={adminForm.field3.variant}  
-            // name="price" 
+            variant={adminForm.field3.variant}             
             name={adminForm.field3.name}  
             type={formTitle==="create_Admin"?"text":"number"} 
             inputProps={formTitle==="create_Admin" ?{minLength:11,maxLength:11}: { minLength: 2,maxLength: 4 }}
@@ -559,9 +398,7 @@ const handleDel=()=>{
             value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
           /> 
          
-{formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('priceField')}><EditIcon/></span>}
-          {/* {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>{setSearchFood({...searchFood,description:""});setEditBtn(false);
-    setDisplayed(true)}}><EditIcon/></span>} */}
+          {formTitle ==="update_Food" && editBtn && <span style={{cursor:"pointer"}} onClick={()=>editFoodInfo('priceField')}><EditIcon/></span>}
           </>:""
           }
 
@@ -602,43 +439,28 @@ const handleDel=()=>{
             disabled={formTitle ==="update_Food" && fieldEnable.priceField}
             // value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
           /> */}
-          
-
-      
-          
+                  
           {/* ADMIN PASSWORD */}
           {formTitle==="create_Admin" &&
           <>
-          <TextField
-            // id="priceInput"
-            id="admin_pass"
-            // label="Price" 
+            <TextField            
+            id="admin_pass"           
             label="Password"  
-            variant={adminForm.field3.variant}  
-            // name="price" 
+            variant={adminForm.field3.variant}             
             name="admin_password" 
-            type="password" 
-            // inputProps={{ minLength: 2,maxLength: 4 }}
+            type="password"           
             onChange={handleInput} 
-            required={true}
-            // disabled={formTitle ==="update_Food" && fieldEnable.priceField}
-            // value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
+            required={true}            
           /> 
 
-          <TextField
-            // id="priceInput"
-            id="confirm_pass"
-            // label="Price" 
+          <TextField            
+            id="confirm_pass"           
             label="Confirm Password"  
-            variant={adminForm.field3.variant}  
-            // name="price" 
+            variant={adminForm.field3.variant}              
             name="confirm_password" 
-            type="password" 
-            // inputProps={{ minLength: 2,maxLength: 4 }}
+            type="password"            
             onChange={handleInput} 
-            required={true}
-            // disabled={formTitle ==="update_Food" && fieldEnable.priceField}
-            // value={foodInfo.price ||searchFood.price || foodInfo.admin_mobile ||""}  
+            required={true}             
           /> 
           </>
           }
@@ -666,40 +488,25 @@ const handleDel=()=>{
               </div>
             }
             <Grid>
-            {
-              formTitle ==="update_Food" && <Button variant="outlined" color="primary"  onClick={()=>{setChangeType(!changeType)}}> Change Food Type</Button>
-            
-            }
-          <Button variant="outlined" color="secondary" type="submit" style={{margin:"5px"}}>
-            {/* {formTitle.replace('_'," ")} */}
-            {formTitle}
-          </Button> 
-         
-          
-        
-
-          
-            <Button variant="outlined" color="primary" style={{marginRight:"5px"}}  onClick={handleRefresh}>
-              
-              Refreash
-            </Button> 
-
-        
-            <Button variant="outlined" color="secondary"   onClick={handleCancel}>            
-              <CancelIcon/>
-            </Button> 
-          
-          
-
-          
-        {formTitle ==="update_Food" && <Button variant="outlined" color="secondary"   onClick={handleDel}>            
-          <DeleteForeverIcon/>Delete Food
-        </Button>} 
-          
-          </Grid>   
+                {
+                  formTitle ==="update_Food" && <Button variant="outlined" color="primary"  onClick={()=>{setChangeType(!changeType)}}> Change Food Type</Button>        
+                }
+              <Button variant="outlined" color="secondary" type="submit" style={{margin:"5px"}}>
+                {/* {formTitle.replace('_'," ")} */}
+                {formTitle}
+              </Button>        
+              <Button variant="outlined" color="primary" style={{marginRight:"5px"}}  onClick={handleRefresh}>            
+                Refreash
+              </Button> 
+              <Button variant="outlined" color="secondary"   onClick={handleCancel}>            
+                <CancelIcon/>
+              </Button> 
+      
+              {formTitle ==="update_Food" && <Button variant="outlined" color="secondary"   onClick={handleDel}>            
+                <DeleteForeverIcon/>Delete Food
+              </Button>}       
+            </Grid>   
         </form>  
-
-    
     </Grid>
   );
 }

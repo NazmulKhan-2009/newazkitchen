@@ -8,39 +8,36 @@ import PurchaseDoneNotification from './PurchaseDoneNotification';
 const PurchaseDone = ({successInfo}) => {
 
 const {orderInfo}=useContext(UserContext)
-  // //console.log(orderInfo.orderId)
- const history = useHistory();
+const history = useHistory();
  return (
   <>
-   {orderInfo ? <>  
-    <PurchaseDoneNotification
-      orderInfo={orderInfo}
-      successInfo={successInfo}
-    />    
-   
-    <OrderDetailsDB
-      orderInfo={orderInfo}
-    />
-
-
-    <Grid 
-      container 
-      justify="center" 
-      style={{marginTop:"3rem"}}>
-        <Button 
-          variant="outlined" 
-          color="primary" 
-          className="MuiButton-outlinedSizeSmall" 
-          // onClick={()=>history.push("/dashboard/purchasehistory")}
-          onClick={()=>history.push("/dashboard-purchasehistory")}
-        >  
-          Go to Purchase History
-        </Button>
-    </Grid>     
-  </>
-  : 
-  
-  <h1>Not Uploaded</h1> }
+   {
+     orderInfo ? 
+     <>  
+        <PurchaseDoneNotification
+          orderInfo={orderInfo}
+          successInfo={successInfo}
+        />       
+        <OrderDetailsDB
+          orderInfo={orderInfo}
+        />
+        <Grid 
+          container 
+          justify="center" 
+          style={{marginTop:"3rem"}}>
+            <Button 
+              variant="outlined" 
+              color="primary" 
+              className="MuiButton-outlinedSizeSmall" 
+              onClick={()=>history.push("/dashboard-purchasehistory")}
+            >  
+              Go to Purchase History
+            </Button>
+        </Grid>     
+      </>
+    :   
+       <h1>Something went wrong, Try again</h1> 
+  }
   </>
  );
 };

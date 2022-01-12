@@ -1,0 +1,48 @@
+.order_his_mob span{
+ color:crimson;
+}
+.order_his_mob p{
+ color:black;
+}
+
+
+
+
+@media screen and (min-width: 0px) and (max-width:472px){
+ 
+ .order_his_mob span{
+   font-size:8px;
+  }
+  .order_his_mob p{
+   font-size:8px;
+  }
+  .order_his_mob{
+    display:block;
+  }
+}
+
+@media screen and (min-width: 472px) and (max-width:770px){
+ 
+ .order_his_mob span{
+  font-size:12px;
+  }
+  .order_his_mob p{
+   font-size:12px;
+  }
+  .order_his_mob{
+    display:block;
+  }
+}
+
+@media screen and (min-width: 771px) and (max-width:1446px){
+ 
+ .order_his_mob span{
+  font-size:15px;
+  }
+  .order_his_mob p{
+   font-size:15px;
+  }
+  .order_his_mob{
+   display:none;
+ }
+}

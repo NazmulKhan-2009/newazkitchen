@@ -3,21 +3,18 @@ import DetailsIcon from '@material-ui/icons/Details';
 import './ourservice.css'
 import { serviceData } from './ourService_data';
 import { NavLink } from 'react-router-dom';
+
+
 export default function OurService() {
 
 
-
-
-
 return (
-<div className="container-fluid py-5" id="service">
-    <div className="container-fluid">
-  
+  <div className="container-fluid py-5" id="service">
+    <div className="container-fluid"> 
       <div className="position-relative d-flex align-items-center justify-content-center">
-            <h1 className="display-1 text-uppercase text-white contract_stroke custom_stroke" >Newaz Kitchen</h1>
-            <h1 className="position-absolute text-uppercase text-primary">Our Service</h1>
-      </div>
-      
+        <h1 className="display-1 text-uppercase text-white contract_stroke custom_stroke" >Newaz Kitchen</h1>
+        <h1 className="position-absolute text-uppercase text-primary">Our Service</h1>
+      </div>     
       <div className="row position-relative d-flex align-items-center justify-content-center pb-3 col-lg-10 mx-auto">
           {serviceData.map((elem)=>            
           <div key={elem.serviceName} className='col-lg-4 col-md-4 my-3'>  
@@ -42,7 +39,7 @@ return (
                 aria-controls={elem.handleCollapse}
                 text-warning='true'
               >
-                  <DetailsIcon/> 
+                <div className="animated infinite tada"><DetailsIcon/>Details</div>
               </span>
             </div>
         </div>

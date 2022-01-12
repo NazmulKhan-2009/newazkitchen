@@ -4,76 +4,23 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
 import { useContext } from 'react';
 import { UserContext } from '../../../App';
 import { Grid } from '@material-ui/core';
-
+import "./priceDetails.css"
+import DeliveryDetails from './DeliveryDetails/DeliveryDetails';
 
 const useStyles = makeStyles((theme) => ({
-
   table: {
-    minWidth:"25rem",
-    
-      
+    minWidth:"25rem",  
   },
-  
 }));
-
-// const TAX_RATE = 0.07;
-
-// const GreenRadio = withStyles({
-//   root: {
-//     color: red[400],
-//     '&$checked': {
-//       color: red[600],
-//     },
-//   },
-//   checked: {},
-// })((props) => <Radio color="default" {...props} />);
-
-
-
-
-// function ccyFormat(num) {
-//   return `${num.toFixed(2)}`;
-// }
-
-// function priceRow(qty, unit) {
-//   return qty * unit;
-// }
-
-// function createRow(desc, qty, unit) {
-//   const price = priceRow(qty, unit);
-//   return { desc, qty, unit, price };
-// }
-
-// function subtotal(items) {
-//   return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-// }
-
-// const rows = [
-//   createRow('Paperclips (Box)', 100, 1.15),
-//   createRow('Paper (Case)', 10, 45.99),
-//   createRow('Waste Basket', 2, 17.99),
-// ];
-
-// const invoiceSubtotal = subtotal(rows);
-// const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-// const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 const PriceDetails=()=>{
   const classes = useStyles();
   const {cartItem, setCartItem}=useContext(UserContext)
-
-  //RADIOS BOX
- 
-
-  
-
   const priceData=cartItem.map(data=>data.total)
   const inTotalPrice=priceData.reduce((pv,cv)=>pv+cv)
   const vat=Math.round(inTotalPrice*.05) 
@@ -82,61 +29,31 @@ const PriceDetails=()=>{
 
   sessionStorage.setItem("totalPrice", JSON.stringify(havetoPay))
   
-
   return (
-    <Grid item md={11} >
-     
-    <h3
-      style={{
-        textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
-        color:"#fd5c63",
-        paddingRight:"3rem"
-        // marginBottom:"3rem",
-        
-        }}
-     > Payment Details</h3>
-
-            
-        
-         
- 
-
-    <TableContainer component={Paper} elevation={10}>
-      <Table className={classes.table} aria-label="spanning table">
-        
-        <TableBody>
-          
-
-          <TableRow>
-            <TableCell rowSpan={0} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{inTotalPrice}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Vat</TableCell>
-            <TableCell align="right">5%</TableCell>
-            <TableCell align="right">{vat}</TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell>Delivery Cost</TableCell>
-            
-            <TableCell align="right" colSpan={2}>{deliveryCost}</TableCell>
-          </TableRow>
-
-          <TableRow>
-           
-            <TableCell align="center" colSpan={2}>Total</TableCell>
-            <TableCell align="right">{havetoPay}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-   
+  <Grid item md={12} xs={12} sm={12}> 
+    <Grid className="price_details_wrapper" >
+      <div className="price_type">
+        <div className="d-flex flex-column justify-content-between" style={{height:"20vh"}}>
+          <h6>Subtotal</h6>
+          <h6>vat (5%)</h6>                  
+          <h6>Delivery Cost</h6>
+        </div>      
+        <div className="d-flex flex-column justify-content-between value">
+          <h6>{inTotalPrice}</h6>
+          <h6>{vat}</h6>           
+          <h6>{deliveryCost}</h6>
+        </div>              
+      </div> 
+      <div className="total">
+        <h6>Total</h6>
+        <h6>{havetoPay}</h6>
+      </div>    
+    </Grid>
+    {/* <DeliveryDetails/> */}
   </Grid> 
   );
 }
+
+
 
 export default PriceDetails

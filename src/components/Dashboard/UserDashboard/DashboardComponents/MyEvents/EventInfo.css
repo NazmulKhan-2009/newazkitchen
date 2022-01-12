@@ -25,3 +25,15 @@
  -webkit-text-stroke: 1.5px #dee2e6;
  
 }
+.event_history{
+ height:80vh;
+ overflow:scroll;
+}
+.event_history::-webkit-scrollbar {
+ display: none;
+}
+
+.event_history{
+ -ms-overflow-style: none;  /* IE and Edge */
+ scrollbar-width: none;  /* Firefox */
+}

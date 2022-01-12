@@ -73,7 +73,7 @@ export default function OrderDetailImages({orderInfo}) {
             <GridListTileBar                          
               actionIcon={
                 <IconButton aria-label={`info about ${item.foodTitle}`} className={classes.icon}>
-                  <InfoIcon />
+                  {/* <InfoIcon /> */}
                 </IconButton>
               }
             />

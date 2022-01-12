@@ -1,21 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-
-
+#upper{
+ background-color: #4B332B;
+ height: 58px;
+}
+.nav_item{
+ display:flex;
+ align-items:center;
+ position: absolute;
+ right:20px;
+}
 
 .bg-color{
  color: #fff;
  background-color: red;
 }
-.brand h2{
- color:#5814AB;
- font-family: 'MuseoModerno', cursive;
- text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
-}
-.link_style{
+.brand span{
  color:#FD5C63;
  font-family: 'MuseoModerno', cursive;
  text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ font-size: 25px;
+}
+.link_style{
+ color:#FD5C63;
+ font-family: 'Bebas Neue', cursive;
+ text-shadow: 5px 4px 11px rgba(0, 0, 0, 0.26);
+ transition: .5s;
+ cursor:pointer;
+ font-size: 20px;
+}
+.link_style:hover{
  text-decoration:none;
+ /* letter-spacing: 1px; */
+ transition: .5s;
+}
+
+/* =====>>>>>>>>>>>>jquery class */
+.top-nav-collapse {
+ z-index: 999999;
+ padding: 5px !important;
+ top: 0px !important;
+ box-shadow: 0px 3px 6px 3px rgba(0, 0, 0, 0.06);
+ -webkit-animation-duration: 1s;
+ animation-duration: 1s;
+ height: 50px;
+ background-position: center center;
+ background-repeat: no-repeat;
+}
+
+.navApp{
+ z-index:999999;
+ position:fixed;
+ /* background:linear-gradient(288deg, rgba(109,108,119,1) 0%, rgba(28,151,156,1) 62%) */
+ background: whitesmoke;
+}
+
+.cart_style{
+position:fixed;
+bottom:60px;
+right:60px;
 
 }
+

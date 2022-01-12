@@ -1,0 +1,41 @@
+.contact_us_wrapper{
+ background-image: url(../../../images/background_creation/background.PNG);
+ width: 100%;
+ height:auto;
+}
+
+.contact_method,
+.send_msg{
+ background:whitesmoke;
+ display: flex;
+ align-items: center;
+ padding:15px 20px;
+ border-radius: 50px;
+ margin:10px;
+
+}
+.contact_method .icon,
+.send_msg .icon
+{
+ color:white;
+ background:#BC3D36;
+ border-radius: 50%;
+ padding:5px;
+
+}
+.contact_method span{ 
+ letter-spacing:2px;
+ font-size:15px;
+ padding:0 10px;
+}
+.cont_title{
+ transform: skew(-0.06turn, 18deg);
+ color:white;
+}
+@media only screen and (max-width: 600px) {
+ .contact_method span{ 
+  letter-spacing:1px;
+  font-size:12px;
+ }
+
+}

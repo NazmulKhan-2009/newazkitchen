@@ -5,7 +5,7 @@
 
  /* flex-wrap: wrap; */
  /* height: 100vh; */
- padding:40px 10px 20px 50px;
+ /* padding:40px 10px 20px 50px; */
 }
 .review_section{
  display: flex;
@@ -22,7 +22,8 @@
  /* justify-content:space-between; */
 }
 .cont_comments{
- background-color:#333333 !important;
+ /* background-color:#333333 !important; */
+ background: linear-gradient(288deg, rgba(109,108,119,1) 0%, rgba(28,151,156,1) 62%);
  color:white !important;
  
     /* flex:.45; */
@@ -47,9 +48,9 @@
 .con_comments .MuiTypography-colorTextSecondary{
 color:tomato !important;
 }
-.MuiListItemText-secondary{
+/* .cont_comments .MuiListItemText-secondary{
  color:tomato !important;
-}
+} */
 
 .inp .MuiInputBase-root {
   max-width:100% !important;

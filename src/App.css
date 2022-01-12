@@ -1,41 +1,3 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 .my_search .MuiAppBar-colorPrimary{
   border-radius: 20px;
  
@@ -53,7 +15,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50px;
-  right: 15px;
+  left: 25px;
   bottom: 15px;
   background: #149ddd;
   color: #fff;
@@ -66,15 +28,52 @@
   position: absolute;
   top: 7px;
   left: 8px;
+  transition: .5s;
 }
 
 .back-to-top:hover {
   color: #fff;
-  background: #2eafec;
-  transition: background 0.2s ease-in-out;
+  background: crimson;
+  transition: .5s;
 }
 /*! back to top button end */
 
 
+.deviceMenu{
+  display: none;
+}
+.cartDisp{
+  display: none !important;
+ }
+
+
+
+@media only screen and (max-width: 900px) {
+  .deviceMenu{
+    display: block;
+    position: fixed;
+    right:0;
+    z-index: 99999;
+
+  }
+  .desk_menu{
+    display:none;
+  }
+  .responsive_dashboard{
+    padding:25px;
+  }
+  .responsive_dashboard .dashboard_header{
+    display:none;
+  }
+  .cartDisp{
+    display: block !important;
+   }
+   .back-to-top i {
+
+   }
+}
+.shadow{
+  border:2px solid black;
+}
 
 

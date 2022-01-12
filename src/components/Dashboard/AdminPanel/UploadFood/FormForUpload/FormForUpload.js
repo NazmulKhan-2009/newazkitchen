@@ -59,7 +59,7 @@ const FormForUpload=()=> {
     formData.append('imageUrl', file); //file base64
    
     //*****FETCH WAY XXXX ASTAGFIRULLAH XXXXX
-    // fetch("http://localhost:5000/fooddetail",{
+    // fetch("https://quiet-cove-17146.herokuapp.com/fooddetail",{
     //       method: 'POST',
     //       body:formData      
     //     })
@@ -70,7 +70,7 @@ const FormForUpload=()=> {
     // *****AXIOS WAY
 
     //AXIOS THEN CATCH WAY XXXX ASTAGFIRULLAH XXXX
-    // axios.post("http://localhost:5000/fooddetail",formData)    
+    // axios.post("https://quiet-cove-17146.herokuapp.com/fooddetail",formData)    
     //     .then(data=>setFoodsInfo(data.data.data))
     //     .catch(err=>console.error(err))
 
@@ -78,7 +78,7 @@ const FormForUpload=()=> {
      //****AXIOS ASYNC AWAIT WAY XXXX ASTAGFIRULLAH XXXXXX
     const addFood= async()=>{
       try{
-          const response=await axios.post("http://localhost:5000/api/food/fooddetail",formData) 
+          const response=await axios.post("https://quiet-cove-17146.herokuapp.com/api/food/fooddetail",formData) 
           setFoodsInfo(response.data.data)
        }catch(e){
          //console.log(`add Food error ${e}`)
@@ -91,7 +91,7 @@ const FormForUpload=()=> {
     // formData.append('file',file);
     // // formData.append('image_link', file); //file base64
        
-    //   fetch("http://localhost:5000/FoodDetail",{
+    //   fetch("https://quiet-cove-17146.herokuapp.com/FoodDetail",{
     //     method: 'POST',
     //     body:formData      
     //   })
@@ -127,7 +127,7 @@ const FormForUpload=()=> {
             }}
         > </h3>
         
-        {/* <img src={`http://localhost:5000/${foodsInfo.imageUrl}`}  alt="" /> */}
+        {/* <img src={`https://quiet-cove-17146.herokuapp.com/${foodsInfo.imageUrl}`}  alt="" /> */}
 
         {foodsInfo.imageUrl &&
           <img src={foodsInfo.imageUrl} alt="" width="30%"/>

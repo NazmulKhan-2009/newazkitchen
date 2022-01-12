@@ -1,5 +1,6 @@
 {
   "name": "newazkitchen",
+  "homepage": "https://newazkitchen.newazkitchenbdapi.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

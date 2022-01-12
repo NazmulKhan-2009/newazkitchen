@@ -6,9 +6,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import FileBase64 from 'react-file-base64';
 import { UserContext } from '../../../../../App';
 import { imageUpload } from '../../../../DataManagement';
-// import './YourProfile.css'
 import cus_style from './YourProfile.module.css';
-// import Tooltip from '@material-ui/core/Tooltip';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,29 +30,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function YourProfile({path}) {
   const {upload_Button,file_base,img_conrol}=cus_style
-
-  // const[file,setFile]= useState(null) //for file base64
-
   const userData=JSON.parse(sessionStorage.getItem('userInfo'))
-  // const [userInfo, setUserInfo]=useState(userData)
   const [userInfo, setUserInfo]=useState(userData)
-  // const [dataLoad, setDataLoad]=useState(false)
-  // const [profilePhoto, setProfilePhoto]=useState('https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png')
-
   const {profilePhoto, setProfilePhoto}= useContext(UserContext)
 
   useEffect(() => {
-    // setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')))
-   
     imageUpload(userInfo.userEmail,"getProfile")
-    .then(res=>setProfilePhoto(res?.data.userImage))
-    
+    .then(res=>setProfilePhoto(res?.data.userImage))  
   }, [])
-  
-
-  
-  // //console.log(file)
- const classes = useStyles();
+  const classes = useStyles();
  
 
 const handleUpload=(image)=>{
@@ -62,32 +47,22 @@ const handleUpload=(image)=>{
   if(image.type.slice(0,5)==="image"){
       imageUpload({userImage:image.base64,email:userInfo.userEmail},'profilePhoto')
       .then(res=>{
-        setProfilePhoto(res.data.userImage)
-        // if(res){
-        //   sessionStorage.setItem('userInfo',JSON.stringify({...userData,photo:res.data.userImage}));
-        //   setDataLoad(!dataLoad)
-        // }
-        // //console.log(res)
-        
-      
-      
+        setProfilePhoto(res.data.userImage)     
       })
   }else{
     alert("Please Upload an Image within 5MB")
   }
   
 }
-// ...userData,photo:res.data.userImage
+
+const accessInfo=JSON.parse(sessionStorage.getItem('userInfo'))
 
  return (
   <div className={classes.root}>
     <div className={img_conrol}>
       <Avatar alt="Remy Sharp" src={profilePhoto} className={classes.large} />
-
       {/* //! image upload */}
-
-      <Grid className={`${upload_Button} ${file_base}`}>
-      
+      <Grid className={`${upload_Button} ${file_base}`}>    
             <label htmlFor="fileInput">
             <PhotoCamera  style={{position:"absolute",width:"35px",height:"30px",cursor:'pointer',paddingTop:"5px"}} color="secondary"/>
             </label>
@@ -96,12 +71,10 @@ const handleUpload=(image)=>{
                                    */}
             {/* && image.size<"5000 kB"  */}
             {/* <FileBase64 required={true} multiple={false} onDone={image =>image.type.slice(0,5)==="image" ? setFile(image.base64) : alert("Please Upload an Image within 5MB")}/>     */}
-
             <FileBase64 required={true} multiple={false} onDone={(image)=>handleUpload(image)}/>                   
       </Grid>
-    </div> 
-     
-      <h3>{userInfo?.userName}</h3>
+    </div>    
+      <h5 style={{color:'whitesmoke'}}>{userInfo?.accessAs==='admin' && "Admin-"}{userInfo?.userName}</h5>
     </div>
  )
 }

@@ -8,9 +8,18 @@
 .makeStyles-root-51{
  margin:5px !important;
 }
+.field_wrapper .field{
+ width:100%
+}
+.delivery_form{
+ margin:auto;
+ padding:0 50px;
+ background: url(../../../../images/cart/form_back.png);
+ background-repeat: no-repeat;
+}
+
 
 .MuiFormLabel-root {
- 
  padding: 0;
  font-size: 1.2rem !important;
  font-family: 'Caveat', cursive !important;
@@ -22,10 +31,40 @@
  font-family: 'Courgette', cursive !important;
  letter-spacing: .04038em !important;
  font-size: 1.2rem !important;
- /* color:red !important; */
  text-shadow: 5px 4px 5px rgba(0, 0, 0, 0.36) !important;
  color:#863D41 !important;
   
+}
+
+@media only screen and (max-width: 600px) {
+ .field{
+  width:300px;
+ }
+ .delivery_form{
+  padding:0 0 0 0px;
+ }
+}
+ 
+@media screen and (min-width: 600px) and (max-width:967px){
+ .field_wrapper .field{
+ 
+ max-width:350px;
+ }
+ 
+ .delivery_form{
+  padding:0 0 0 0px;
+  margin:auto;
+ }
+}
+ 
+@media screen and (min-width: 967px) and (max-width:1260px){
+ .field_wrapper{
+  
+  flex-direction: column; 
+ }
+ .field{
+  width:400px;
+ }
 }
 
 

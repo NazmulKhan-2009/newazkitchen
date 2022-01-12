@@ -36,32 +36,28 @@ const MobileTransfer = ({handleDialog,purchaseDone,purchaseNotify}) => {
         !purchaseNotify ?
 
         <Grid >
-            <h3 
-                style={{
-                    textAlign: 'center',
-                    textShadow: '5px 4px 11px rgba(0, 0, 0, 0.26)',
-                    color:'#AB47BC'}}>Pay Bill by Mobile Money Transfer</h3>
+            {/* <h3 
+             style={{
+                textAlign: 'center',
+                textShadow: '5px 4px 11px rgba(0, 0, 0, 0.26)',
+                color:'#AB47BC'}}>
+                Pay Bill by Mobile Money Transfer
+            </h3> */}
             <Grid container className="Form">
             {
                 moneyTrfCo.map(info=><MoneyTrfCom info={info} key={info.coName}
-                    handleDialog={handleDialog} purchaseDone={purchaseDone}
-                    
+                handleDialog={handleDialog} purchaseDone={purchaseDone}             
                 /> )
             }
             </Grid>
-            </Grid>
-            
-            : <PurchaseDone
-                successInfo={{
-                    paymentIdInfo:`You have Paid ${orderInfo.delivery_Info.totalPrice} Taka on ${orderInfo.payment_by}`,
-                    successMsg:`Thanks for purchase from Newaz Kitchen, your puchase ID is `,
-
-         
-      }}
-
-            />
-
-        
+        </Grid>       
+            : 
+        <PurchaseDone
+            successInfo={{
+                paymentIdInfo:`You have Paid ${orderInfo.delivery_Info.totalPrice} Taka on ${orderInfo.payment_by} which is under verification process`,
+                successMsg:`Thanks for purchase from Newaz Kitchen, your puchase ID is `,     
+            }}
+        />      
      }
 
 </>

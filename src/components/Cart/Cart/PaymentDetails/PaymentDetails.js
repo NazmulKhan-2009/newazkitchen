@@ -8,18 +8,16 @@ import WaitingOrder from '../WaitingOrder';
 
 const PaymentDetails = ({confirmCart}) => {
  return (
-  <Grid container item md={6} xs={12} style={{margin:'auto'}}>
-    
-   <PriceDetails
-   
-   />
-   
-   {confirmCart ? 
+  <Grid container item md={6} xs={11} sm={6} style={{margin:'auto'}}>
+
+   {/* <PriceDetails/> */}
+   {/* <DeliveryDetails/> */}
+   {/* {confirmCart ? 
    <DeliveryDetails/>
    :
    <WaitingOrder 
    info={{text:'Waiting for Confirm cart',img:'https://media1.giphy.com/media/LVd5BbSMsgKLEjKpqL/source.gif'}}/>
-   }
+   } */}
    
   
   </Grid>

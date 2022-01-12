@@ -94,7 +94,7 @@ const handleEventCancel=()=>{
   eventCancel(eventData).then((res)=> console.log(res))
   setProfileSync(Math.random())
   dialogClose(false)
-  loading(true)
+  // loading(true)
 }
 
 

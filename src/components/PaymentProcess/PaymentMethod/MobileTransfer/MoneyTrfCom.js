@@ -22,15 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 const MoneyTrfCom=({info,handleDialog,purchaseDone})=>{
   const classes = useStyles();
-
-  // const inputField=(
-  // <form>
-  //   <input type="text"/>
-  //   <input type="text"/>
-  //   <button>send</button>
-  // </form>
-  // )
-
   const handleMobileTrf=(mobileTrfTitle)=>{
     handleDialog(true,{
       title:`Payment by ${mobileTrfTitle}` ,

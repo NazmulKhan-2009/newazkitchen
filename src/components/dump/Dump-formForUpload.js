@@ -49,7 +49,7 @@ const FormForUpload=()=> {
     formData.append('file',file);
     // formData.append('image_link', file); //file base64
        
-      fetch("http://localhost:5000/foods",{
+      fetch("https://quiet-cove-17146.herokuapp.com/foods",{
         method: 'POST',
         body:formData
         // headers:{"content-type":"application/json"},
@@ -78,7 +78,7 @@ const FormForUpload=()=> {
 
 
   useEffect(()=>{
-    fetch("http://localhost:5000/foods")
+    fetch("https://quiet-cove-17146.herokuapp.com/foods")
     .then(res=>res.json())
     .then(info=>setImage2(info.data.foods[104].img))
   },[])
@@ -97,13 +97,13 @@ const FormForUpload=()=> {
             }}
         > </h3>
         <p></p>
-        {/* <img src={`http://localhost:5000/${image.img}`} alt="img" width="20%" className="img-fluid"/> */}
+        {/* <img src={`https://quiet-cove-17146.herokuapp.com/${image.img}`} alt="img" width="20%" className="img-fluid"/> */}
         
-        {/* <img src={`http://localhost:5000/${image2.img}`} alt="img" width="20%" className="img-fluid"/> */}
+        {/* <img src={`https://quiet-cove-17146.herokuapp.com/${image2.img}`} alt="img" width="20%" className="img-fluid"/> */}
 
         {/* <img  src={`data:image/png; base64, ${image2.img}`} alt=''/> */}
 
-        {/* <img src={`http://localhost:5000/${image2.img}`} alt=""/>  */}
+        {/* <img src={`https://quiet-cove-17146.herokuapp.com/${image2.img}`} alt=""/>  */}
 
         <form  className={classes.root} autoComplete="on" onSubmit={handleSubmit}>
             {/* {

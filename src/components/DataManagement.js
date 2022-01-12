@@ -1,132 +1,98 @@
 import axios from "axios";
-// import React, { useContext } from 'react';
-// import { UserContext } from "../App";
-export const orderedData=(email,payment_by,order_status,purchasedInfo)=>{
+
+
+const url='http://localhost:5000'
+// const url='https://quiet-cove-17146.herokuapp.com'
+
+
+export const allFoodsList=async()=>{
+  const result=await axios.get(`${url}/api/food/fooddetail`)
+  return result.data
+}
+
+export const userLoginData=async(userEmail)=>{
+ const result= await axios(`${url}/api/user/alluser/${userEmail}`)
+ return result.data
+}
+
+export const orderedData=(email,payment_by,order_status,purchasedInfo,paymentCondition)=>{
 
 const adminVerify=JSON.parse(sessionStorage.getItem('userInfo'))
 
  const cartInfo=JSON.parse(localStorage.getItem('cartInfo'))
  const token=sessionStorage.getItem('token')
-//  const purchasedInfo=JSON.parse(sessionStorage.getItem('purchasedInfo'))
  const orderedData={
    email,
    cart:cartInfo,
    payment_by,
    order_status,
-   purchasedInfo:purchasedInfo,  
+   purchasedInfo:purchasedInfo,
+   paymentCondition,  
    deliveryInfo: JSON.parse(sessionStorage.getItem('deliveryInfo'))
  }
  if(adminVerify.accessAs==='success'){
    const orderFood= async()=>{
    try{
-       const response=await axios.post("http://localhost:5000/api/order/orderdetail", orderedData,{headers: {'Authorization': 'Bearer '+ token}}) 
-       //! setOrderInfo(response.data.data)
+       const response=await axios.post(`${url}/api/order/orderdetail`, orderedData,{headers: {'Authorization': 'Bearer '+ token}}) 
        return response.data.data
        
-     }catch(e){
-      //console.log(`add Order error ${e}`)
-     } ;
+      }catch(e){
+        return e
+      } ;
  }  
- 
- return orderFood()
-}else if(adminVerify.accessAs==='admin'){
+  return orderFood()
+  }else if(adminVerify.accessAs==='admin'){
   alert('You Admin hmmmm!')
 }
-
 }
-
-
-//Order Hisotry
-
-// export const orderHistory=async(email)=>{
-//   try {
-//    const response= await axios.get(`http://localhost:5000/api/order/orderhistory/${email}`)
-
-//    return response.data.data
-//   } catch (e) {
-//     //console.log(`error to get order history ${e}`)
-//   }
-
-// }
 
 export const orderHistory=(email,token)=>{
 const orderData=async()=>{
-
-  // try {
-  //   const response= await axios.get(`http://localhost:5000/api/order/orderhistory/${email}`)
- 
-  //   return response.data.data
-  //  } catch (e) {
-  //    //console.log(`error to get order history ${e}`)
-  //  }
-
   try{
       const response=await axios({
         method:"get",
-        url:`http://localhost:5000/api/order/orderhistory/${email}`,
+        url:`${url}/api/order/orderhistory/${email}`,
         headers: {'Authorization': 'Bearer '+ token}
       })
       return response.data.data
-   }catch(e){
-     
+      // console.log(response.data.data)
+    }catch(e){
+     return e
     } ;
-}
-    
-return orderData()
-
+    }    
+  return orderData()
 }
 
-
-//!USER INFO CONNECTION WITH DATA BASE
-
-export const userDataDb=(db)=>{
-  //console.log(`data base is connected with ${db}`)
+export const orderHistoryAll=async()=>{
+try{
+    const response=await axios({
+      method:'get',
+      url:`${url}/api/order/orderhistoryall`})
+    // console.log(response.data.data)
+    return response.data.data
+ }catch(e){
+   console.log(e)
+  } ;
 }
-
-
-//USER SIGN UP 
-// export const userSignUp=(userData)=>{
-
-//   const userCreate=async()=>{
-
-//     try {
-//       const responsedData=await axios.post("http://localhost:5000/api/user/signup", userData)
-//       //console.log(responsedData)
-      
-//     } catch (error) {
-//       //console.log(`something problem in sign up`)
-//     }
-
-//   }
-//   userCreate()
-    
-  
-// }
 
 //SIGN UP 
 export const userSignUp=async(userData)=>{
   try {
-    const resData=await axios.post('http://localhost:5000/api/user/signup' , userData)
-    // //console.log(resData)
+    const resData=await axios.post(`${url}/api/user/signup` , userData)
     return resData
-    
   } catch(e){
-  //  //console.log(e)
-  // return 
-  }
-    
+    return e
+  }  
 }
 
 //SIGN IN
 
 export const userSignIn=async(userData)=>{
- 
- try{
-    const resData=await axios.post('http://localhost:5000/api/user/signin' , userData) 
-
+ try{   
+    const resData=await axios.post(`${url}/api/user/signin` , userData) 
     return resData
-  }catch{
-    //console.log()
+  }catch(e){
+    return e
    } ;
 
 }
@@ -134,12 +100,11 @@ export const userSignIn=async(userData)=>{
 //SEARCH FOOD
 
 export const searchFood=async(keyWord)=>{
-try{
-    const resData=await axios.post('http://localhost:5000/api/food/searchfood',{keyWord})
-      return resData
-    // //console.log(resData)
+try{  
+    const resData=await axios.post(`${url}/api/food/searchfood`,{keyWord})
+    return resData
  }catch(e){
-   //console.log(e)
+  return e
   } ;
 }
 
@@ -147,90 +112,85 @@ try{
 //SPECIFIC FOOD SPECIFICATION
 
 export const foodDetails=async(id)=>{
-
   try{
-    const resData=await axios.get(`http://localhost:5000/api/food/${id}`) 
+    const resData=await axios.get(`${url}/api/food/${id}`) 
     return resData.data.data[0]
-    // //console.log(resData.data.data)
- 
     }catch(e){
-      //console.log(e)
+      return e
     } ;
- 
   }
 
 
 //RATING REVIEW
 export const ratingReview=async(reviewData)=>{
-try{
-    const resData=await axios.post('http://localhost:5000/api/food/review',reviewData)
-
-    // //console.log(resData)
-    return resData.data.data
- }catch(e){
-   
-  } ;
-
+    try{
+        const resData=await axios.post(`${url}/api/food/review`,reviewData)
+        return resData.data.data
+    }catch(e){
+      return e
+      } ;
 }  
 
-
 // dashboard management with database
-
 export const imageUpload=async(image,type)=>{
-
   if(type==='profilePhoto'){
     try{
-      const response=await axios.patch(
-        `http://localhost:5000/api/user/alluser`,image) 
-        return response
-      // //console.log(response.data.success)
-      
+      const response=await axios.patch(`${url}/api/user/alluser`,image)    
+      return response    
     }catch(e){
-     //console.log(`add Food error ${e}`)
+      return e
     } ;
 
   }
+
   if(type==='getProfile'){
     try{
-      const response=await axios.get(
-        `http://localhost:5000/api/user/alluser/${image}`) 
-        return response
-      // //console.log(response.data.success)
-      
+      const response=await axios.get( `${url}/api/user/alluser/${image}`) 
+      return response     
     }catch(e){
-     //console.log(`add Food error ${e}`)
+      return e
     } ;
-
-  }
-  
-
-  
+  } 
 }
 
 
 export const addFavFood=async(info)=>{
- const data=await axios.patch(`http://localhost:5000/api/user/favfood/${info.foodId}/${info.email}`)
- //console.log(data)
+  try{
+    const data=await axios.patch(`${url}/api/user/favfood/${info.foodId}/${info.email}`)
+    return data
+   }catch(e){
+    return e
+    } ;
 }
 
-
 //! ADD EVENTS
-
 export const addEvents=async(data)=>{
-  const resData=await axios.post('http://localhost:5000/api/user/addevent/',data)
-  console.log(resData)
+  try{
+    const resData=await axios.post(`${url}/api/user/addevent/`,data)
+    return resData
+   }catch(e){
+    return e
+    } ;
+
 }
 
 export const eventCancel=async(eventId)=>{
- 
-const result=await axios.patch(`http://localhost:5000/api/user/event/${eventId}`)
-return result
+  try{
+    const result=await axios.patch(`${url}/api/user/event/${eventId}`)
+    return result
+   }catch(e){
+    return e
+    } ;
+
 }
 
-
 //!RESET PASSWORD
-
 export const resetUserPassword=async(dataToChange)=>{
-  const response=await axios.patch('http://localhost:5000/api/user/resetpassword',dataToChange)
-  return response
+  try{
+    const response=await axios.patch(`${url}/api/user/resetpassword`,dataToChange)
+    return response
+   }catch(e){
+    return e
+    } ;
+  
 }

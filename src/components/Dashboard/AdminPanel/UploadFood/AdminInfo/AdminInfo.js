@@ -10,7 +10,7 @@
 
 //   const serverFoodList=async()=>{
 //     try{
-//       const foods=await axios.get("http://localhost:5000/api/food/fooddetail")
+//       const foods=await axios.get("https://quiet-cove-17146.herokuapp.com/api/food/fooddetail")
 //       setFoodsList(foods.data.slice(90,103))
       
 //      }catch(e){

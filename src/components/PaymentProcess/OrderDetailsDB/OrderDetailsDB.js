@@ -6,29 +6,27 @@ import OrderStatus from './OrderStatus/OrderStatus';
 
 const OrderDetailsDB = ({orderInfo}) => {
  
-//!//console.log(orderInfo)
+
 
  return (
   
 <Grid container item md={12} justify="center" spacing={5}>
-  <Grid item md={4}>
+  {/* <Grid item md={4}>
    <OrderDetailImages
       orderInfo={orderInfo}
    />
-  </Grid>
-
-  <Grid item md={5}>
-  <OrderDelivery
-      orderInfo={orderInfo}
-   />
-  </Grid>
-  
+  </Grid> */}
   {/* <Grid item md={3}>
   <OrderTransaction
       orderInfo={orderInfo}
    />
   </Grid> */}
 
+  <Grid item md={8}>
+  <OrderDelivery
+      orderInfo={orderInfo}
+   />
+  </Grid>
   <Grid item md={3} container justify="center">
   <OrderStatus
       orderInfo={orderInfo}

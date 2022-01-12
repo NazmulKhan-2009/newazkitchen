@@ -6,14 +6,11 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import './DeliveryDetails.css';
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(0),
-      minWidth: '15rem',  
-       
+      minWidth: '15rem',   
     },
     
   },
@@ -22,57 +19,39 @@ const useStyles = makeStyles((theme) => ({
 const DeliveryDetails=()=> {
   const classes = useStyles();
   const [deliveryInfo,SetDeliveryInfo]=useState({})
+  const [selectedValue, setSelectedValue] =useState('');
+  const [gender, setGender]=useState("")
   let history = useHistory();
- 
-  
-  
-  
-  // //console.log(deliveryInfo)
 
   const handleSubmit=(e)=>{
-     e.preventDefault()
-    //console.log(deliveryInfo)
-  // //console.log(totalPrice)
-  sessionStorage.setItem("deliveryInfo", JSON.stringify({...deliveryInfo,totalPrice}))
-    // localStorage.removeItem('cartInfo')
+    e.preventDefault()
+    sessionStorage.setItem("deliveryInfo", JSON.stringify({...deliveryInfo,totalPrice}))
     SetDeliveryInfo({})
-    // history.push("/dashboard/payment")
     history.push("/payment")
   }
-
   const handleInput=e=>{ 
     setSelectedValue(e.target.value);  
     SetDeliveryInfo({...deliveryInfo,[e.target.name]:e.target.value})
   }
 
+  const handleGender=(e)=>{
+    setGender(e.target.value)
+    SetDeliveryInfo({...deliveryInfo,[e.target.name]:e.target.value})
+  }
   const totalPrice=JSON.parse(sessionStorage.getItem('totalPrice'))
-  //console.log(totalPrice)
+  console.log(selectedValue)
 
-  const [selectedValue, setSelectedValue] = React.useState('');
-
-  // const handleChange = (event) => {
-  //   setSelectedValue(event.target.value);
-  // };
-
+  
   return (
-    <Grid>
-      <h3
-        style={{
-          textShadow: "5px 4px 11px rgba(0, 0, 0, 0.26)",
-          color:"#fd5c63",
-          margin: '1rem'
-          
-          // marginBottom:"3rem",
-          
-          }}
-      > Delivery Address</h3>
-      <form  className={classes.root} autoComplete="on" onSubmit={handleSubmit}>
-      <div>
-        <FormControlLabel value="Mr" control={<Radio required={true} size="small" name="gender" value="Mr" onChange={handleInput} checked={selectedValue === 'Mr'} color="primary" />} label="Mr" />
-
-        <FormControlLabel value="Mrs" control={<Radio required={true} size="small" name="gender" value="Mrs" onChange={handleInput} checked={selectedValue === 'Mrs'} color="primary"/>} label="Mrs" />
-      </div>
+    <Grid container item md={6} xs={12} sm={12} className="delivery_form">
       
+      <form  className={classes.root} autoComplete="on" onSubmit={handleSubmit}>
+        <div className="form_row">   
+          <FormControlLabel value="Mr" control={<Radio  required={true} size="small" name="gender" value="Mr" onChange={handleGender} checked={gender === 'Mr' && 'checked'} color="primary" />} label="Mr" />
+
+          <FormControlLabel value="Mrs" control={<Radio required={true} size="small" name="gender" value="Mrs" onChange={handleGender} checked={gender ==='Mrs' && 'checked'} color="primary"/>} label="Mrs" />    
+        </div>
+       <div className="field_wrapper">
         <TextField 
           required={true}
           id="emailInput" 
@@ -81,9 +60,9 @@ const DeliveryDetails=()=> {
           name="name" 
           type="text"           
           onChange={handleInput}           
-          value={deliveryInfo.name ||""}
-          
-        />
+          value={deliveryInfo.name ||""}   
+          className="field"    
+        />   
         <TextField 
           required={true}
           id="cellInput" 
@@ -93,9 +72,10 @@ const DeliveryDetails=()=> {
           name="contact" 
           type="text" 
           onChange={handleInput}           
-          value={deliveryInfo.contact ||""} 
+          value={deliveryInfo.contact ||""}  
+          className="field"         
+        />  
           
-        />
         <TextField
           id="addressInput"
           label="Your Address in details" 
@@ -105,6 +85,7 @@ const DeliveryDetails=()=> {
           onChange={handleInput} 
           required={true}
           value={deliveryInfo.address ||""}  
+          className="field"
         />
         <TextField       
           id="insInput"
@@ -114,10 +95,14 @@ const DeliveryDetails=()=> {
           type="text" 
           onChange={handleInput} 
           value={deliveryInfo.instruction ||""} 
+          className="field"
         />
-        <Button variant="outlined" color="secondary" type="submit"  >
+        </div>
+        <div style={{textAlign: "center",paddingTop:"30px"}}>
+          <Button variant="outlined" color="secondary" type="submit"  >
           Go to Payment
-        </Button>
+          </Button>
+        </div>  
         
       </form>
       

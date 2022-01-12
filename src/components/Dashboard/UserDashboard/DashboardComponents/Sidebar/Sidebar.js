@@ -16,7 +16,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext,useState,useEffect  } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../../../../App';
 import YourProfile from '../YourProfile/YourProfile';
@@ -59,22 +59,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const userInfo=JSON.parse(sessionStorage.getItem('userInfo'))
+console.log(userInfo?.accessAs)
 
-const dashboardNav=[
-  {linkName:'Home',linkTo:'/',icon:<HomeIcon/>}, 
-  {linkName:'Dashboard',linkTo:'/dashboard',icon:<DashboardIcon/>},
-  {linkName:'My Order',linkTo:'dashboard-purchasehistory',icon:<ViewListIcon/>},{linkName:'Favorites',linkTo:'dashboard-myfavorites',icon:<FavoriteBorderIcon/>},{linkName:'My Events',linkTo:'dashboard-myevents',icon:<EventIcon/>},
 
-]
+// const dashboardNav=[
+//   {linkName:'Home',linkTo:'/',icon:<HomeIcon/>}, 
+//   {linkName:'Dashboard',linkTo:'/dashboard',icon:<DashboardIcon/>},
+//   {linkName:'My Order',linkTo:'dashboard-purchasehistory',icon:<ViewListIcon/>},{linkName:'Favorites',linkTo:'dashboard-myfavorites',icon:<FavoriteBorderIcon/>},{linkName:'My Events',linkTo:'dashboard-myevents',icon:<EventIcon/>},
+// ]
 
-// //console.log(window.location.pathname)
+
 
 
 
 
 export default function Sidebar(props) {
-
-
+const {isAdmin,loginInfo}=useContext(UserContext)
+console.log(isAdmin,loginInfo)
 
 
   const { window } = props;
@@ -82,7 +84,6 @@ export default function Sidebar(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const {setLoginInfo}=useContext(UserContext)
-
   const history=useHistory()
    //! log out expression
    const logOut=()=>{
@@ -98,73 +99,79 @@ export default function Sidebar(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  // const dashboardNav=()=>{
+  //   if(userInfo?.accessAs==="admin"){
+  //     return [{linkName:'Home',linkTo:'/',icon:<HomeIcon/>}, 
+  //       {linkName:'Dashboard',linkTo:'/dashboard',icon:<DashboardIcon/>},
+  //       {linkName:'Order',linkTo:'dashboard-order',icon:<ViewListIcon/>},
+  //       {linkName:'Event',linkTo:'dashboard-event',icon:<FavoriteBorderIcon/>},
+  //       {linkName:'Maintenence',linkTo:'dashboard-maintenence',icon:<EventIcon/>},
+      
+  //     ]
+  //   }
+  //   if(userInfo?.accessAs==="success"){
+  //     return [
+  //       {linkName:'Home',linkTo:'/',icon:<HomeIcon/>}, 
+  //       {linkName:'Dashboard',linkTo:'/dashboard',icon:<DashboardIcon/>},
+  //       {linkName:'My Order',linkTo:'dashboard-purchasehistory',icon:<ViewListIcon/>},
+  //       {linkName:'Favorites',linkTo:'dashboard-myfavorites',icon:<FavoriteBorderIcon/>},
+  //       {linkName:'My Events',linkTo:'dashboard-myevents',icon:<EventIcon/>},
+      
+  //     ]
+  //   }
+  // }
+  
+
+
+  const [defaultUser, setDefaultUser]=useState([
+    {linkName:'Home',linkTo:'/',icon:<HomeIcon/>}, 
+    {linkName:'Dashboard',linkTo:'/dashboard',icon:<DashboardIcon/>},
+    {linkName:'My Order',linkTo:'dashboard-purchasehistory',icon:<ViewListIcon/>},
+    {linkName:'Favorites',linkTo:'dashboard-myfavorites',icon:<FavoriteBorderIcon/>},
+    {linkName:'My Events',linkTo:'dashboard-myevents',icon:<EventIcon/>},
+  
+  ])
+
+  useEffect(()=>{
+    if(userInfo?.accessAs==="admin"){
+      setDefaultUser( [{linkName:'Home',linkTo:'/',icon:<HomeIcon/>}, 
+        {linkName:'Dashboard',linkTo:'/dashboard',icon:<DashboardIcon/>},
+        {linkName:'Order',linkTo:'dashboard-purchasehistory',icon:<ViewListIcon/>},
+        {linkName:'Event',linkTo:'dashboard-event',icon:<FavoriteBorderIcon/>},
+        {linkName:'Maintenence',linkTo:'dashboard-maintenence',icon:<EventIcon/>},
+      
+      ])
+    }
+
+  },[])
+
+
   const drawer = (
-    <div style={{background:'indigo',height:'100vh'}}>
+    <div style={{background:'url(https://i.ibb.co/M504yp3/background-cart.png)',backgroundRepeat:"repeat", height:'100vh'}}>
       <div className={classes.toolbar} />
       <YourProfile path={"/dashboard"}/>
       <Divider/>
       <List>
-        {dashboardNav.map((item, index) => (
+        {defaultUser.map((item, index) => (
           <ListItem button key={item.linkName}>
-           {/* <Link> <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} /></Link> */}
-
             <Link to={item.linkName==='Home'| item.linkName==='Dashboard' ? item.linkTo :`/${item.linkTo}`} replace  style={{textDecoration:'none',display:'flex',alignItems:'center',color:'tomato'}}><ListItemIcon style={{color:'tomato'}}>{item.icon}</ListItemIcon> {item.linkName}</Link>
           </ListItem>
         ))}
          <Divider/>
          <ListItem  button onClick={logOut} >
            <ListItemIcon><ExitToAppIcon style={{color:'white'}}/></ListItemIcon>
-            <ListItemText primary="Log Out" style={{color:'white'}} />
-
-            
+            <ListItemText primary="Log Out" style={{color:'white'}} />          
           </ListItem>
-          <Divider/>
+        <Divider/>
       </List>
     </div>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
-
- 
-
+  
   return (
     <div className={classes.root}>
-      {/* <CssBaseline /> */}
-      {/* <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
-
-{/* {console.log('that is sidebar')} */}
-      
-        <Toolbar style={{position:'absolute',left:0,top:0}}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-         
-        </Toolbar>
-       
-
+        <MenuIcon onClick={handleDrawerToggle} />
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">

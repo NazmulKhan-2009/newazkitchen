@@ -19,17 +19,8 @@ export default function MyEvents() {
   // //console.log(jwt.verify(toko,"khan20"))
 
   return (
-   <Sidebar>
-    
-      {/* <Grid style={{margin:'0 200px'}}>
-      <EventsTime/>
-      </Grid> */}
-      
-      {/* <EventsType/> */}
-
+    <Sidebar>
       <EventInfo/>
-    
-    
     </Sidebar>   
   );
 }

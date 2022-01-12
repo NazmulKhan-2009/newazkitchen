@@ -127,7 +127,7 @@
 // // );
 
 // // export default CardForm;
-
+//! CARD NO FOR TESTING 4242 4242 4242 4242 LINK https://stripe.com/docs/payments/without-card-authentication
 
 import React, {useContext, useState} from 'react';
 import {loadStripe} from '@stripe/stripe-js';

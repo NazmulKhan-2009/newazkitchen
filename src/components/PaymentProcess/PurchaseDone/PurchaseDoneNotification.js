@@ -5,7 +5,7 @@ import React from 'react';
 const PurchaseDoneNotification = ({successInfo,orderInfo}) => {
  
  return (
-  <Grid item container md={12} xs={10}  justify="center">
+  <Grid item container md={12} sm={10} xs={10}  justify="center">
     <div className="Result">
       <div className="ResultTitle" role="alert">
         {successInfo.successMsg} {orderInfo.orderId}

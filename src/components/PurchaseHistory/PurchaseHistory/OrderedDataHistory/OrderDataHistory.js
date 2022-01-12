@@ -16,7 +16,8 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import React from 'react';
 import { orderHandleImg } from '../../../CommonFunction';
 import './OrderDataHistory.css';
-
+import Dialogs from "../../../Cart/Dialog/Dialogs"
+import { useState } from 'react';
 
 const useRowStyles = makeStyles({
   root: {
@@ -26,30 +27,27 @@ const useRowStyles = makeStyles({
   },
 });
 
-// function createData(name, calories, fat, carbs, protein, price) {
-//   return {
-//     name,
-//     calories,
-//     fat,
-//     carbs,
-//     protein,
-//     price,
-//     history: [
-//       { date: '2020-01-05', customerId: '11091700', amount: 3 },
-//       { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-//     ],
-//   };
-// }
 
-function Row({item}) {
-  const { email,order_Time,orderId,order_status,delivery_Info,ordered_Data} = item;
+function Row({item,handleDial,trnx}) {
+  const { email,order_Time,orderId,order_status,delivery_Info,ordered_Data,payment_by,paymentCondition,purchasedInfo} = item;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
+  const userInfo=JSON.parse(sessionStorage.getItem('userInfo')) 
+  console.log(userInfo)
+
+  const handlePaymentVerification=(purchasedInfo)=>{
+    
+    trnx(item)
+    console.log(purchasedInfo)
+    handleDial(true)
+  }
+
+  console.log(payment_by.trim(''))
   return (
-    <React.Fragment>
+    <>
       <TableRow className="table_row">
-        <TableCell >
+        <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -58,10 +56,14 @@ function Row({item}) {
           {orderId}
         </TableCell>
         <TableCell align="center" >{delivery_Info.totalPrice}</TableCell>
-        <TableCell align="center">{email}</TableCell>
+        <TableCell align="center">{payment_by} <button disabled={userInfo.accessAs==='admin' ? "" :"disabled"} onClick={()=>handlePaymentVerification(purchasedInfo)} style={{background:paymentCondition==="unverified" ? 'crimson':'blue',color:'white',padding:"1px 5px",borderRadius:"10px",border:"none",width:"80px"}}>{paymentCondition}<br/>{purchasedInfo?.transaction_No}</button></TableCell>
+
+        
+
         <TableCell align="center" >{order_Time}</TableCell>
         <TableCell align="center"  className="order_img"><img src={orderHandleImg(order_status)} alt="" width="100%"/></TableCell>
       </TableRow>
+
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -72,10 +74,10 @@ function Row({item}) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow className="cell_head">
-                    <TableCell>Date</TableCell>                  
-                    <TableCell align="left">Customer</TableCell>
-                    <TableCell >Amount</TableCell>
-                    <TableCell>Total price ($)</TableCell>
+                    <TableCell>Food</TableCell>                  
+                    <TableCell align="left">Quantity</TableCell>
+                    <TableCell >Unit price</TableCell>
+                    <TableCell>Total price (BDT)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -83,11 +85,10 @@ function Row({item}) {
                     <TableRow key={item._id} className="history_data">
                       <TableCell align="left">
                       <img src={item.imageUrl} alt="" width="40%"/>
-                      {/* {item.quantity} */}
                       </TableCell>
                       <TableCell align="left">{item.quantity}</TableCell>
-                      <TableCell align="left">{item.quantity * item.price}</TableCell>
-                      <TableCell align="left">{item.quantity}</TableCell>
+                      <TableCell align="left">{item.price}</TableCell>
+                      <TableCell align="left">{item.quantity*item.price}</TableCell>
                       {/* <TableCell align="right">
                         {Math.round(historyRow.amount * row.price * 100) / 100}
                       </TableCell> */}
@@ -100,61 +101,75 @@ function Row({item}) {
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </>
   );
 }
 
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     calories: PropTypes.number.isRequired,
-//     carbs: PropTypes.number.isRequired,
-//     fat: PropTypes.number.isRequired,
-//     history: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         amount: PropTypes.number.isRequired,
-//         customerId: PropTypes.string.isRequired,
-//         date: PropTypes.string.isRequired,
-//       }),
-//     ).isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     protein: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-//   createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-//   createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-// ];
-
 export default function OrderDataHistory({orderHistoryData}) {
+
+  const [open, setOpen] = React.useState(false);
+  const [trnxData,setTrnxData]=useState({})
+
+  const handleDial=(opn)=>{
+    setOpen(opn)
+  }
+  const handleDisagree=(cl)=>{
+    setOpen(cl)
+  }
+
+  const trnxInfo=(data)=>{
+    setTrnxData(data)
+  }
+
+  const handleAgree=(forDialog,forSatus)=>{
+    setOpen(forDialog)
+    if(forSatus){
+            
+    }
+   }
  //todo //console.log(orderHistoryData)
   return (
-   <Grid container justify='space-around' >
-   <Grid  item md={11} xs={11} >
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table" >
-        <TableHead>
-          <TableRow >
-            {/* <TableCell colSpan={1}/> */}
-            <TableCell align="center" colSpan={2} className="table_cell" >Order Id</TableCell>
-            <TableCell align="center" className="table_cell" >Total Price</TableCell>
-            <TableCell align="center" className="table_cell" >Payment Method</TableCell>
-            <TableCell align="center"  className="table_cell" >Contact</TableCell>
-            <TableCell align="center" className="table_cell" >Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {orderHistoryData.slice(0).reverse().map(item => (
-            <Row key={item._id} item={item} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-   </Grid> 
+   <Grid container justify='space-around' className="order_his_cont">
+      <Grid  item md={11} xs={11} sm={12} className="ord_his_large_screen">
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table" >
+            <TableHead>
+              <TableRow>
+                {/* <TableCell colSpan={1}/> */}
+                <TableCell align="center" colSpan={2} className="table_cell" >Order Id</TableCell>
+                <TableCell align="center" className="table_cell" >Total Price</TableCell>
+                <TableCell align="center" className="table_cell" >Payment Method</TableCell>
+                <TableCell align="center"  className="table_cell" >Date</TableCell>
+                <TableCell align="center" className="table_cell" >Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {orderHistoryData.slice(0).reverse().map(item => (
+                <Row key={item._id} item={item} handleDial={handleDial} trnx={trnxInfo}/>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        
+  <Dialogs
+
+dial={open} 
+      handleAgree={handleAgree}
+      handleDisagree={handleDisagree}
+      fromPayVerify="verifyDialog"
+      dialogInfo={{
+         title:`Verify The Transaction ${trnxData.purchasedInfo?.transaction_No}`,
+         content:"",
+         payment:`Total Amount ${trnxData.delivery_Info?.totalPrice}`,
+         contentEnd:`Payee Number ${trnxData.purchasedInfo?.sentMobileAc}` ,
+         btnYes:"yes",
+         btnNo:"no",
+         inputOption:"",
+         purchaseDone:""
+         }}
+  />
+
+      </Grid> 
    </Grid> 
   );
 }

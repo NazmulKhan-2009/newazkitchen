@@ -266,16 +266,3 @@ border: none;
 /* !login page on  event  */
 
 
-/* .login_style::before{
-	content:"";
-	position: absolute;
-	background-color: black;
-	width:800px;
-	height:450px;
-	opacity: 0.2;
-	z-index: 100;
-} */
-
-/* .loading_style_{
-	display:none;
-} */
