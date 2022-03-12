@@ -1,8 +1,8 @@
 import axios from "axios";
 
 
-const url='http://localhost:5000'
-// const url='https://quiet-cove-17146.herokuapp.com'
+// const url='http://localhost:5000'
+const url='https://quiet-cove-17146.herokuapp.com' || 'http://localhost:5000'
 
 
 export const allFoodsList=async()=>{
