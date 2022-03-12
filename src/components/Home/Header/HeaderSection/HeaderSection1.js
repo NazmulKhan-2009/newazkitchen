@@ -14,7 +14,7 @@ export default function HeaderSection1() {
         </div>       
       </div>
     </div>
-    {/* <img src="https://raw.githubusercontent.com/JaznanOfficial/e-learning/main/wave1.png" alt="" /> */}
+    <img src="https://raw.githubusercontent.com/JaznanOfficial/e-learning/main/wave1.png" alt="" />
     
 </div>
  )
